@@ -1,0 +1,25 @@
+# -*- coding: utf-8 -*-
+
+#import ptvsd
+#print("Waiting for debugger attach")
+# 5678 is the default attach port in the VS Code debug configurations
+#ptvsd.enable_attach(address=('localhost', 5678), redirect_output=True)
+#ptvsd.wait_for_attach()
+
+import FreeCAD
+import FreeCADGui
+
+sel = FreeCADGui.Selection.getSelection()
+
+if(len(sel) != 0):
+	# ソリッドのAABBを取得
+	solid = sel[0].Shape
+	FreeCAD.Console.PrintMessage("ソリッドのAABB: " + str(solid.BoundBox) + "\n")
+	
+	# 1枚目のフェースのAABBを取得
+	face = solid.Faces[0]
+	FreeCAD.Console.PrintMessage("とあるフェースのAABB: " + str(face.BoundBox) + "\n")
+
+	# 1本目のエッジのAABBを取得
+	edge = solid.Edges[0]
+	FreeCAD.Console.PrintMessage("とあるエッジのAABB: " + str(edge.BoundBox) + "\n")

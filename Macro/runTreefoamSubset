@@ -1,0 +1,22 @@
+#!/bin/bash
+#環境変数の設定（TreeFoamのインストール場所）
+export TreeFoamPath=/opt/TreeFoam                       #インストール場所
+export TreeFoamUserPath=~/.TreeFoamUser         #userFolderの設定
+
+#翻訳の設定
+export TEXTDOMAINDIR=$TreeFoamPath/data/locale
+export TEXTDOMAIN=treefoamBash
+
+#PATHの設定
+export PATH=$TreeFoamPath:$TreeFoamPath/bin:$TreeFoamPath/python:$PATH
+export PYTHONPATH=$TreeFoamPath:$TreeFoamPath/python:$TreeFoamPath/bin:~/.FreeCAD:/usr/lib/freecad-daily/lib:/$PYTHONPATH
+
+#TreeFoamのlogFileを設定
+export LogFile=$TreeFoamUserPath"/temp/dexcsLauncher.log"
+
+if [[ $LANGUAGE =~ ja* ]] ; then
+      export LANGUAGE=ja
+fi
+if [[ $LANGUAGE =~ en* ]];  then
+   export LANGUAGE=en
+fi
