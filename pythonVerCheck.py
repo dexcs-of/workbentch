@@ -5,7 +5,7 @@ import sys
 import os
 import gettext
 
-localedir = os.path.expanduser("~") + "/.FreeCAD/locale"
+localedir = os.path.expanduser("~") + "/.FreeCAD/mod/dexcsCfdOF/locale"
 if sys.version_info.major == 3:
 #	if os.environ["LANG"] == "ja:en":
 #	    os.environ["LANG"] ="ja"
