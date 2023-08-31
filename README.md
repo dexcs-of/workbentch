@@ -1,5 +1,5 @@
 # FreeCAD Macro & WorkBentch for DEXCS Launcher
-# 更新 2023/8/28
+# 更新 2023/8/31
 FreeCADのワークベンチとしてインストールできるようにすべく、マクロの収納場所やlocaleファイルををワークベンチフォルダ下に移動、併せて移動変更に伴うスクリプト修正を施したもの。
 但し、単純に .FreeCAD/Mod/dexcsCfdOFを入れ替えただけでは、（環境によって）動かないかもしれない。
 
