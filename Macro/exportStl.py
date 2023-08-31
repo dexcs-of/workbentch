@@ -4,12 +4,10 @@ import os
 import tempfile
 from PySide.QtCore import *
 from PySide.QtGui import *
-
 import pythonVerCheck
+import dexcsFunctions
 
-doc = App.ActiveDocument
-name = os.path.splitext(doc.FileName)[0]
-modelDir = os.path.dirname(doc.FileName)
+modelDir = dexcsFunctions.getCaseFileName()
 
 (fileName, selectedFilter) = QFileDialog.getSaveFileName( None, _("save name as stl"),modelDir)
 

@@ -35,13 +35,13 @@ if FreeCAD.GuiUp:
     from PySide import QtCore
 import pythonVerCheck
 
-class _CommandCfdEditConstantFolder:
+class _CommandCfdOpenOFTerminal:
     def GetResources(self):
-        icon_path = os.path.join(dexcsCfdTools.get_module_path(), "Gui", "Resources", "icons", "editProperties-cons.png")
+        icon_path = os.path.join(dexcsCfdTools.get_module_path(), "Gui", "Resources", "icons", "image_normal.png")
         return {'Pixmap': icon_path,
-                'MenuText': QtCore.QT_TRANSLATE_NOOP("Cfd_EditConstantFolder", "Edit Constant Folder"),
+                'MenuText': QtCore.QT_TRANSLATE_NOOP("Cfd_OpenOFTerminal", "Run OF terminal"),
                 'Accel': "S, P",
-                'ToolTip': QtCore.QT_TRANSLATE_NOOP("Cfd_EditConstantFolder", _("Edit properties"))}
+                'ToolTip': QtCore.QT_TRANSLATE_NOOP("Cfd_OpenOFTerminal", _("Run OF terminal"))}
 
     def IsActive(self):
         return dexcsCfdTools.getActiveAnalysis() is not None
@@ -51,20 +51,20 @@ class _CommandCfdEditConstantFolder:
         isPresent = False
         members = dexcsCfdTools.getActiveAnalysis().Group
         for i in members:
-            if isinstance(i.Proxy, _CommandCfdEditConstantFolder):
+            if isinstance(i.Proxy, _CommandCfdOpenOFTerminal):
                 FreeCADGui.activeDocument().setEdit(i.Name)
                 isPresent = True
 
         # Allowing user to re-create if CFDSolver was deleted.
         if not isPresent:
-            #FreeCADGui.runCommand('Std_Macro_10',0)
-            #import editConstantFolder
+            #FreeCADGui.runCommand('Std_Macro_17',0)
+            #import openOFTerminal
             _macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro'
             _prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
             FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
-            FreeCADGui.runCommand('Std_Macro_10',0)
+            FreeCADGui.runCommand('Std_Macro_17',0)
             FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_prefs)
 
 if FreeCAD.GuiUp:
-    FreeCADGui.addCommand('Cfd_EditConstantFolder', _CommandCfdEditConstantFolder())
+    FreeCADGui.addCommand('Cfd_OpenOFTerminal', _CommandCfdOpenOFTerminal())
 

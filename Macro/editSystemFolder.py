@@ -30,7 +30,7 @@ constantFolder = modelDir + "/constant"
 
 if os.path.isdir(systemFolder):
 
-    envSet = ". " + os.path.expanduser("~") + "/.FreeCAD/Mod/dexcsCfdOF/Macro/runTreefoamSubset;"
+    envSet = ". " + os.path.expanduser("~") + "/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro/runTreefoamSubset;"
     wdir = modelDir + "/system"
     title = _("edit Dict File")
     img = "oneFile"

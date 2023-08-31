@@ -36,7 +36,7 @@ if os.path.isdir(systemFolder) and os.path.isdir(constantFolder):
     #geditの実行ファイル作成
     caseName = CaseFilePath
     title =  ""
-    envSet = ". " + os.path.expanduser("~") + "/.FreeCAD/Mod/dexcsCfdOF/Macro/runTreefoamSubset;"
+    envSet = ". " + os.path.expanduser("~") + "/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro/runTreefoamSubset;"
     configDict = pyDexcsSwakSubset.readConfigDexcs()
     envSwak = "export dexcsSwakPath=" + os.path.expanduser(configDict["dexcs"]) + "/SWAK\nexport PYTHONPATH=$dexcsSwakPath:$PYTHONPATH\n"
 

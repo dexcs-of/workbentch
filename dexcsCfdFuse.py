@@ -35,36 +35,32 @@ if FreeCAD.GuiUp:
     from PySide import QtCore
 import pythonVerCheck
 
-class _CommandCfdEditConstantFolder:
+class _CommandCfdFuse:
     def GetResources(self):
-        icon_path = os.path.join(dexcsCfdTools.get_module_path(), "Gui", "Resources", "icons", "editProperties-cons.png")
+        icon_path = os.path.join(dexcsCfdTools.get_module_path(), "Gui", "Resources", "icons", "Part_Fuse.svg")
         return {'Pixmap': icon_path,
-                'MenuText': QtCore.QT_TRANSLATE_NOOP("Cfd_EditConstantFolder", "Edit Constant Folder"),
+                'MenuText': QtCore.QT_TRANSLATE_NOOP("Cfd_Fuse", "Fuse"),
                 'Accel': "S, P",
-                'ToolTip': QtCore.QT_TRANSLATE_NOOP("Cfd_EditConstantFolder", _("Edit properties"))}
+                'ToolTip': QtCore.QT_TRANSLATE_NOOP("Cfd_Fuse", _("Fuse"))}
 
-    def IsActive(self):
-        return dexcsCfdTools.getActiveAnalysis() is not None
+    #def IsActive(self):
+    #    return dexcsCfdTools.getActiveAnalysis() is not None
 
     def Activated(self):
         dexcsCfdTools.hide_parts_show_meshes()
         isPresent = False
         members = dexcsCfdTools.getActiveAnalysis().Group
         for i in members:
-            if isinstance(i.Proxy, _CommandCfdEditConstantFolder):
+            if isinstance(i.Proxy, _CommandCfdFuse):
                 FreeCADGui.activeDocument().setEdit(i.Name)
                 isPresent = True
 
         # Allowing user to re-create if CFDSolver was deleted.
         if not isPresent:
-            #FreeCADGui.runCommand('Std_Macro_10',0)
-            #import editConstantFolder
-            _macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro'
-            _prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
-            FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
-            FreeCADGui.runCommand('Std_Macro_10',0)
-            FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_prefs)
+            FreeCADGui.runCommand('Part_Fuse',0)
+            #import Fuse
+
 
 if FreeCAD.GuiUp:
-    FreeCADGui.addCommand('Cfd_EditConstantFolder', _CommandCfdEditConstantFolder())
+    FreeCADGui.addCommand('Cfd_Fuse', _CommandCfdFuse())
 

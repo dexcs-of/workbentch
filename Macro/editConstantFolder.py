@@ -52,7 +52,7 @@ constantFolder = modelDir + "/constant"
 
 if os.path.isdir(constantFolder):
 
-    envSet = ". " + os.path.expanduser("~") + "/.FreeCAD/Mod/dexcsCfdOF/Macro/runTreefoamSubset;"
+    envSet = ". " + os.path.expanduser("~") + "/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro/runTreefoamSubset;"
     wdir = modelDir + "/constant"
     [folders, files] = getFoldersFiles(wdir)
     if len(folders) >= 1:

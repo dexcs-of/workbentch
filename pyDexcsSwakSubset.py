@@ -72,7 +72,7 @@ def readConfigDexcs():
         "dexcs": ""
         }
     #fileName = os.getenv("TreeFoamUserPath") + os.sep + "configTreeFoam"
-    fileName = os.getenv("HOME") + "/.FreeCAD/Mod/dexcsCfdOF/Macro/configDexcs"
+    fileName = os.getenv("HOME") + "/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro/configDexcs"
     f = open(fileName); lines = f.readlines(); f.close()
     for line in lines:
         words = line.split()

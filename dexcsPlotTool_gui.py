@@ -18,8 +18,10 @@ class gui(QtWidgets.QDialog):
         super(gui, self).__init__(parent)
         self.ui = Ui_DexcsPlotTool()
         self.ui.setupUi(self)
-        doc = App.ActiveDocument
-        modelDir = os.path.dirname(doc.FileName)
+        #doc = App.ActiveDocument
+        #modelDir = os.path.dirname(doc.FileName)
+        import dexcsFunctions
+        modelDir = dexcsFunctions.getCaseFileName()
 
         #モデルファイル置き場がケースファイルの場所（.CaseFileDictで指定）と異なる場合
         caseFileDict = modelDir + "/.CaseFileDict"
@@ -99,7 +101,10 @@ class gui(QtWidgets.QDialog):
 if __name__ == '__main__':
     if not QtWidgets.QApplication.instance():
         app = QtWidgets.QApplication(sys.argv)
+        print("debug1")
     else:
+        print("debug2")
         app = QtWidgets.QApplication.instance()
+        print("debug3")
     window = gui()
     window.show()

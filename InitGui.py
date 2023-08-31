@@ -52,20 +52,59 @@ class dexcsCfdOFWorkbench(Workbench):
         # not at the beginning of this file for translation support
         from PySide import QtCore
 
+        from dexcsCfdSolverSet import _CommandCfdSolverSet
         from dexcsCfdAnalysis import _CommandCfdAnalysis
         from dexcsCfdMesh import _CommandCfdMeshFromShape
         from dexcsCfdMeshRefinement import _CommandMeshRegion
         from dexcsCfdSolverFoam import _CommandCfdSolverFoam
+        from dexcsCfdCheckCaseFileName import _CommandCfdCheckCaseFileName
         from dexcsCfdEditConstantFolder import _CommandCfdEditConstantFolder
+        from dexcsCfdEditSystemFolder import _CommandCfdEditSystemFolder
+        from dexcsCfdRunGridEditor import _CommandCfdRunGridEditor
+        from dexcsCfdRunPlotWatcher import _CommandCfdRunPlotWatcher
+        from dexcsCfdRunClearCase import _CommandCfdRunClearCase
+        from dexcsCfdOpenOFTerminal import _CommandCfdOpenOFTerminal
+        from dexcsCfdRunParaview import _CommandCfdRunParaview
+        from dexcsCfdRunPlotTool import _CommandCfdRunPlotTool
+        from dexcsCfdRunTreeFoam import _CommandCfdRunTreeFoam
+        from dexcsCfdRunParallel import _CommandCfdRunParallel
+        from dexcsCfdRunTable_GUI import _CommandCfdRunTable_GUI
+        from dexcsCfdMakeCfMeshSetting import _CommandCfdMakeCfMeshSetting
+        from dexcsCfdExportSTL import _CommandCfdExportSTL
+        from dexcsCfdShowSolidInfo import _CommandCfdShowSolidInfo
+        from dexcsCfdDowngrade import _CommandCfdDowngrade
+        from dexcsCfdFuse import _CommandCfdFuse
 
+        FreeCADGui.addCommand('Cfd_SolverSet', _CommandCfdSolverSet())
         FreeCADGui.addCommand('Cfd_Analysis', _CommandCfdAnalysis())
         FreeCADGui.addCommand('Cfd_MeshFromShape', _CommandCfdMeshFromShape())
         FreeCADGui.addCommand('Cfd_MeshRegion', _CommandMeshRegion())
+        FreeCADGui.addCommand('Cfd_RunGridEditor', _CommandCfdRunGridEditor())
+        FreeCADGui.addCommand('Cfd_CheckCaseFileName', _CommandCfdCheckCaseFileName())
         FreeCADGui.addCommand('Cfd_EditConstantFolder', _CommandCfdEditConstantFolder())
+        FreeCADGui.addCommand('Cfd_EditSystemFolder', _CommandCfdEditSystemFolder())
+        FreeCADGui.addCommand('Cfd_RunPlotWatcher', _CommandCfdRunPlotWatcher())
+        FreeCADGui.addCommand('Cfd_RunClearCase', _CommandCfdRunClearCase())
+        FreeCADGui.addCommand('Cfd_OpenOFTerminal', _CommandCfdOpenOFTerminal())
+        FreeCADGui.addCommand('Cfd_RunParaview', _CommandCfdRunParaview())
+        FreeCADGui.addCommand('Cfd_RunPlotTool', _CommandCfdRunPlotTool())
+        FreeCADGui.addCommand('Cfd_RunTreeFoam', _CommandCfdRunTreeFoam())
+        FreeCADGui.addCommand('Cfd_RunParallel', _CommandCfdRunParallel())
+        FreeCADGui.addCommand('Cfd_RunTable_GUI', _CommandCfdRunTable_GUI())
+        FreeCADGui.addCommand('Cfd_MakeCfMeshSetting', _CommandCfdMakeCfMeshSetting())
+        FreeCADGui.addCommand('Cfd_ExportSTL', _CommandCfdExportSTL())
+        FreeCADGui.addCommand('Cfd_ShowSolidInfo', _CommandCfdShowSolidInfo())
+        FreeCADGui.addCommand('Cfd_Downgrade', _CommandCfdDowngrade())
+        FreeCADGui.addCommand('Cfd_Fuse', _CommandCfdFuse())
 
-        cmdlst = ['Cfd_Analysis',
-                  'Cfd_MeshFromShape', 'Cfd_MeshRegion',
-                  'Cfd_SolverControl', 'Cfd_EditConstantFolder']
+        cmdlst = ['Cfd_SolverSet','Cfd_Analysis',
+                  'Cfd_MeshFromShape', 'Cfd_MeshRegion', 'Cfd_RunGridEditor',
+                  'Cfd_SolverControl', 'Cfd_CheckCaseFileName', 'Cfd_EditConstantFolder', 
+                  'Cfd_EditSystemFolder', 'Cfd_RunPlotWatcher', 'Cfd_RunClearCase', 
+                  'Cfd_OpenOFTerminal', 'Cfd_RunParaview', 'Cfd_RunPlotTool', 
+                  'Cfd_RunTreeFoam', 'Cfd_RunParallel', 'Cfd_RunTable_GUI', 
+                  'Cfd_MakeCfMeshSetting', 'Cfd_ExportSTL', 'Cfd_ShowSolidInfo', 
+                  'Cfd_Downgrade', 'Cfd_Fuse']
 
         self.appendToolbar(str(QtCore.QT_TRANSLATE_NOOP("Cfd", "dexcsCfdOF")), cmdlst)
         self.appendMenu(str(QtCore.QT_TRANSLATE_NOOP("Cfd", "&dexcsCfdOF")), cmdlst)

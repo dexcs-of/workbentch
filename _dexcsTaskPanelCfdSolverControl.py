@@ -71,8 +71,6 @@ class _dexcsTaskPanelCfdSolverControl:
         index_method = self.form.cb_method.findText(self.solver_object.ParallelMethod)
         self.form.cb_method.setCurrentIndex(index_method)
 
-        self.form.check_parallel.stateChanged.connect(self.updateUI)
-        self.form.check_parallel.setChecked(self.solver_object.ParallelCores > 1)
 
         # update UI
         self.console_message = ''
@@ -90,6 +88,11 @@ class _dexcsTaskPanelCfdSolverControl:
         self.open_paraview = QtCore.QProcess()
 
         self.working_dir = dexcsCfdTools.getOutputPath(self.analysis_object)
+        #print('self.working_dir=', self.working_dir)
+
+        self.form.check_parallel.stateChanged.connect(self.updateUI)
+        self.form.check_parallel.setChecked(self.solver_object.ParallelCores > 1)
+
 
         self.updateUI()
 

@@ -33,38 +33,47 @@ import os.path
 if FreeCAD.GuiUp:
     import FreeCADGui
     from PySide import QtCore
+    from PySide.QtCore import *
+    from PySide.QtGui import *
 import pythonVerCheck
 
-class _CommandCfdEditConstantFolder:
-    def GetResources(self):
-        icon_path = os.path.join(dexcsCfdTools.get_module_path(), "Gui", "Resources", "icons", "editProperties-cons.png")
-        return {'Pixmap': icon_path,
-                'MenuText': QtCore.QT_TRANSLATE_NOOP("Cfd_EditConstantFolder", "Edit Constant Folder"),
-                'Accel': "S, P",
-                'ToolTip': QtCore.QT_TRANSLATE_NOOP("Cfd_EditConstantFolder", _("Edit properties"))}
 
-    def IsActive(self):
-        return dexcsCfdTools.getActiveAnalysis() is not None
+#def makeCfdShowSolidInfo(name="CfdShowSolidInfo"):
+#    obj = FreeCAD.ActiveDocument.addObject("Part::FeaturePython", name)
+#    _ShowSolidInfo(obj)
+#    if FreeCAD.GuiUp:
+#        _ViewProviderCfdShowSolidInfo(obj.ViewObject)
+#    return obj
+
+class _CommandCfdShowSolidInfo:
+    def GetResources(self):
+        icon_path = os.path.join(dexcsCfdTools.get_module_path(), "Gui", "Resources", "icons", "bulb.svg")
+        return {'Pixmap': icon_path,
+                'MenuText': QtCore.QT_TRANSLATE_NOOP("Cfd_ShowSolidInfo", "show solid info"),
+                'Accel': "S, P",
+                'ToolTip': QtCore.QT_TRANSLATE_NOOP("Cfd_ShowSolidInfo", _("show solid info"))}
+
+    #def IsActive(self):
+    #    return dexcsCfdTools.getActiveAnalysis() is not None
 
     def Activated(self):
         dexcsCfdTools.hide_parts_show_meshes()
         isPresent = False
         members = dexcsCfdTools.getActiveAnalysis().Group
         for i in members:
-            if isinstance(i.Proxy, _CommandCfdEditConstantFolder):
+            if isinstance(i.Proxy, _CommandCfdShowSolidInfo):
                 FreeCADGui.activeDocument().setEdit(i.Name)
                 isPresent = True
 
         # Allowing user to re-create if CFDSolver was deleted.
         if not isPresent:
-            #FreeCADGui.runCommand('Std_Macro_10',0)
-            #import editConstantFolder
-            _macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro'
-            _prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
-            FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
-            FreeCADGui.runCommand('Std_Macro_10',0)
-            FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_prefs)
+            #import showSolidInfo
+            prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
+            FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath','/home/dexcs/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro')
+            FreeCADGui.runCommand('Std_Macro_0',0)
+            FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',prefs)
+           
 
 if FreeCAD.GuiUp:
-    FreeCADGui.addCommand('Cfd_EditConstantFolder', _CommandCfdEditConstantFolder())
+    FreeCADGui.addCommand('Cfd_ShowSolidInfo', _CommandCfdShowSolidInfo())
 

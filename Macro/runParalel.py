@@ -49,11 +49,11 @@ if os.path.isdir(systemFolder) and os.path.isdir(constantFolder):
     #envSet = "source " + envOpenFOAMFix + '\n'
     envSet = ". " + envOpenFOAMFix + '\n'
 
-    envSet = envSet + ". ~/.FreeCAD/Mod/dexcsCfdOF/Macro/runTreefoamSubset\n"
+    envSet = envSet + ". ~/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro/runTreefoamSubset\n"
     configDict = pyDexcsSwakSubset.readConfigDexcs()
     envSwak = "export dexcsSwakPath=" + os.path.expanduser(configDict["dexcs"]) + "/SWAK\nexport PYTHONPATH=$dexcsSwakPath:$PYTHONPATH\n"
     if TreeFoamVersion.startswith('3') :
-        solverSet = os.path.expanduser("~") + "/.FreeCAD/Mod/dexcsCfdOF/Macro/runParallelDexcs.py " + caseName
+        solverSet = os.path.expanduser("~") + "/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro/runParallelDexcs.py " + caseName
     else :
         solverSet = "runParallelDialog.py " + caseName
     sleep = ""
