@@ -47,20 +47,7 @@ class _CommandCfdDowngrade:
     #    return dexcsCfdTools.getActiveAnalysis() is not None
 
     def Activated(self):
-        dexcsCfdTools.hide_parts_show_meshes()
-        isPresent = False
-        members = dexcsCfdTools.getActiveAnalysis().Group
-        for i in members:
-            if isinstance(i.Proxy, _CommandCfdDowngrade):
-                FreeCADGui.activeDocument().setEdit(i.Name)
-                isPresent = True
+        FreeCADGui.runCommand('Draft_Downgrade',0)
+        #import Downgrade
 
-        # Allowing user to re-create if CFDSolver was deleted.
-        if not isPresent:
-            FreeCADGui.runCommand('Draft_Downgrade',0)
-            #import Downgrade
-
-
-if FreeCAD.GuiUp:
-    FreeCADGui.addCommand('Cfd_Downgrade', _CommandCfdDowngrade())
 
