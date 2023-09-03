@@ -37,14 +37,6 @@ if FreeCAD.GuiUp:
     from PySide.QtGui import *
 import pythonVerCheck
 
-
-#def makeCfdShowSolidInfo(name="CfdShowSolidInfo"):
-#    obj = FreeCAD.ActiveDocument.addObject("Part::FeaturePython", name)
-#    _ShowSolidInfo(obj)
-#    if FreeCAD.GuiUp:
-#        _ViewProviderCfdShowSolidInfo(obj.ViewObject)
-#    return obj
-
 class _CommandCfdShowSolidInfo:
     def GetResources(self):
         icon_path = os.path.join(dexcsCfdTools.get_module_path(), "Gui", "Resources", "icons", "bulb.svg")
@@ -57,23 +49,10 @@ class _CommandCfdShowSolidInfo:
     #    return dexcsCfdTools.getActiveAnalysis() is not None
 
     def Activated(self):
-        dexcsCfdTools.hide_parts_show_meshes()
-        isPresent = False
-        members = dexcsCfdTools.getActiveAnalysis().Group
-        for i in members:
-            if isinstance(i.Proxy, _CommandCfdShowSolidInfo):
-                FreeCADGui.activeDocument().setEdit(i.Name)
-                isPresent = True
-
-        # Allowing user to re-create if CFDSolver was deleted.
-        if not isPresent:
-            #import showSolidInfo
-            prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
-            FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath','/home/dexcs/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro')
-            FreeCADGui.runCommand('Std_Macro_0',0)
-            FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',prefs)
-           
-
-if FreeCAD.GuiUp:
-    FreeCADGui.addCommand('Cfd_ShowSolidInfo', _CommandCfdShowSolidInfo())
+        FreeCADGui.runCommand('Std_Macro_0',0)
+        #import showSolidInfo
+        #prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
+        #FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath','/home/dexcs/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro')
+        #FreeCADGui.runCommand('Std_Macro_0',0)
+        #FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',prefs)
 

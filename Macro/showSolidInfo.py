@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import FreeCADGui
+#import FreeCADGui
 
 import pythonVerCheck
 

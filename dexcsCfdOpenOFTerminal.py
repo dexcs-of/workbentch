@@ -47,24 +47,12 @@ class _CommandCfdOpenOFTerminal:
         return dexcsCfdTools.getActiveAnalysis() is not None
 
     def Activated(self):
-        dexcsCfdTools.hide_parts_show_meshes()
-        isPresent = False
-        members = dexcsCfdTools.getActiveAnalysis().Group
-        for i in members:
-            if isinstance(i.Proxy, _CommandCfdOpenOFTerminal):
-                FreeCADGui.activeDocument().setEdit(i.Name)
-                isPresent = True
+        #FreeCADGui.runCommand('Std_Macro_17',0)
+        #import openOFTerminal
+        _macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro'
+        _prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
+        FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
+        FreeCADGui.runCommand('Std_Macro_17',0)
+        FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_prefs)
 
-        # Allowing user to re-create if CFDSolver was deleted.
-        if not isPresent:
-            #FreeCADGui.runCommand('Std_Macro_17',0)
-            #import openOFTerminal
-            _macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro'
-            _prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
-            FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
-            FreeCADGui.runCommand('Std_Macro_17',0)
-            FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_prefs)
-
-if FreeCAD.GuiUp:
-    FreeCADGui.addCommand('Cfd_OpenOFTerminal', _CommandCfdOpenOFTerminal())
 

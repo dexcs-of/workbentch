@@ -66,10 +66,10 @@ if os.path.isdir(systemFolder) and os.path.isdir(constantFolder):
     env = QtCore.QProcessEnvironment.systemEnvironment()
     if env.contains("APPIMAGE"):
         cmd = dexcsCfdTools.makeRunCommand('./run', modelDir, source_env=False)
-        print('cmd = ', cmd)
-        FreeCAD.Console.PrintMessage("Solver run command: " + ' '.join(cmd) + "\n")
+        #print('cmd = ', cmd)
+        #FreeCAD.Console.PrintMessage("Solver run command: " + ' '.join(cmd) + "\n")
         env = QtCore.QProcessEnvironment.systemEnvironment()
-        print('env = ', env)
+        #print('env = ', env)
         dexcsCfdTools.removeAppimageEnvironment(env)
         process = QtCore.QProcess()
         process.setProcessEnvironment(env)
