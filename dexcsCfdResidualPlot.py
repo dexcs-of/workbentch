@@ -25,7 +25,15 @@
 
 from PySide import QtCore
 import FreeCAD
-from freecad.plot import Plot
+
+if int(FreeCAD.Version()[0]) == 0 and int(FreeCAD.Version()[1].split('.')[0]) < 20:
+    from compat import Plot  # Plot workbench
+else:
+    try:
+        from FreeCAD.Plot import Plot  # Inbuilt plot module
+    except ImportError:
+        from compat import Plot  # Fallback to compat (should be unnecessary once 0.20 is stable)
+
 import math
 
 
@@ -35,9 +43,9 @@ class ResidualPlot:
 
         self.updated = False
         self.residuals = {}
-        #self.Timer = QtCore.QTimer()
-        #self.Timer.timeout.connect(self.refresh)
-        #self.Timer.start(2000)
+        self.Timer = QtCore.QTimer()
+        self.Timer.timeout.connect(self.refresh)
+        self.Timer.start(2000)
 
     def updateResiduals(self, residuals):
         self.updated = True
@@ -46,7 +54,7 @@ class ResidualPlot:
     def refresh(self):
         if self.updated:
             self.updated = False
-            print('debug-refresh')
+            #print('debug-refresh')
             ax = self.fig.axes
             ax.cla()
             ax.set_title("Simulation residuals")

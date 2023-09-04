@@ -25,7 +25,16 @@
 
 from PySide2 import QtCore
 import FreeCAD
-from freecad.plot import Plot
+
+if int(FreeCAD.Version()[0]) == 0 and int(FreeCAD.Version()[1].split('.')[0]) < 20:
+    from compat import Plot  # Plot workbench
+else:
+    try:
+        from FreeCAD.Plot import Plot  # Inbuilt plot module
+    except ImportError:
+        from compat import Plot  # Fallback to compat (should be unnecessary once 0.20 is stable)
+
+
 
 class PostPlot:
     def __init__(self):

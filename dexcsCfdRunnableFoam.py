@@ -30,7 +30,7 @@ import FreeCAD
 import dexcsCfdTools
 import dexcsCfdAnalysis
 from PySide.QtCore import QObject, Signal
-from CfdResidualPlot import ResidualPlot
+from dexcsCfdResidualPlot import ResidualPlot
 from collections import OrderedDict
 
 
