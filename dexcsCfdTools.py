@@ -496,7 +496,6 @@ def setParaviewPath(paraview_path):
     # Set Paraview install path in parameters
     FreeCAD.ParamGet(prefs).SetString("ParaviewPath", paraview_path)
 
-
 def getParaviewPath():
     prefs = getPreferencesLocation()
     # Get path from parameters
@@ -504,6 +503,66 @@ def getParaviewPath():
     # Ensure parameters exist for future editing
     setParaviewPath(paraview_path)
     return paraview_path
+
+def setCfmeshDir(cfmesh_dir):
+    prefs = getPreferencesLocation()
+    FreeCAD.ParamGet(prefs).SetString("CfmeshPath", cfmesh_dir)
+
+def getCfmeshDir():
+    prefs = getPreferencesLocation()
+    # Get path from parameters
+    cfmesh_path = FreeCAD.ParamGet(prefs).GetString("CfmeshPath", "")
+    # Ensure parameters exist for future editing
+    setCfmeshDir(cfmesh_dir)
+    return cfmesh_dir
+
+def setTreefoamDir(treefoam_dir):
+    prefs = getPreferencesLocation()
+    FreeCAD.ParamGet(prefs).SetString("TreefoamPath", treefoam_dir)
+
+def getTreefomDir():
+    prefs = getPreferencesLocation()
+    # Get path from parameters
+    treefoam_dir = FreeCAD.ParamGet(prefs).GetString("TreefoamPath", "")
+    # Ensure parameters exist for future editing
+    setTreefoamDir(treefoam_dir)
+    return treefoam_dir
+
+def setDexcsDir(dexcs_dir):
+    prefs = getPreferencesLocation()
+    FreeCAD.ParamGet(prefs).SetString("DexcsPath", dexcs_dir)
+
+def getDexcsDir():
+    prefs = getPreferencesLocation()
+    # Get path from parameters
+    dexcs_dir = FreeCAD.ParamGet(prefs).GetString("DexcsPath", "")
+    # Ensure parameters exist for future editing
+    setParaviewDir(dexcs_dir)
+    return dexcs_dir
+
+def setPlot_Maxnumber(plot_maxnumber):
+    prefs = getPreferencesLocation()
+    FreeCAD.ParamGet(prefs).SetString("PlotMaxnumber", plot_maxnumber)
+
+def getPlot_Maxnumber():
+    prefs = getPreferencesLocation()
+    # Get path from parameters
+    plot_maxnumber = FreeCAD.ParamGet(prefs).GetString("PlotMaxNumber", "")
+    # Ensure parameters exist for future editing
+    setPlot_Maxnumber(plot_maxnumber)
+    return plot_maxnumber
+
+def setPlot_Method(plot_method):
+    prefs = getPreferencesLocation()
+    FreeCAD.ParamGet(prefs).SetString("PlotMethod", plot_method)
+
+def getPlot_Method():
+    prefs = getPreferencesLocation()
+    # Get path from parameters
+    plot_method = FreeCAD.ParamGet(prefs).GetString("PlotMethod", "")
+    # Ensure parameters exist for future editing
+    setPlotMaxnumber(plot_method)
+    return plot_method
 
 
 def translatePath(p):
