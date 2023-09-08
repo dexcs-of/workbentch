@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+#   getStringsForTranslate
+#
+#       get character strings for translate
+#           make ".po" file
+#
+#   13/10/09     issue
+#
+
+
+#make ".po" file (join and sort strings)
+
+# 最初のコマンド（出力をsort）
+#xgettext -f inputFiles -d dexcs -s
+
+# 2回目以降のコマンド（追加する、sortしない）
+xgettext -f inputFiles -d ja -j
+
+

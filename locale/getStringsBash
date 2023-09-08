@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+#   bashスクリプトの多言語化
+#   　　文字列の抽出
+#
+
+name=/home/caeuser/TreeFoam/bin/makePatch2.0
+
+bash --dump-po-strings $name > ./msgBash.po

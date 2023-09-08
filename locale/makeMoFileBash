@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+#   makeMoFileBash
+#
+#       make ".mo" file
+#
+#   13/10/09     issue
+#
+
+
+
+#make ".mo" file
+msgfmt treefoamBash.po -o treefoamBash.mo
+
+

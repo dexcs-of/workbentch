@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+#   makeMoFile
+#
+#       make ".mo" file
+#
+#   13/10/09     issue
+#
+
+
+
+#make ".mo" file
+msgfmt ja.po -o CfMeshSetting.mo
+
+
