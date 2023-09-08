@@ -6,6 +6,7 @@
 
 import os
 import pythonVerCheck
+import FreeCAD
 
 def ErrorDialog1(message):
     print (message)
@@ -64,21 +65,17 @@ def readConfigTreeFoam():
 def readConfigDexcs():
     """ configDexcsの内容を読み取り、結果を辞書形式で返す。
     appの内容をconfigTreeFoamに合わせる
-    辞書keys: language, logFile, OFversion, rootDir, workDir, bashrcFOAM,
-    paraFoam, salomeMeca, CAD, editor, fileManager, Terminal, foamTerminal"""
+    辞書keys: CfmeshPath, TreefoamPath, DexcsPath"""
+
+    prefs = "User parameter:BaseApp/Preferences/Mod/dexcsCfdOF"
+    cfmesh_dir = FreeCAD.ParamGet(prefs).GetString("CfmeshPath", "")
+    treefoam_dir = FreeCAD.ParamGet(prefs).GetString("TreefoamPath", "")
+    dexcs_dir = FreeCAD.ParamGet(prefs).GetString("DexcsPath", "")
     configDict = {
-        "cfMesh": "",
-        "TreeFoam": "",
-        "dexcs": ""
+        "cfMesh": cfmesh_dir,
+        "TreeFoam": treefoam_dir,
+        "dexcs": dexcs_dir
         }
-    #fileName = os.getenv("TreeFoamUserPath") + os.sep + "configTreeFoam"
-    fileName = os.getenv("HOME") + "/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro/configDexcs"
-    f = open(fileName); lines = f.readlines(); f.close()
-    for line in lines:
-        words = line.split()
-        if len(words) > 1 and words[0][0] != "#":
-            if words[0] in configDict.keys():
-                configDict[words[0]] = " ".join(words[1:])
     
     return configDict
 

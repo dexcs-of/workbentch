@@ -24,13 +24,25 @@ class dexcsPlotPost():
         #print('deb2',Lines)
         self.dexcs_plot(modelDir,Lines)
 
-    def process_column_vector(self,plotFile,columnNumber,scaleFactor):
+    def process_column_vector(self,plotFile,columnNumber,scaleFactor,maxN,maxMethod):
         f = open(plotFile,"r")
         text = f.readlines()
         f.close()
+        listN = len(text)
+        if listN > maxN :
+            if maxMethod == 1:
+                numStart = 0
+                numDiv = listN // maxN 
+            else :
+                numStart = listN - maxN
+                numDiv = 1
+        else :
+            numStart = 0
+            numDiv = 1
         postV = []
-        for line in text:
-            split = line.split()
+        #for line in text:
+        for num in range(numStart, listN, numDiv):
+            split = text[num].split()
             if split[0] != "#" :
                 try:
                     pX = float((split[columnNumber].replace('(','')).replace(')','')) 
@@ -43,15 +55,26 @@ class dexcsPlotPost():
         return postV
 
 
-    def process_column(self,plotFile,columnNumber,scaleFactor):
+    def process_column(self,plotFile,columnNumber,scaleFactor,maxN,maxMethod):
     
         f = open(plotFile,"r")
         text = f.readlines()
         f.close()
-
+        listN = len(text)
+        if listN > maxN :
+            if maxMethod == 1:
+                numStart = 0
+                numDiv = listN // maxN 
+            else :
+                numStart = listN - maxN
+                numDiv = 1
+        else :
+            numStart = 0
+            numDiv = 1
         postV = []
-        for line in text:
-            split = line.split()
+        #for line in text:
+        for num in range(numStart, listN, numDiv):
+            split = text[num].split()
             if split[0] != "#" :
                 try:
                     postV.append( float((split[columnNumber].replace('(','')).replace(')','')) * scaleFactor )
@@ -59,17 +82,28 @@ class dexcsPlotPost():
                     pass
         return postV
 
-    def process_column_X(self,plotFile,columnNumber,scaleFactor):
+    def process_column_X(self,plotFile,columnNumber,scaleFactor,maxN,maxMethod):
     
         f = open(plotFile,"r")
         text = f.readlines()
         f.close()
         preX=100000
         epsX=1e-9
-
+        listN = len(text)
+        if listN > maxN :
+            if maxMethod == 1:
+                numStart = 0
+                numDiv = listN // maxN 
+            else :
+                numStart = listN - maxN
+                numDiv = 1
+        else :
+            numStart = 0
+            numDiv = 1
         postV = []
-        for line in text:
-            split = line.split()
+        #for line in text:
+        for num in range(numStart, listN, numDiv):
+            split = text[num].split()
             if split[0] != "#" :
                 try:
                     tempX = float((split[columnNumber].replace('(','')).replace(')','')) * scaleFactor 
@@ -126,13 +160,24 @@ class dexcsPlotPost():
             PostsX=[]
             PostsY={}
 
+            from dexcsCfdAnalysis import _CfdAnalysis
+            for obj in FreeCAD.ActiveDocument.Objects:
+                if hasattr(obj, 'Proxy') and isinstance(obj.Proxy, _CfdAnalysis):
+                    if obj.IsActiveAnalysis:
+                        maxN = int(obj.PlotMaxnumber)
+                        maxmethod = obj.PlotMethodLast
+                        if maxmethod :
+                            maxMethod = 0
+                        else :
+                            maxMethod = 1
+
             for k in range(len(Y_File)) :
-                postX = self.process_column_X(X_File[k], X_column[k], X_scaleFactor[k])
+                postX = self.process_column_X(X_File[k], X_column[k], X_scaleFactor[k],maxN,maxMethod)
                 PostsX.append(postX)
                 if Y_Vector[k] == "1":
-                    PlotValue = self.process_column_vector(Y_File[k], Y_column[k], Y_scaleFactor[k])
+                    PlotValue = self.process_column_vector(Y_File[k], Y_column[k], Y_scaleFactor[k],maxN,maxMethod)
                 else:
-                    PlotValue = self.process_column(Y_File[k], Y_column[k], Y_scaleFactor[k])
+                    PlotValue = self.process_column(Y_File[k], Y_column[k], Y_scaleFactor[k],maxN,maxMethod)
                 PostsY[Y_Legend[k]] = PlotValue
                 k = k + 1
 

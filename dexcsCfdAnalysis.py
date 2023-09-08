@@ -68,10 +68,23 @@ class _CfdAnalysis:
         else:
             model_Dir = os.path.dirname(model)
         templateCase = FreeCAD.ParamGet(prefs).GetString("DefaultTemplateCase", "")
+ 
+        plot_maxnumber = FreeCAD.ParamGet(prefs).GetString("DefaultPlotMaxnumber", "")
+        plot_method = FreeCAD.ParamGet(prefs).GetString("DefaultPlotMethod", "")
+ 
         addObjectProperty(obj, "OutputPath", model_Dir, "App::PropertyPath", "",
                            "Path to which cases are written (blank to use system default)")
         addObjectProperty(obj, "TemplateCase", templateCase, "App::PropertyPath", "",
                            "Path to Template case Dir (blank to use system default)")
+
+        addObjectProperty(obj, "PlotMaxnumber", plot_maxnumber, "App::PropertyString", "",
+                           "Max Plot number")
+
+        if plot_method == 'last' :
+            addObjectProperty(obj, 'PlotMethodLast', True, "App::PropertyBool", "", "Plot Method if over Maxnumber")
+        else :
+            addObjectProperty(obj, 'PlotMethodLast', False, "App::PropertyBool", "", "Plot Method if over Maxnumber")
+
         addObjectProperty(obj, "IsActiveAnalysis", False, "App::PropertyBool", "", "Active analysis object in document")
         obj.setEditorMode("IsActiveAnalysis", 1)  # Make read-only (2 = hidden)
         addObjectProperty(obj, 'NeedsMeshRewrite', True, "App::PropertyBool", "", "Mesh setup needs to be re-written")
