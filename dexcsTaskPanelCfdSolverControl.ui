@@ -93,16 +93,6 @@
      <property name="verticalSpacing">
       <number>8</number>
      </property>
-     <item row="2" column="1">
-      <widget class="QPushButton" name="terminateSolver">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="text">
-        <string>Stop</string>
-       </property>
-      </widget>
-     </item>
      <item row="2" column="0">
       <widget class="QPushButton" name="pb_run_solver">
        <property name="enabled">
@@ -123,6 +113,16 @@
        </property>
        <property name="text">
         <string>Solver</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPushButton" name="terminateSolver">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>Stop</string>
        </property>
       </widget>
      </item>
@@ -190,13 +190,23 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="2" column="2">
       <widget class="QPushButton" name="pb_reconstruct">
        <property name="enabled">
         <bool>false</bool>
        </property>
        <property name="text">
         <string>reconstructPar</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPushButton" name="pb_plot">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Plot</string>
        </property>
       </widget>
      </item>

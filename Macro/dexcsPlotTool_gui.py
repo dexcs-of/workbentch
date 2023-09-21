@@ -69,22 +69,37 @@ class gui(QtWidgets.QDialog):
         #os.chdir(self.modelDir)
         #print("new1 at ", self.modelDir)
         import FreeCAD
-        FreeCAD.Gui.runCommand('Std_Macro_16',0)
+        #FreeCAD.Gui.runCommand('Std_Macro_16',0)
+        _macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro'
+        _prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
+        FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
+        FreeCADGui.runCommand('Std_Macro_16',0)
+        FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_prefs)
+
 
     def run_edit(self):
         #dexcsCfMeshPATH = "~/.FreeCAD/Mod/dexcsCfMesh"
         #import sys
         #sys.path.append(dexcsCfMeshPATH)
-        #import dexcsCfdTools
+        import dexcsCfdTools
         if self.dpltFile :
             fileName = self.modelDir + '/system/' + self.dpltFile
-            #dexcsCfdTools.openFileManager(self.modelDir+'/system/' + self.dpltFile)
-            proc = QtCore.QProcess()
-            proc.start("gedit " + fileName)
-            if proc.waitForStarted():
-                consoleMessageFn("gedit started")
-            else:
-                consoleMessageFn("Error starting gedit")
+            dexcsCfdTools.openFileManager(self.modelDir+'/system/' + self.dpltFile)
+            #proc = QtCore.QProcess()
+            #proc.setProgram("gedit") 
+            #proc.setArguments([fileName])
+            #proc.start()
+            #proc.start("gedit " + fileName)
+            #env = QtCore.QProcessEnvironment.systemEnvironment()
+            #removeAppimageEnvironment(env)
+            #proc.setWorkingDirectory(self.modelDir)
+            #proc.setProcessEnvironment(env)
+            #if proc.waitForStarted():
+            #    consoleMessageFn("gedit started")
+            #    return
+            #else:
+            #    consoleMessageFn("Error starting gedit")
+            #    return
 
     def run_plot(self):
         print("plot")
