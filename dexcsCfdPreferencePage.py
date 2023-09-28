@@ -58,7 +58,7 @@ PARAVIEW_PATH = "/opt/paraview/bin/paraview"
 DEXCS_TEMPLATE = "/opt/DEXCS/template/dexcs"
 DEXCS_PATH = "/opt/DEXCS"
 TREEFOAM_PATH = "/opt/TreeFoam"
-PLOT_NUMBER_MAX ='1000000'
+PLOT_NUMBER_MAX ='100000'
 PLOT_METHOD = 'last'
 
 
@@ -98,8 +98,11 @@ class dexcsCfdPreferencePage:
         self.form.label_3.setText(_("TreeFoam install directory"))
         self.form.label_8.setText(_("DEXCS install directory"))
         self.form.label_4.setText(_("Plot Limit"))
+        self.form.label_5.setText(_("Template Case"))
         self.form.label_6.setText(_("maxNumber"))
         self.form.label_2.setText(_("method"))
+        self.form.rb_deci.setText(_("Decimation"))
+        self.form.rb_last.setText(_("Last"))
         tool_tip_mes = _("The OpenFOAM install folder (e.g. 'OpenFOAM-xxx').")
         self.form.le_foam_dir.setToolTip(tool_tip_mes)
         tool_tip_mes = _("The full path of the ParaView executable.")

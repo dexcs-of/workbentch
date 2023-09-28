@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-08 17:09+0900\n"
+"POT-Creation-Date: 2023-09-28 06:56+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -649,6 +649,7 @@ msgstr ""
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:69
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:61
 #: ../_dexcsTaskPanelCfdSolverControl.py:61
+#: ../_dexcsTaskPanelCfdSolverControl.py:62
 msgid "reconstructPar"
 msgstr "領域再構築"
 
@@ -723,6 +724,7 @@ msgstr "実行"
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:70
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:62
 #: ../_dexcsTaskPanelCfdSolverControl.py:62
+#: ../_dexcsTaskPanelCfdSolverControl.py:63
 msgid "parallel"
 msgstr "並列計算"
 
@@ -1113,6 +1115,7 @@ msgstr "Allrun 作成中 ..."
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:182
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:174
 #: ../_dexcsTaskPanelCfdSolverControl.py:177
+#: ../_dexcsTaskPanelCfdSolverControl.py:183
 msgid "Error writing case:"
 msgstr "エラー"
 
@@ -1120,6 +1123,7 @@ msgstr "エラー"
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:184
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:176
 #: ../_dexcsTaskPanelCfdSolverControl.py:179
+#: ../_dexcsTaskPanelCfdSolverControl.py:185
 msgid "Write case setup file failed"
 msgstr "ケース作成に失敗"
 
@@ -1127,6 +1131,7 @@ msgstr "ケース作成に失敗"
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:188
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:180
 #: ../_dexcsTaskPanelCfdSolverControl.py:183
+#: ../_dexcsTaskPanelCfdSolverControl.py:189
 msgid "Write dexcs Allrun is completed"
 msgstr "Allrun 作成に成功"
 
@@ -1134,6 +1139,7 @@ msgstr "Allrun 作成に成功"
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:192
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:184
 #: ../_dexcsTaskPanelCfdSolverControl.py:187
+#: ../_dexcsTaskPanelCfdSolverControl.py:193
 msgid "Case check failed"
 msgstr "ケースチェックに失敗"
 
@@ -1141,6 +1147,7 @@ msgstr "ケースチェックに失敗"
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:195
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:187
 #: ../_dexcsTaskPanelCfdSolverControl.py:190
+#: ../_dexcsTaskPanelCfdSolverControl.py:196
 msgid "Checking dependencies..."
 msgstr "依存関係をチェック"
 
@@ -1153,6 +1160,7 @@ msgstr "依存関係をチェック"
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdMesh.py:320
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdMesh.py:321
 #: ../_dexcsTaskPanelCfdSolverControl.py:200 ../_dexcsTaskPanelCfdMesh.py:321
+#: ../_dexcsTaskPanelCfdSolverControl.py:206
 msgid "Please edit the case input files externally at: {}\n"
 msgstr "ファイルマネージャにて以下のケースフォルダーを編集して下さい : {}\n"
 
@@ -1160,6 +1168,7 @@ msgstr "ファイルマネージャにて以下のケースフォルダーを編
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:226
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:218
 #: ../_dexcsTaskPanelCfdSolverControl.py:221
+#: ../_dexcsTaskPanelCfdSolverControl.py:228
 msgid "Solver started"
 msgstr "ソルバー実行開始"
 
@@ -1167,6 +1176,7 @@ msgstr "ソルバー実行開始"
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:228
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:220
 #: ../_dexcsTaskPanelCfdSolverControl.py:223
+#: ../_dexcsTaskPanelCfdSolverControl.py:230
 msgid "Error starting solver"
 msgstr "ソルバー実行に失敗"
 
@@ -1174,6 +1184,7 @@ msgstr "ソルバー実行に失敗"
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:232
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:224
 #: ../_dexcsTaskPanelCfdSolverControl.py:227
+#: ../_dexcsTaskPanelCfdSolverControl.py:234
 msgid "Solver manually stopped"
 msgstr "ソルバーを手動停止"
 
@@ -1181,6 +1192,7 @@ msgstr "ソルバーを手動停止"
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:238
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:230
 #: ../_dexcsTaskPanelCfdSolverControl.py:233
+#: ../_dexcsTaskPanelCfdSolverControl.py:240
 msgid "Simulation finished successfully"
 msgstr "計算は正常終了"
 
@@ -1188,6 +1200,7 @@ msgstr "計算は正常終了"
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:240
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:232
 #: ../_dexcsTaskPanelCfdSolverControl.py:235
+#: ../_dexcsTaskPanelCfdSolverControl.py:242
 msgid "Simulation exited with error"
 msgstr "計算がエラー終了"
 
@@ -1195,6 +1208,7 @@ msgstr "計算がエラー終了"
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:281
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:273
 #: ../_dexcsTaskPanelCfdSolverControl.py:276
+#: ../_dexcsTaskPanelCfdSolverControl.py:292
 msgid "reconstruction started"
 msgstr "領域再構築を開始"
 
@@ -1202,6 +1216,7 @@ msgstr "領域再構築を開始"
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:283
 #: ../Mod/dexcsCfdOF/_dexcsTaskPanelCfdSolverControl.py:275
 #: ../_dexcsTaskPanelCfdSolverControl.py:278
+#: ../_dexcsTaskPanelCfdSolverControl.py:294
 msgid "Error starting reconstruct"
 msgstr "領域再構築に失敗"
 
@@ -1594,26 +1609,26 @@ msgstr "DEXCS 設定"
 
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:82
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:86
-#: ../dexcsCfdPreferencePage.py:103
+#: ../dexcsCfdPreferencePage.py:103 ../dexcsCfdPreferencePage.py:106
 msgid "The OpenFOAM install folder (e.g. 'OpenFOAM-xxx')."
 msgstr "OpenFOAMインストール場所（例：OpenFOAM-xxx）"
 
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:84
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:88
-#: ../dexcsCfdPreferencePage.py:105
+#: ../dexcsCfdPreferencePage.py:105 ../dexcsCfdPreferencePage.py:108
 msgid "The full path of the ParaView executable."
 msgstr "Paraview実行ファイルのフルパス名"
 
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:86
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:90
-#: ../dexcsCfdPreferencePage.py:107
+#: ../dexcsCfdPreferencePage.py:107 ../dexcsCfdPreferencePage.py:110
 msgid ""
 "The default output directory ('model_dir' if the same of FreeCAD Model File)."
 msgstr "デフォルト出力場所（モデルと同じ場合は'model_dir'）"
 
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:88
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:92
-#: ../dexcsCfdPreferencePage.py:109
+#: ../dexcsCfdPreferencePage.py:109 ../dexcsCfdPreferencePage.py:112
 msgid "Template Case Folder"
 msgstr "テンプレートケースフォルダー"
 
@@ -1622,6 +1637,7 @@ msgstr "テンプレートケースフォルダー"
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:112
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:115
 #: ../dexcsCfdPreferencePage.py:151 ../dexcsCfdPreferencePage.py:154
+#: ../dexcsCfdPreferencePage.py:157
 msgid "Terminating a pending install task"
 msgstr ""
 
@@ -1638,14 +1654,14 @@ msgstr "標準テンプレートケース"
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:169
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:173
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:178
-#: ../dexcsCfdPreferencePage.py:279
+#: ../dexcsCfdPreferencePage.py:279 ../dexcsCfdPreferencePage.py:282
 msgid "Choose OpenFOAM directory"
 msgstr "OpenFOAMインストールディレクトリの選択して下さい"
 
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:175
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:179
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:184
-#: ../dexcsCfdPreferencePage.py:303
+#: ../dexcsCfdPreferencePage.py:303 ../dexcsCfdPreferencePage.py:306
 msgid "Choose ParaView executable"
 msgstr "ParaView実行ファイルを選択して下さい"
 
@@ -1654,14 +1670,14 @@ msgstr "ParaView実行ファイルを選択して下さい"
 #: ../Mod/dexcsCfdOF/dexcsCfdAnalysis.py:121
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:197
 #: ../Mod/dexcsCfdOF/dexcsCfdAnalysis.py:138 ../dexcsCfdAnalysis.py:147
-#: ../dexcsCfdPreferencePage.py:316
+#: ../dexcsCfdPreferencePage.py:316 ../dexcsCfdPreferencePage.py:319
 msgid "Choose output directory"
 msgstr "標準出力ディレクトリを選択して下さい"
 
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:194
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:198
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:203
-#: ../dexcsCfdPreferencePage.py:322
+#: ../dexcsCfdPreferencePage.py:322 ../dexcsCfdPreferencePage.py:325
 msgid "Choose template case"
 msgstr "テンプレートケースを選択して下さい"
 
@@ -1681,6 +1697,7 @@ msgid "Default output directory"
 msgstr "ケースファイルの出力先"
 
 #: ../Mod/dexcsCfdOF/dexcsCfdPreferencePage.py:85
+#: ../dexcsCfdPreferencePage.py:101
 msgid "Template Case"
 msgstr "テンプレートケース"
 
@@ -1829,39 +1846,39 @@ msgstr "DEXCS インストール場所"
 msgid "Plot Limit"
 msgstr "プロット制限"
 
-#: ../dexcsCfdPreferencePage.py:101
+#: ../dexcsCfdPreferencePage.py:101 ../dexcsCfdPreferencePage.py:102
 msgid "maxNumber"
 msgstr "最大プロット数"
 
-#: ../dexcsCfdPreferencePage.py:102
+#: ../dexcsCfdPreferencePage.py:102 ../dexcsCfdPreferencePage.py:103
 msgid "method"
 msgstr "制限方法"
 
-#: ../dexcsCfdPreferencePage.py:111
+#: ../dexcsCfdPreferencePage.py:111 ../dexcsCfdPreferencePage.py:114
 msgid "cfMesh install Folder (e.g. 'openfoam...')."
 msgstr "cfMesh インストール場所(例 'openfoam...')"
 
-#: ../dexcsCfdPreferencePage.py:113
+#: ../dexcsCfdPreferencePage.py:113 ../dexcsCfdPreferencePage.py:116
 msgid "TreeFoam install Folder (default '/opt/Treefoam')."
 msgstr "TreeFoam インストール場所"
 
-#: ../dexcsCfdPreferencePage.py:115
+#: ../dexcsCfdPreferencePage.py:115 ../dexcsCfdPreferencePage.py:118
 msgid "DEXCS install Folder (default '/opt/DEXCS')."
 msgstr "DEXCS インストール場所"
 
-#: ../dexcsCfdPreferencePage.py:117
+#: ../dexcsCfdPreferencePage.py:117 ../dexcsCfdPreferencePage.py:120
 msgid "MaxNumber of Plots series (default non-limit)"
 msgstr "プロット列データの最大数"
 
-#: ../dexcsCfdPreferencePage.py:285
+#: ../dexcsCfdPreferencePage.py:285 ../dexcsCfdPreferencePage.py:288
 msgid "Choose cfMesh directory"
 msgstr "cfMesh インストール場所を選択"
 
-#: ../dexcsCfdPreferencePage.py:291
+#: ../dexcsCfdPreferencePage.py:291 ../dexcsCfdPreferencePage.py:294
 msgid "Choose TreeFoam directory"
 msgstr "TreeFoam インストール場所を選択"
 
-#: ../dexcsCfdPreferencePage.py:297
+#: ../dexcsCfdPreferencePage.py:297 ../dexcsCfdPreferencePage.py:300
 msgid "Choose DEXCS directory"
 msgstr "DEXCS インストール場所を選択"
 
@@ -1936,3 +1953,15 @@ msgstr "ソリッド情報を表示"
 #: ../dexcsCfdSolverSet.py:45
 msgid "SolverSet"
 msgstr "新規ソルバーセット"
+
+#: ../_dexcsTaskPanelCfdSolverControl.py:61
+msgid "plotPost"
+msgstr "プロット"
+
+#: ../dexcsCfdPreferencePage.py:104
+msgid "Decimation"
+msgstr "間引き"
+
+#: ../dexcsCfdPreferencePage.py:105
+msgid "Last"
+msgstr "最新"
