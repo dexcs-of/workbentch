@@ -530,7 +530,7 @@ msgstr "既存プロットファイル"
 #: ../Table_GUI.py:403 ../Table_GUI.py:404 ../Table_GUI.py:518
 #: ../Table_GUI.py:584 ../Table_GUI.py:585 ../Macro/Table_GUI.py:585
 msgid "load left-file"
-msgstr "⇒プロット"
+msgstr "プロット"
 
 #: ../Table_GUI.py:418 ../Table_GUI.py:419 ../Table_GUI.py:433
 #: ../Table_GUI.py:498 ../Table_GUI.py:499 ../Macro/Table_GUI.py:499
@@ -1965,3 +1965,13 @@ msgstr "間引き"
 #: ../dexcsCfdPreferencePage.py:105
 msgid "Last"
 msgstr "最新"
+
+#: ../dexcsCfdRunTable_GUI.py:620
+msgid "LookAsText"
+msgstr "確認"
+
+#: ../dexcsCfdRunTable_GUI.py:405
+msgid "Confirm on gedit"
+msgstr "テキストエディタで確認"
+
+

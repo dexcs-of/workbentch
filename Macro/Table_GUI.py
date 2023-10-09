@@ -396,6 +396,23 @@ class Ui_MainWindow(object):
                 
         self.Left_verticalLayout.addWidget(self.defalut_tree)
 
+
+        self.horizontalLayout_2a = QHBoxLayout()
+
+        self.ConfirmFileButton = QPushButton()#self.frame2を削除
+        #multi_lang
+        self.ConfirmFileButton.setObjectName("ConfirmFileButton")
+        self.ConfirmFileButton.setText(_("Confirm on gedit"))
+        self.horizontalLayout_2a.addWidget(self.ConfirmFileButton)
+
+        #self.Left_verticalLayout.addWidget(self.horizontalLayout_2a)
+
+        self.min_horizontalGroupBox = QGroupBox('')
+        self.min_horizontalGroupBox.setLayout(self.horizontalLayout_2a)
+
+        self.Left_verticalLayout.addWidget(self.min_horizontalGroupBox)
+
+
         self.other_tree = other_tree
         self.other_tree.setObjectName("treewidget2")
 
@@ -477,33 +494,43 @@ class Ui_MainWindow(object):
         #self.lineEdit_title.setSizePolicy(sizePolicy)
         self.horizontalLayout_6.addWidget(self.lineEdit_title)
 
+        spacerItemTop = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalLayout_6.addItem(spacerItemTop)
+
+        #self.vLayout_6.addLayout(self.horizontalLayout_6)
+        self.Right_verticalLayout.addLayout(self.horizontalLayout_6,1)
+
+
+        self.horizontalLayout_6a = QHBoxLayout()
+
+
         #Yラベル名
         #  label_depth
         self.label_Ylabel = QLabel()
         #multi_lang
         self.label_Ylabel.setText(_("Y-Label"))
         #self.label_Ylabel.setSizePolicy(sizePolicy)
-        self.horizontalLayout_6.addWidget(self.label_Ylabel)
+        self.horizontalLayout_6a.addWidget(self.label_Ylabel)
         #  lineEdit
         self.lineEdit_Ylabel = QLineEdit()#self.frame2を削除
         self.lineEdit_Ylabel.setFixedWidth(200)
         self.lineEdit_Ylabel.setObjectName("")
         self.lineEdit_Ylabel.setText("hogeYLabel")
         #self.lineEdit_Ylabel.setSizePolicy(sizePolicy)
-        self.horizontalLayout_6.addWidget(self.lineEdit_Ylabel)
+        self.horizontalLayout_6a.addWidget(self.lineEdit_Ylabel)
         
         
         self.PlotButton = QPushButton()#self.frame2を削除
         self.PlotButton.setObjectName("PlotButton")
         #multi_lang
         self.PlotButton.setText(_("plot"))
-        self.horizontalLayout_6.addWidget(self.PlotButton)
+        self.horizontalLayout_6a.addWidget(self.PlotButton)
 
         spacerItem6 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-        self.horizontalLayout_6.addItem(spacerItem6)
+        self.horizontalLayout_6a.addItem(spacerItem6)
 
         #self.vLayout_6.addLayout(self.horizontalLayout_6)
-        self.Right_verticalLayout.addLayout(self.horizontalLayout_6,1)
+        self.Right_verticalLayout.addLayout(self.horizontalLayout_6a,1)
 
 
         self.horizontalLayout_7 = QHBoxLayout()
@@ -531,7 +558,14 @@ class Ui_MainWindow(object):
         self.SaveButton.setText(_("save dplt"))
         self.horizontalLayout_7.addWidget(self.SaveButton)
 
-        #label num_var
+
+
+        self.LookAsTextButton = QPushButton()#self.frame2を削除
+        #multi_lang
+        self.LookAsTextButton.setObjectName("ConfirmTextButton")
+        self.LookAsTextButton.setText(_("LookAsText"))
+        self.horizontalLayout_7.addWidget(self.LookAsTextButton)
+
 
 
         #button load2
@@ -800,11 +834,14 @@ class gridTable(Ui_MainWindow):
 
         ###########################################(20200611)追加ボタンと実装のconnect#####################################################################################
 
+        QObject.connect(self.ConfirmFileButton, SIGNAL("clicked()"), self.actionOnConfirmFileButton)
+
         QObject.connect(self.AddFileButton, SIGNAL("clicked()"), self.actionOnAddFileButton)
         QObject.connect(self.DeleteFileButton, SIGNAL("clicked()"), self.actionOnDeleteFileButton)
         
         QObject.connect(self.PlotButton, SIGNAL("clicked()"), self.actionOnPlotButton)
-        QObject.connect(self.SaveButton, SIGNAL("clicked()"), self.actionOnSaveButton)        
+        QObject.connect(self.SaveButton, SIGNAL("clicked()"), self.actionOnSaveButton)
+        QObject.connect(self.LookAsTextButton, SIGNAL("clicked()"), self.actionOnLookAsTextButton)                
         QObject.connect(self.LoadButton, SIGNAL("clicked()"), self.actionOnLoadButton)        
         QObject.connect(self.Load2Button, SIGNAL("clicked()"), self.actionOnLoad2Button)        
         QObject.connect(self.reserveButton, SIGNAL("clicked()"), self.actionOnreserveButton)
@@ -981,7 +1018,7 @@ class gridTable(Ui_MainWindow):
         mapfile = filenamegroup[self.default_tree.tree_widget.indexOfTopLevelItem(select_item)]
 
         self.loadDir = mapfile        
-        self.label_loadDir.setText("loadDir: " + self.loadDir)       
+        self.label_loadDir.setText("loadFile: " + self.loadDir)       
 
                 
         logging.debug(mapfile)
@@ -1041,6 +1078,13 @@ class gridTable(Ui_MainWindow):
 
         self.typeComboBox.clear()
         self.typeComboBox.addItems(dplt_system)
+
+
+    def actionOnConfirmFileButton(self):
+        select_item = self.default_tree.tree_widget.selectedItems()[0]
+        mapfile = filenamegroup[self.default_tree.tree_widget.indexOfTopLevelItem(select_item)]
+        comm = "gedit " + learnDir +"/postProcessing/" + mapfile  + " &"
+        os.system(comm)
 
 
     def actionOnAddFileButton(self):
@@ -1443,6 +1487,20 @@ class gridTable(Ui_MainWindow):
                 #f2.write(temp_row)
 
 
+    def actionOnLookAsTextButton(self):
+        fileName = learnDir + '/system/' + self.typeComboBox.currentText()
+
+        if os.path.exists(fileName):
+            comm = "gedit " + fileName + " &"
+            os.system(comm)
+            #f = open(fileName,"r")
+            #lines = f.readlines()
+            #f.close()
+            #logging.debug("postProcessing=",f.name)
+            #dexcsPlotPost.dexcsPlotPost(learnDir,lines)
+            #print("[Table_GUI]: Load dplt file excuted")
+        else:
+            print("file not exist")
 
     def actionOnLoadButton(self):
         fileName = learnDir + '/system/' + self.typeComboBox.currentText()
