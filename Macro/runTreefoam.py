@@ -17,7 +17,7 @@ modelDir = dexcsFunctions.getCaseFileName()
 workDir=modelDir
 
 configDict = pyDexcsSwakSubset.readConfigDexcs()
-envTreeFoam = configDict["TreeFoam"]
+envTreeFoam = "~/.TreeFoamUser"
 
 configTreeFoamFile = os.path.expanduser(envTreeFoam) + "/configTreeFoam"
 f = open(configTreeFoamFile)

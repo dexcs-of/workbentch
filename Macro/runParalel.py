@@ -42,7 +42,7 @@ if os.path.isdir(systemFolder) and os.path.isdir(constantFolder):
     configDict = pyDexcsSwakSubset.readConfigTreeFoam()
     envOpenFOAMFix = configDict["bashrcFOAM"]
     configDict = pyDexcsSwakSubset.readConfigDexcs()
-    envTreeFoam = configDict["TreeFoam"]
+    envTreeFoam = "~/.TreeFoamUser"
     envOpenFOAMFix = envOpenFOAMFix.replace('$TreeFoamUserPath',envTreeFoam)
     envOpenFOAMFix = os.path.expanduser(envOpenFOAMFix)
     #envOpenFOAMFix = envOpenFOAMFix.replace('$TreeFoamUserPath',os.getenv("HOME")+'/.TreeFoamUser')
