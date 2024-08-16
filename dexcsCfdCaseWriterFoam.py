@@ -111,6 +111,7 @@ class dexcsCfdCaseWriterFoam:
         settings['system']['CasePath'] = self.case_folder
         settings['solver']['ParallelCores'] = self.solver_obj.ParallelCores
         settings['solver']['ParallelMethod'] = self.solver_obj.ParallelMethod
+        settings['solver']['Parallel'] = self.solver_obj.Parallel
         TemplateBuilder.TemplateBuilder(self.case_folder, self.template_path, settings)
         
         return True

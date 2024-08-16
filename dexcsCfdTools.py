@@ -530,6 +530,7 @@ def getTreefomDir():
 
 def setDexcsDir(dexcs_dir):
     prefs = getPreferencesLocation()
+    print("deb:"+dexcs_dir)
     FreeCAD.ParamGet(prefs).SetString("DexcsPath", dexcs_dir)
 
 def getDexcsDir():
@@ -1118,6 +1119,44 @@ def getParaviewExecutable():
         paraview_cmd = shutil.which("paraview")
     return paraview_cmd
 
+def startParaview1(case_path, script_name, console_message_fn):
+    proc = QtCore.QProcess()
+    paraview_cmd = getParaviewExecutable()
+    arg = '--script={}'.format(script_name)
+
+    if not paraview_cmd:
+        # If not found, try to run from the OpenFOAM environment, in case a bundled version is available from there
+        paraview_cmd = "$(which paraview)"  # 'which' required due to mingw weirdness(?) on Windows
+        try:
+            cmds = [paraview_cmd, arg]
+            cmd = ' '.join(cmds)
+            console_message_fn("Running " + cmd)
+            args = makeRunCommand(cmd, case_path)
+            paraview_cmd = args[0]
+            args = args[1:] if len(args) > 1 else []
+            proc.setProgram(paraview_cmd)
+            proc.setArguments([arg])
+            proc.setProcessEnvironment(getRunEnvironment())
+            success = proc.startDetached()
+            if not success:
+                raise Exception("Unable to start command " + cmd)
+            console_message_fn("Paraview started")
+        except QtCore.QProcess.ProcessError:
+            console_message_fn("Error starting paraview")
+    else:
+        console_message_fn("Running " + paraview_cmd + " " + arg)
+        proc.setProgram(paraview_cmd)
+        proc.setArguments([arg])
+        proc.setWorkingDirectory(case_path)
+        env = QtCore.QProcessEnvironment.systemEnvironment()
+        removeAppimageEnvironment(env)
+        proc.setProcessEnvironment(env)
+        success = proc.startDetached()
+        if success:
+            console_message_fn("Paraview started")
+        else:
+            console_message_fn("Error starting paraview")
+    return success
 
 def startParaview(case_path, script_name, consoleMessageFn):
     proc = QtCore.QProcess()

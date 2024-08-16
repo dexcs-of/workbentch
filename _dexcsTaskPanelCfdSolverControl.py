@@ -122,9 +122,11 @@ class _dexcsTaskPanelCfdSolverControl:
         self.form.pb_run_solver.setEnabled(os.path.exists(os.path.join(solverDirectory, "Allrun")))
         self.form.parallel_frame.setVisible(self.form.check_parallel.isChecked())
         if self.form.check_parallel.isChecked():
+            self.solver_object.Parallel = True
             if self.form.if_ncpu.value()==1:
                 self.form.if_ncpu.setValue(2)
         else:
+            self.solver_object.Parallel = False
             self.form.if_ncpu.setValue(1)
             FreeCADGui.doCommand("\nFreeCAD.ActiveDocument.{}.ParallelCores "
                              "= {}".format(self.solver_object.Name, 1))
