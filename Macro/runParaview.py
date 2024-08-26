@@ -30,7 +30,7 @@ if os.path.isdir(systemFolder) and os.path.isdir(constantFolder):
     cont = cont + "a=`pwd`\n"
     cont = cont + "openName=`basename $a`.foam\n"
     cont = cont + "touch $openName\n"
-    cont = cont + ParaviewPath + " $openName\n"
+    cont = cont + ParaviewPath + " --data $openName\n"
     cont = cont + "rm $openName\n"
     f=open("./run","w")
     f.write(cont)
