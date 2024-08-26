@@ -67,8 +67,8 @@ if os.path.isdir(systemFolder) and os.path.isdir(constantFolder):
     env = QtCore.QProcessEnvironment.systemEnvironment()
 
     if env.contains("APPIMAGE"):
-        message = (_("this FreeCAD is AppImage version.\n  some function of runParallelDialog doesen't work.\n if you want utilize the function, use normal TreeFoam menu.")) 
-        ans = QtGui.QMessageBox.critical(None, _("AppImage Warning"), message, QtGui.QMessageBox.Yes)
+        #message = (_("this FreeCAD is AppImage version.\n  some function of runParallelDialog doesen't work.\n if you want utilize the function, use normal TreeFoam menu.")) 
+        #ans = QtGui.QMessageBox.critical(None, _("AppImage Warning"), message, QtGui.QMessageBox.Yes)
         dexcsCfdTools.removeAppimageEnvironment(env)
 
         cmd = dexcsCfdTools.makeRunCommand('./run', modelDir, source_env=False)
