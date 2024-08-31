@@ -52,42 +52,50 @@ class CfdMeshTools:
 
         # Default to 2 % of bounding box characteristic length
         self.clmax = Units.Quantity(self.mesh_obj.BaseCellSize).Value
-        if self.clmax <= 0.0:
-            #shape = self.part_obj.Shape
+        """ if self.clmax <= 0.0: """
+        """     #shape = self.part_obj.Shape
             #cl_bound_mag = math.sqrt(shape.BoundBox.XLength**2 + shape.BoundBox.YLength**2 + shape.BoundBox.ZLength**2)
             #cl_bound_min = min(min(shape.BoundBox.XLength, shape.BoundBox.YLength), shape.BoundBox.ZLength)
-            #self.clmax = min(0.02*cl_bound_mag, 0.4*cl_bound_min)  # Always in internal format, i.e. mm
-            xmax = -1.0e+30
-            xmin = 1.0e+30
-            ymax = -1.0e+30
-            ymin = 1.0e+30
-            zmax = -1.0e+30
-            zmin = 1.0e+30
-            doc = FreeCAD.activeDocument()
-            for obj in doc.Objects:
-                try:
-                    if obj.Shape:
-                        if obj.Shape.BoundBox.XMax > xmax:
-                            xmax = obj.Shape.BoundBox.XMax
-                        if obj.Shape.BoundBox.XMin < xmin:
-                            xmin = obj.Shape.BoundBox.XMin
-                        if obj.Shape.BoundBox.YMax > ymax:
-                            ymax = obj.Shape.BoundBox.YMax
-                        if obj.Shape.BoundBox.YMin < ymin:
-                            ymin = obj.Shape.BoundBox.YMin
-                        if obj.Shape.BoundBox.ZMax > zmax:
-                            zmax = obj.Shape.BoundBox.ZMax
-                        if obj.Shape.BoundBox.ZMin < zmin:
-                            zmin = obj.Shape.BoundBox.ZMin
-                except AttributeError:
-                    pass
-            sumOf3Edges = (xmax-xmin+ymax-ymin+zmax-zmin)
-            #self.mesh_obj.BaseCellSize = sumOf3Edges / 60.0       
-            self.mesh_obj.BaseCellSize = ((xmax-xmin)*(ymax-ymin)*(zmax-zmin)/6000) ** (1/3)       
-            print('BaseCellSize = '+str(self.mesh_obj.BaseCellSize))
-        # Only used by gmsh - what purpose?
+            #self.clmax = min(0.02*cl_bound_mag, 0.4*cl_bound_min)  # Always in internal format, i.e. mm """
+        xmax = -1.0e+30
+        xmin = 1.0e+30
+        ymax = -1.0e+30
+        ymin = 1.0e+30
+        zmax = -1.0e+30
+        zmin = 1.0e+30
+        doc = FreeCAD.activeDocument()
+        for obj in doc.Objects:
+            try:
+                if obj.Shape:
+                    if obj.Shape.BoundBox.XMax > xmax:
+                        xmax = obj.Shape.BoundBox.XMax
+                    if obj.Shape.BoundBox.XMin < xmin:
+                        xmin = obj.Shape.BoundBox.XMin
+                    if obj.Shape.BoundBox.YMax > ymax:
+                        ymax = obj.Shape.BoundBox.YMax
+                    if obj.Shape.BoundBox.YMin < ymin:
+                        ymin = obj.Shape.BoundBox.YMin
+                    if obj.Shape.BoundBox.ZMax > zmax:
+                        zmax = obj.Shape.BoundBox.ZMax
+                    if obj.Shape.BoundBox.ZMin < zmin:
+                        zmin = obj.Shape.BoundBox.ZMin
+            except AttributeError:
+                pass
+        """ print(type(self.mesh_obj)) """
+        self.mesh_obj.BoundingBoxMin = (xmin, ymin, zmin)
+        self.mesh_obj.BoundingBoxMax = (xmax, ymax, zmax)
         self.clmin = 0.0
-
+        sumOf3Edges = (xmax-xmin+ymax-ymin+zmax-zmin)
+        #self.mesh_obj.BaseCellSize = sumOf3Edges / 60.0       
+        self.mesh_obj.BaseCellSize = ((xmax-xmin)*(ymax-ymin)*(zmax-zmin)/6000) ** (1/3)       
+        print('BaseCellSize = '+str(self.mesh_obj.BaseCellSize))
+        # Only used by gmsh - what purpose?
+        # import ptvsd
+        # print("Waiting for debugger attach")
+        # # 5678 is the default attach port in the VS Code debug configurations
+        # ptvsd.enable_attach(address=('localhost', 5678), redirect_output=True)
+        # ptvsd.wait_for_attach()
+        
         self.dimension = self.mesh_obj.ElementDimension
         #self.dimension = '3D'
 
@@ -558,16 +566,27 @@ class CfdMeshTools:
         # Snappy requires that the chosen internal point must remain internal during the meshing process and therefore
         # the meshing algorithm might fail if the point accidentally falls in a sliver between the mesh and the geometry
         # As a safety measure, the check distance is chosen to be approximately the size of the background mesh.
-        shape = self.part_obj.Shape
         step_size = self.clmax*2.5
 
-        bound_box = self.part_obj.Shape.BoundBox
+        for obj in self.mesh_obj.Document.Objects:
+            #bif type(obj) == Part:
+                shape = obj.Shape
+                pointCheck = self.isInside(shape)
+                if pointCheck is not None:
+                    return pointCheck
+        dexcsCfdTools.cfdError("Failed to find an internal point - please specify manually.")
+        return None
+    
+    def isInside(self, shape):
+        step_size = self.clmax*2.5
+        bound_box = shape.BoundBox
         error_safety_factor = 2.0
         if (step_size*error_safety_factor >= bound_box.XLength or
                         step_size*error_safety_factor >= bound_box.YLength or
                         step_size*error_safety_factor >= bound_box.ZLength):
-            dexcsCfdTools.cfdError("Current choice in characteristic length of {} might be too large for automatic "
-                              "internal point detection.".format(self.clmax))
+            """ dexcsCfdTools.cfdError("Current choice in characteristic length of {} might be too large for automatic "
+                              "internal point detection.".format(self.clmax)) """
+            return None
         x1 = bound_box.XMin
         x2 = bound_box.XMax
         y1 = bound_box.YMin

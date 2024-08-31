@@ -296,11 +296,12 @@ def normalise(v):
 
 def cfdError(msg):
     """ Show message for an expected error """
-    QtGui.QApplication.restoreOverrideCursor()
-    if FreeCAD.GuiUp:
+    QtGui.QGuiApplication.restoreOverrideCursor()
+    FreeCAD.Console.PrintError(msg + "\n")
+    """ if FreeCAD.GuiUp:
         QtGui.QMessageBox.critical(None, "dexcsCfdOF Workbench", msg)
     else:
-        FreeCAD.Console.PrintError(msg + "\n")
+        FreeCAD.Console.PrintError(msg + "\n") """
 
 
 def cfdMessage(msg):
@@ -1118,6 +1119,7 @@ def getParaviewExecutable():
         # Otherwise, see if the command 'paraview' is in the path.
         paraview_cmd = shutil.which("paraview")
     return paraview_cmd
+
 
 def startParaview(case_path, script_name, consoleMessageFn):
     proc = QtCore.QProcess()

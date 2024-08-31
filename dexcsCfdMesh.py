@@ -91,8 +91,7 @@ class _CfdMesh:
 
     # they will be used from the task panel too, thus they need to be outside of the __init__
     known_element_dimensions = ['2D', '3D']
-    #known_mesh_utility = ['cfMesh', 'snappyHexMesh', 'gmsh']
-    known_mesh_utility = ['cfMesh']
+    known_mesh_utility = ['cfMesh', 'snappyHexMesh']
     known_workflowControls = ['none', 'templateGeneration', 'surfaceTopology', 'surfaceProjection', 'patchAssignment', 'edgeExtraction', 'boundaryLayerGeneration', 'meshOptimisation', 'boundaryLayerRefinement']
     known_patchType = ['patch', 'wall', 'symmetry', 'overset', 'cyclic', 'wedge', 'empty', 'symmetryPlane']
 
@@ -164,19 +163,27 @@ class _CfdMesh:
         addObjectProperty(obj, "BaseCellSize", "0 m", "App::PropertyLength", "Mesh Parameters",
                           "Max mesh element size (0.0 = infinity)")
 
-        #addObjectProperty(obj, 'PointInMesh', {"x": '0 m', "y": '0 m', "z": '0 m'}, "App::PropertyMap",
-        #                  "Mesh Parameters",
-        #                  "Location vector inside the region to be meshed (must not coincide with a cell face)")
+        addObjectProperty(obj, 'CellsBetweenLevels', 3, "App::PropertyInteger", "Mesh Parameters",
+                         "Number of cells between each level of refinement")
 
-        #addObjectProperty(obj, 'CellsBetweenLevels', 3, "App::PropertyInteger", "Mesh Parameters",
-        #                  "Number of cells between each level of refinement")
-
-        #addObjectProperty(obj, 'EdgeRefinement', 1, "App::PropertyFloat", "Mesh Parameters",
-        #                  "Relative edge (feature) refinement")
+        addObjectProperty(obj, 'EdgeRefinement', 1, "App::PropertyFloat", "Mesh Parameters",
+                         "Relative edge (feature) refinement")
 
         if addObjectProperty(obj, 'ElementDimension', _CfdMesh.known_element_dimensions, "App::PropertyEnumeration",
                              "Mesh Parameters", "Dimension of mesh elements (Default 3D)"):
             obj.ElementDimension = '3D'
+        # Refinement
+        addObjectProperty(obj, "CharacteristicLengthMax", "0 m", "App::PropertyLength", "Mesh Parameters",
+                          "Max mesh element size (0.0 = infinity)")
+        addObjectProperty(obj, 'PointInMesh', {"x": '0 m', "y": '0 m', "z": '0 m'}, "App::PropertyMap",
+                          "Mesh Parameters",
+                          "Location vector inside the region to be meshed (must not coincide with a cell face)")
+        addObjectProperty(obj, 'BoundingBoxMin', (0.0, 0.0, 0.0),
+                          "App::PropertyVector", "Mesh Parameters",
+                          "Min Position of Bounding Box")
+        addObjectProperty(obj, 'BoundingBoxMax', (0.0, 0.0, 0.0),
+                          "App::PropertyVector", "Mesh Parameters",
+                          "Max Position of Bounding Box")
 
     def onDocumentRestored(self, obj):
         self.initProperties(obj)
@@ -192,7 +199,6 @@ class _CfdMesh:
 class _ViewProviderCfdMesh:
     """ A View Provider for the CfdMesh object """
     def __init__(self, vobj):
-        #print('debug0')
         vobj.Proxy = self
 
     def getIcon(self):
@@ -204,20 +210,16 @@ class _ViewProviderCfdMesh:
         self.Object = vobj.Object
 
     def updateData(self, obj, prop):
-        #print('debug1'+obj.Label)
         return
 
     def onChanged(self, vobj, prop):
-        #print('debug5'+vobj.Object.Name)
         dexcsCfdTools.setCompSolid(vobj)
         return
 
     def setEdit(self, vobj, mode):
-        #print('debug4 '+vobj.Object.Name)
         for obj in FreeCAD.ActiveDocument.Objects:
             if hasattr(obj, 'Proxy') and isinstance(obj.Proxy, _CfdMesh):
                 obj.ViewObject.show()
-        #print('debug6'+self.Object.Name)
         import _dexcsTaskPanelCfdMesh
         taskd = _dexcsTaskPanelCfdMesh._TaskPanelCfdMesh(self.Object)
         taskd.obj = vobj.Object
