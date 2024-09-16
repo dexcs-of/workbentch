@@ -73,6 +73,7 @@ class dexcsCfdOFWorkbench(Workbench):
         from dexcsCfdExportSTL import _CommandCfdExportSTL
         from dexcsCfdShowSolidInfo import _CommandCfdShowSolidInfo
         from dexcsCfdDowngrade import _CommandCfdDowngrade
+        from dexcsCfdUpgrade import _CommandCfdUpgrade
         from dexcsCfdFuse import _CommandCfdFuse
 
         FreeCADGui.addCommand('Cfd_SolverSet', _CommandCfdSolverSet())
@@ -95,6 +96,7 @@ class dexcsCfdOFWorkbench(Workbench):
         FreeCADGui.addCommand('Cfd_ExportSTL', _CommandCfdExportSTL())
         FreeCADGui.addCommand('Cfd_ShowSolidInfo', _CommandCfdShowSolidInfo())
         FreeCADGui.addCommand('Cfd_Downgrade', _CommandCfdDowngrade())
+        FreeCADGui.addCommand('Cfd_Upgrade', _CommandCfdUpgrade())
         FreeCADGui.addCommand('Cfd_Fuse', _CommandCfdFuse())
 
         cmdlst = ['Cfd_Analysis', 'Cfd_MeshFromShape', 
@@ -104,7 +106,7 @@ class dexcsCfdOFWorkbench(Workbench):
                   'Cfd_OpenOFTerminal', 'Cfd_RunParaview', 'Cfd_RunPlotTool', 
                   'Cfd_RunTreeFoam', 'Cfd_RunParallel', 'Cfd_RunTable_GUI', 
                   'Cfd_MakeCfMeshSetting', 'Cfd_ExportSTL', 'Cfd_ShowSolidInfo', 
-                  'Cfd_Downgrade', 'Cfd_Fuse']
+                  'Cfd_Downgrade', 'Cfd_Upgrade', 'Cfd_Fuse']
 
         self.appendToolbar(str(QtCore.QT_TRANSLATE_NOOP("Cfd", "dexcsCfdOF")), cmdlst)
         self.appendMenu(str(QtCore.QT_TRANSLATE_NOOP("Cfd", "&dexcsCfdOF")), cmdlst)
