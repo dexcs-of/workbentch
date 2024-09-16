@@ -12,7 +12,7 @@ pfoam.CaseType = 'Decomposed Case'
 pfoam.CaseType = 'Reconstructed Case'
 %}
 # for ParaView 5.13〜   Decomposepolyhedra is error
-pfoam.Decomposepolyhedra = 0
+#pfoam.Decomposepolyhedra = 0
 
 # get active view
 renderView1 = GetActiveViewOrCreate('RenderView')
