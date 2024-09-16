@@ -49,10 +49,11 @@ class _CommandCfdShowSolidInfo:
     #    return dexcsCfdTools.getActiveAnalysis() is not None
 
     def Activated(self):
-        FreeCADGui.runCommand('Std_Macro_0',0)
-        #import showSolidInfo
-        #prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
-        #FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath','/home/dexcs/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro')
         #FreeCADGui.runCommand('Std_Macro_0',0)
-        #FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',prefs)
+        #import showSolidInfo
+        _macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro'
+        prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
+        FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
+        FreeCADGui.runCommand('Std_Macro_0',0)
+        FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',prefs)
 
