@@ -24,6 +24,7 @@ from subprocess import Popen
 import pythonVerCheck
 import pyDexcsSwakSubset
 from dexcsCfdMesh import _CfdMesh
+import dexcsCfdTools
 
 class Test(QDialog):
     def __init__(self,parent=None):
@@ -111,11 +112,15 @@ class MainControl():
 
     def __init__(self):
         """
-        特に何もしない。
+        get mesh container of active analysis container
         """
+        self.analysisObject = dexcsCfdTools.getActiveAnalysis()
+       
         for obj in FreeCAD.ActiveDocument.Objects:
-            if hasattr(obj, "Proxy") and isinstance(obj.Proxy, _CfdMesh):
-               self.mesh_obj = obj
+            if hasattr(obj, "Proxy") and isinstance(obj.Proxy, _CfdMesh):              
+               self.analysis = dexcsCfdTools.getParentAnalysisObject(obj)
+               if self.analysis == self.analysisObject:
+                 self.mesh_obj = obj     
 
         #print("DEXCS MainControl / " + self.mesh_obj.Label)
 
@@ -521,6 +526,7 @@ class MainControl():
         for obj in doc.Objects:
             if obj.ViewObject.Visibility:
                 if hasattr(obj, "Proxy") and isinstance(obj.Proxy, _CfdMeshRefinement):
+                  if dexcsCfdTools.getParentAnalysisObject(obj) == self.analysisObject:
                     if obj.NumberLayers > 1 :                    
                         #for objList in(obj.LinkedObjects):
                         for ref in(obj.ShapeRefs):
@@ -676,6 +682,7 @@ class MainControl():
         for obj in doc.Objects:
             if obj.ViewObject.Visibility:
                 if hasattr(obj, "Proxy") and isinstance(obj.Proxy, _CfdMeshRefinement):
+                  if dexcsCfdTools.getParentAnalysisObject(obj) == self.analysisObject:
                     if (not obj.Internal) and (obj.RefinementLevel > 0) :                    
                         #for objList in(obj.LinkedObjects):
                         for ref in(obj.ShapeRefs):
@@ -827,6 +834,7 @@ class MainControl():
         for obj in doc.Objects:
             if obj.ViewObject.Visibility:
                 if hasattr(obj, "Proxy") and isinstance(obj.Proxy, _CfdMeshRefinement):
+                  if dexcsCfdTools.getParentAnalysisObject(obj) == self.analysisObject:
                     if obj.Internal :                    
                         #for objList in(obj.LinkedObjects):
                         for ref in(obj.ShapeRefs):
@@ -1102,6 +1110,7 @@ class MainControl():
         for obj in doc.Objects:
             if obj.ViewObject.Visibility:
                 if hasattr(obj, "Proxy") and isinstance(obj.Proxy, _CfdMeshRefinement):
+                  if dexcsCfdTools.getParentAnalysisObject(obj) == self.analysisObject:
                     if (not obj.Internal) :                    
                         #for objList in(obj.LinkedObjects):
                         for ref in(obj.ShapeRefs):
@@ -1234,6 +1243,7 @@ class MainControl():
         for obj in doc.Objects:
             if obj.ViewObject.Visibility:
                 if hasattr(obj, "Proxy") and isinstance(obj.Proxy, _CfdMeshRefinement):
+                  if dexcsCfdTools.getParentAnalysisObject(obj) == self.analysisObject:
                     if obj.Internal :                    
                         for ref in(obj.ShapeRefs):
                             __region__.append(ref[0].Label) 
