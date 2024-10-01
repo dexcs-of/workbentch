@@ -42,6 +42,8 @@ from PySide2.QtWidgets import *
 
 import Util_Table
 import dexcsFunctions
+from PySide2 import QtCore
+import dexcsCfdTools
 
 
 
@@ -1148,8 +1150,18 @@ class gridTable(Ui_MainWindow):
         select_item = self.default_tree.tree_widget.selectedItems()[0]
         mapfile = filenamegroup[self.default_tree.tree_widget.indexOfTopLevelItem(select_item)]
         comm = "gedit " + learnDir +"/postProcessing/" + mapfile  + " &"
-        os.system(comm)
 
+        env = QtCore.QProcessEnvironment.systemEnvironment()
+        if env.contains("APPIMAGE"):
+            dexcsCfdTools.removeAppimageEnvironment(env)
+            process = QtCore.QProcess()
+            process.setProcessEnvironment(env)
+            process.setProgram("gnome-text-editor")
+            process.setArguments({learnDir +"/postProcessing/" + mapfile})
+            process.startDetached()
+
+        else:
+            os.system(comm)
 
     def actionOnAddFileButton(self):
 
@@ -1582,7 +1594,18 @@ class gridTable(Ui_MainWindow):
 
         if os.path.exists(fileName):
             comm = "gedit " + fileName + " &"
-            os.system(comm)
+            env = QtCore.QProcessEnvironment.systemEnvironment()
+            if env.contains("APPIMAGE"):
+                dexcsCfdTools.removeAppimageEnvironment(env)
+                process = QtCore.QProcess()
+                process.setProcessEnvironment(env)
+                process.setProgram("gnome-text-editor")
+                process.setArguments({fileName})
+                process.startDetached()
+
+            else:
+                os.system(comm)
+            #os.system(comm)
             #f = open(fileName,"r")
             #lines = f.readlines()
             #f.close()
