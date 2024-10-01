@@ -22,7 +22,7 @@ import csv
 import math
 
 import copy
-
+import time
 
 import numpy as np
 import re
@@ -64,7 +64,7 @@ other_flag = False
 
 
 #テーブルのカラム表示は一定なのでグローバル変数とした
-column_header = ["id","name","s/f","X","Y", "vec","length"]
+column_header = ["id","name","s/f","X","Y", "abs","length"]
 
 #各ファイルのデータ登録を辞書型にしたため省略できるが、今後チェックボックス状態でbplt出力有無の切替に活用できる可能性あり
 checked_postProcessisng_files = []
@@ -431,7 +431,8 @@ class Ui_MainWindow(object):
         self.DeleteFileButton = QPushButton()#self.frame2を削除
         self.DeleteFileButton.setObjectName("DeleteFileButton")
         self.DeleteFileButton.setText(_("Delete File"))
-        self.horizontalLayout_3.addWidget(self.DeleteFileButton)
+        #20240928 temporaly change to unvisible
+        #self.horizontalLayout_3.addWidget(self.DeleteFileButton)
 
 
         self.mini_horizontalGroupBox = QGroupBox('')
@@ -490,7 +491,7 @@ class Ui_MainWindow(object):
         self.lineEdit_title = QLineEdit()#self.frame2を削除
         self.lineEdit_title.setFixedWidth(200)
         self.lineEdit_title.setObjectName("")
-        self.lineEdit_title.setText("hogeTitle")
+        self.lineEdit_title.setText("Title")
         #self.lineEdit_title.setSizePolicy(sizePolicy)
         self.horizontalLayout_6.addWidget(self.lineEdit_title)
 
@@ -515,7 +516,7 @@ class Ui_MainWindow(object):
         self.lineEdit_Ylabel = QLineEdit()#self.frame2を削除
         self.lineEdit_Ylabel.setFixedWidth(200)
         self.lineEdit_Ylabel.setObjectName("")
-        self.lineEdit_Ylabel.setText("hogeYLabel")
+        self.lineEdit_Ylabel.setText("YLabel")
         #self.lineEdit_Ylabel.setSizePolicy(sizePolicy)
         self.horizontalLayout_6a.addWidget(self.lineEdit_Ylabel)
         
@@ -546,7 +547,7 @@ class Ui_MainWindow(object):
         self.lineEdit_filename = QLineEdit()#self.frame2を削除
         self.lineEdit_filename.setFixedWidth(200)
         self.lineEdit_filename.setObjectName("")
-        self.lineEdit_filename.setText("hogeFileName")
+        self.lineEdit_filename.setText("FileName")
         #self.lineEdit_filename.setSizePolicy(sizePolicy)
         self.horizontalLayout_7.addWidget(self.lineEdit_filename)
 
@@ -560,11 +561,7 @@ class Ui_MainWindow(object):
 
 
 
-        self.LookAsTextButton = QPushButton()#self.frame2を削除
-        #multi_lang
-        self.LookAsTextButton.setObjectName("ConfirmTextButton")
-        self.LookAsTextButton.setText(_("LookAsText"))
-        self.horizontalLayout_7.addWidget(self.LookAsTextButton)
+
 
 
 
@@ -619,6 +616,11 @@ class Ui_MainWindow(object):
         self.LoadButton.setText(_("load left-file"))
         self.horizontalLayout_8.addWidget(self.LoadButton)
 
+        self.LookAsTextButton = QPushButton()#self.frame2を削除
+        #multi_lang
+        self.LookAsTextButton.setObjectName("ConfirmTextButton")
+        self.LookAsTextButton.setText(_("LookAsText"))
+        self.horizontalLayout_8.addWidget(self.LookAsTextButton)
 
         spacerItem6 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
         self.horizontalLayout_8.addItem(spacerItem6)
@@ -832,6 +834,11 @@ class gridTable(Ui_MainWindow):
         self.default_tree.tree_widget.itemClicked.connect(self.onfile_enumClick)
         self.other_tree.tree_widget.itemClicked.connect(self.onfile_enumClick_other)
 
+        self.default_tree.tree_widget.itemChanged.connect(self.onfile_checkClick)
+        self.other_tree.tree_widget.itemChanged.connect(self.onfile_checkClick_other)
+
+
+
         ###########################################(20200611)追加ボタンと実装のconnect#####################################################################################
 
         QObject.connect(self.ConfirmFileButton, SIGNAL("clicked()"), self.actionOnConfirmFileButton)
@@ -908,8 +915,13 @@ class gridTable(Ui_MainWindow):
                table.setCellValue(counter,3,"---")
             if not(table.getCellValue(counter,4) == "Use" or table.getCellValue(counter,4) == "---"):
                table.setCellValue(counter,4,"---")
-            if not(table.getCellValue(counter,5) == "Use" or table.getCellValue(counter,5) == "---"):
+            #if (table.getCellValue(counter,5) == "X"):
+               #table.setCellValue(counter,5,"---")            
+            if not(table.getCellValue(counter,5) == "Use" or table.getCellValue(counter,5) == "---" or table.getCellValue(counter,5) == "X"):
                table.setCellValue(counter,5,"---")
+            #else:
+               #table.setCellValue(counter,5,"---")
+            
         table.adjustCells()
         self.maskEvent = False        
 
@@ -924,6 +936,8 @@ class gridTable(Ui_MainWindow):
             newText = "---"
         elif text == "---":
             newText = "Use"
+        elif text == "X":
+            newText = "X"
 
         else:
             flag = 1
@@ -979,6 +993,36 @@ class gridTable(Ui_MainWindow):
         else:
             self.other_tree.maskEvent = False
 
+    def onfile_checkClick(self, widgetItem):
+        select_item = self.default_tree.tree_widget.selectedItems()[0]
+        Index = self.default_tree.tree_widget.indexOfTopLevelItem(select_item)   
+        item = self.default_tree.tree_widget.topLevelItem(Index)
+
+        #self.maskEvent = True
+        #self.maskEvent = False
+
+        #self.maskEvent = True
+        #time.sleep(0.1)
+
+        if item.checkState(0) == Qt.Unchecked:
+            #item.setCheckState(0,Qt.Checked)
+            print("uncheck")
+        elif item.checkState(0) == Qt.Checked:
+            print("check")
+            #item.setCheckState(0,Qt.UnChecked)
+        else:
+            print("check func not properly")
+        
+        #self.maskEvent = False
+            
+            
+    def onfile_checkClick_other(self, widgetItem):
+        print("not  yet impl")
+        #self.updateDictMatrixes() 
+        #            self.setDefaultMatrix(mapfile )
+        #setDefaultMatrix
+
+
     def enterSignalFromEditor(self):
         """ cellに組み込まれたtextEditorが終了した時の処理。
         編集後のtextをcellに挿入し、editorを閉じる"""
@@ -1020,7 +1064,17 @@ class gridTable(Ui_MainWindow):
         self.loadDir = mapfile        
         self.label_loadDir.setText("loadFile: " + self.loadDir)       
 
-                
+
+        pathname = mapfile.split("/")        
+        use_pathname = pathname[-1]
+
+
+        for i in range(len(pathname)-1):
+            #The filename_maximum length defined by right value 
+            if len(pathname[-i-2]) + len(use_pathname) < 30:
+                use_pathname = pathname[-i-2] + "_" + use_pathname
+
+        self.lineEdit_filename.setText(use_pathname)
         logging.debug(mapfile)
 
         print(mapfile)
@@ -1033,7 +1087,7 @@ class gridTable(Ui_MainWindow):
 
 
     def onfile_enumClick_other(self):
-        print("otherfile select")
+        #print("otherfile select")
         logging.debug("file select")
         select_item = self.other_tree.tree_widget.selectedItems()[0]
 
@@ -1043,14 +1097,24 @@ class gridTable(Ui_MainWindow):
         logging.debug(select_item)
         #絶対パスと相対パスの切り替え箇所１
         #mapfile = postDir + "/" + filenamegroup[self.default_tree.tree_widget.indexOfTopLevelItem(select_item)]
-        print("seconde")
+        #print("seconde")
         mapfile = filenamegroup_other[self.other_tree.tree_widget.indexOfTopLevelItem(select_item)]
         
         self.loadDir = mapfile        
         self.label_loadDir.setText("loadDir: " + self.loadDir)       
+
+
+        pathname = mapfile.split("/")        
+        use_pathname = pathname[-1]
+        for i in range(len(pathname)-1):
+            #The filename_maximum length defined by right value
+            if len(pathname[-i-2]) + len(use_pathname) < 30:
+                use_pathname = pathname[-i-2] + "_" + use_pathname
+
+        self.lineEdit_filename.setText(use_pathname)
                 
         logging.debug(mapfile)
-        print("third")
+        #print("third")
 
         if mapfile in Use_checkedfile_Matrixes_other:
             print("mapfile exists")
@@ -1323,7 +1387,7 @@ class gridTable(Ui_MainWindow):
             #filename = "blank"
         
         #sorted_Use_checkedfile_Matrixes = sorted(Use_checkedfile_Matrixes.items(), key=lambda x:x[0])
-
+        #filename = self.lineEdit_filename.text()
         United_Use_checkedfile_Matrixes = Use_checkedfile_Matrixes
         United_Use_checkedfile_Matrixes.update(Use_checkedfile_Matrixes_other)
 
@@ -1339,6 +1403,7 @@ class gridTable(Ui_MainWindow):
                 mul =  row_data[2]
                 X_Flag = row_data[3]
                 Y_Flag =  row_data[4]
+                Z_Flag =  row_data[5]
                 vector = ""
                 tempname = ""
                 
@@ -1361,6 +1426,27 @@ class gridTable(Ui_MainWindow):
                     #File_X_rep_column = index_f
                     X_rep_index[file_key] = index_f
                     X_rep_mul[file_key] = mul
+                    if X_Flag=="Use":
+                        X_name = name
+
+                if Z_Flag=="Use":
+                    tempname = name
+                    for i in range(MAX_COUNT):
+                    
+                        if not tempname in Y_names:
+                            logging.debug("unique filename")
+                            break
+                        else:
+                            tempname= name +"_" + str(i+1)
+                    logging.debug("name decide")
+                        
+                    Y_names.append(name[:-2]+"_"+ "abs")
+                    Y_keys.append(file_key)
+                    #Y_Datas.append(data_columns[row_count])
+                    Y_muls.append(mul)
+                    Y_vectors.append("1")
+                    Y_indexs.append(index_f)
+
                 
                 if Y_Flag=="Use":
                     tempname = name
@@ -1377,7 +1463,8 @@ class gridTable(Ui_MainWindow):
                     Y_keys.append(file_key)
                     #Y_Datas.append(data_columns[row_count])
                     Y_muls.append(mul)
-                    Y_vectors.append(vector)
+#                    Y_vectors.append(vector)
+                    Y_vectors.append("0")
                     Y_indexs.append(index_f)
                     #Y_file_indexs.append(row)
  
@@ -1401,6 +1488,9 @@ class gridTable(Ui_MainWindow):
             filename = self.lineEdit_filename.text()                
         
         Title_Chart = self.lineEdit_title.text()
+
+        #X_Label_Chart =  self.lineEdit_label.text()
+
         Y_Label_Chart =  self.lineEdit_Ylabel.text()
 
         filename_extent = filename + ".dplt"
@@ -1607,7 +1697,7 @@ class gridTable(Ui_MainWindow):
         mapfiles.append(mapfile)
 
         #for h,name in enumerate(checked_postProcessisng_files):
-        print(mapfile)
+        #print(mapfile)
         for h,name in enumerate(mapfiles):        
             fileunit_data_columns = []
             #Dir__Name = postDir + "/" + name
@@ -1625,16 +1715,24 @@ class gridTable(Ui_MainWindow):
             
             datum = []
             #rowLabels.append("")
-                                
+            SingleCharFile_Flg=0                    
                                     
             logging.debug("read success")
 
+
+
+                    #C/M for SingleCharFile
+
+
+
             if name[-3:] != ".xy":
-            
+                Probe_Flag = 0
                 Read_Stage = 0
                 for line in cont_page:
                 #logging.debug(line)
                     if Read_Stage == 0:
+                        if "Probe" in line:
+                            Probe_Flag = 1
                         if 'Time' in line:
                             Read_Stage = 2
                             listlized = line.split()
@@ -1667,13 +1765,38 @@ class gridTable(Ui_MainWindow):
                     elif Read_Stage==2:
                         data_row =[]
                         listlized = line.split()
+                        num_vector = 0
+                        num_column = 0
                         for i,item in enumerate(listlized):
                             if item[0]=="(":
                                 item=item[1:]
+                                num_vector += 1
                             if item[-1]==")":
                                 item=item[:-1]
                             data_row.append(item)
+                            num_column += 1
                         fileunit_data_columns.append(data_row)
+                        if Probe_Flag == 1:
+                            if num_vector !=0:
+                                if num_vector ==1:
+                                    datum.append(os.path.basename(name)+"_x")
+                                    datum.append(os.path.basename(name)+"_y")
+                                    datum.append(os.path.basename(name)+"_z")
+                                else:
+                                    #print(num_vector)
+                                    for ind in range(num_vector):
+                                        datum.append(os.path.basename(name)+"_"+str(ind)+"_x")
+                                        datum.append(os.path.basename(name)+"_"+str(ind)+"_y")
+                                        datum.append(os.path.basename(name)+"_"+str(ind)+"_z")
+                            else:
+                                if num_column == 2:
+                                    datum.append(os.path.basename(name))
+                                else:
+                                    for ind in range(num_column-1):
+                                        datum.append(os.path.basename(name)+"_"+str(ind))                                                        
+                            Probe_Flag =0
+                    #elif Read_Stage==2 and Probe_Flag =0:
+                                                
                     else:
                         pass
 
@@ -1710,7 +1833,13 @@ class gridTable(Ui_MainWindow):
                 colData.append("1")    
                 colData.append("---")
                 colData.append("---")
-                colData.append("---")
+                try:
+                    if datum[i][-2:]=="_x":
+                        colData.append("---")
+                    else:
+                        colData.append("X")
+                except:
+                    colData.append("X")
 
                 #colData.append("")
                 colData1.append(colData)
@@ -1836,7 +1965,7 @@ class gridTable(Ui_MainWindow):
         else:
             filepath = filenamegroup_other[self.other_tree.tree_widget.indexOfTopLevelItem(select_item)]
 
-        print(filepath)        
+        #print(filepath)        
         #filepath = postDir + "/" + filenamegroup[0]
         logging.debug("matrix for loop success") 
         if other_flag == False:
@@ -2070,7 +2199,8 @@ if __name__ == "__main__":
     pre_rowColVals = []    
     pre_rowColVals.append(colData2)
 
-    pre_rowColVals =[["0","unknown","1","---","---","---","unknown" ]]
+    #pre_rowColVals =[["0","unknown","1","---","---","---","unknown" ]]
+    pre_rowColVals =[["0","unknown","1","---","---","X","unknown" ]]
 
     ui = gridTable(rowLabels, pre_rowColVals)
     ui.main()
@@ -2083,8 +2213,8 @@ if __name__ == "__main__":
         app = QApplication.instance()
         logging.debug("no argument")
     
-    print("20211228_gitlab_test")
-    print("20220101_gitlab_test")
+    #print("20211228_gitlab_test")
+    #print("20220101_gitlab_test")
     # rowLabels = ["score", "param1", "param2", "param3", ""]
     # colLabels = ["score", "sub1", "sub2", "sub3", ""]
     # rowColVals = [[1, 2, 3, 4, ""],

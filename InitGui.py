@@ -68,7 +68,7 @@ class dexcsCfdOFWorkbench(Workbench):
         from dexcsCfdRunPlotTool import _CommandCfdRunPlotTool
         from dexcsCfdRunTreeFoam import _CommandCfdRunTreeFoam
         from dexcsCfdRunParallel import _CommandCfdRunParallel
-        from dexcsCfdRunTable_GUI import _CommandCfdRunTable_GUI
+        from dexcsCfdRundexcsPlotTable import _CommandCfdRundexcsPlotTable
         from dexcsCfdMakeCfMeshSetting import _CommandCfdMakeCfMeshSetting
         from dexcsCfdExportSTL import _CommandCfdExportSTL
         from dexcsCfdShowSolidInfo import _CommandCfdShowSolidInfo
@@ -91,7 +91,7 @@ class dexcsCfdOFWorkbench(Workbench):
         FreeCADGui.addCommand('Cfd_RunPlotTool', _CommandCfdRunPlotTool())
         FreeCADGui.addCommand('Cfd_RunTreeFoam', _CommandCfdRunTreeFoam())
         FreeCADGui.addCommand('Cfd_RunParallel', _CommandCfdRunParallel())
-        FreeCADGui.addCommand('Cfd_RunTable_GUI', _CommandCfdRunTable_GUI())
+        FreeCADGui.addCommand('Cfd_RundexcsPlotTable', _CommandCfdRundexcsPlotTable())
         FreeCADGui.addCommand('Cfd_MakeCfMeshSetting', _CommandCfdMakeCfMeshSetting())
         FreeCADGui.addCommand('Cfd_ExportSTL', _CommandCfdExportSTL())
         FreeCADGui.addCommand('Cfd_ShowSolidInfo', _CommandCfdShowSolidInfo())
@@ -104,7 +104,7 @@ class dexcsCfdOFWorkbench(Workbench):
                   'Cfd_CheckCaseFileName', 'Cfd_RunGridEditor', 'Cfd_EditConstantFolder', 
                   'Cfd_EditSystemFolder', 'Cfd_RunPlotWatcher', 'Cfd_RunClearCase', 
                   'Cfd_OpenOFTerminal', 'Cfd_RunParaview', 'Cfd_RunPlotTool', 
-                  'Cfd_RunTreeFoam', 'Cfd_RunParallel', 'Cfd_RunTable_GUI', 
+                  'Cfd_RunTreeFoam', 'Cfd_RunParallel', 'Cfd_RundexcsPlotTable', 
                   'Cfd_MakeCfMeshSetting', 'Cfd_ExportSTL', 'Cfd_ShowSolidInfo', 
                   'Cfd_Downgrade', 'Cfd_Upgrade', 'Cfd_Fuse']
 
