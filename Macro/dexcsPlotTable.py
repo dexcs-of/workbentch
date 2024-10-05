@@ -2,7 +2,7 @@
 #  coding: utf-8
 #
 """
-Table_GUI.py
+dexcsPlotTable.py
 """
 
 import logging
@@ -22,7 +22,6 @@ import csv
 import math
 
 import copy
-import time
 
 import numpy as np
 import re
@@ -836,8 +835,6 @@ class gridTable(Ui_MainWindow):
         self.default_tree.tree_widget.itemClicked.connect(self.onfile_enumClick)
         self.other_tree.tree_widget.itemClicked.connect(self.onfile_enumClick_other)
 
-        self.default_tree.tree_widget.itemChanged.connect(self.onfile_checkClick)
-        self.other_tree.tree_widget.itemChanged.connect(self.onfile_checkClick_other)
 
 
 
@@ -994,36 +991,6 @@ class gridTable(Ui_MainWindow):
             self.default_tree.maskEvent = False
         else:
             self.other_tree.maskEvent = False
-
-    def onfile_checkClick(self, widgetItem):
-        select_item = self.default_tree.tree_widget.selectedItems()[0]
-        Index = self.default_tree.tree_widget.indexOfTopLevelItem(select_item)   
-        item = self.default_tree.tree_widget.topLevelItem(Index)
-
-        #self.maskEvent = True
-        #self.maskEvent = False
-
-        #self.maskEvent = True
-        #time.sleep(0.1)
-
-        if item.checkState(0) == Qt.Unchecked:
-            #item.setCheckState(0,Qt.Checked)
-            print("uncheck")
-        elif item.checkState(0) == Qt.Checked:
-            print("check")
-            #item.setCheckState(0,Qt.UnChecked)
-        else:
-            print("check func not properly")
-        
-        #self.maskEvent = False
-            
-            
-    def onfile_checkClick_other(self, widgetItem):
-        print("not  yet impl")
-        #self.updateDictMatrixes() 
-        #            self.setDefaultMatrix(mapfile )
-        #setDefaultMatrix
-
 
     def enterSignalFromEditor(self):
         """ cellに組み込まれたtextEditorが終了した時の処理。
@@ -1258,7 +1225,7 @@ class gridTable(Ui_MainWindow):
             f.close()
             logging.debug("postProcessing=",f.name)
             dexcsPlotPost.dexcsPlotPost(learnDir,lines)
-            print("[Table_GUI]: Plot excuted")
+            print("[dexcsPlotTable]: Plot excuted")
 
         #dexcs_plot(block)
         
@@ -1363,7 +1330,7 @@ class gridTable(Ui_MainWindow):
 
     def actionOnSaveButton(self):
         self.Save_dplt("")
-        print("[Table_GUI]: dplt file was saved")
+        print("[dexcsPlotTable]: dplt file was saved")
         
     def Save_dplt(self, filename):
         MAX_COUNT=256
@@ -1611,7 +1578,7 @@ class gridTable(Ui_MainWindow):
             #f.close()
             #logging.debug("postProcessing=",f.name)
             #dexcsPlotPost.dexcsPlotPost(learnDir,lines)
-            #print("[Table_GUI]: Load dplt file excuted")
+            #print("[dexcsPlotTable]: Load dplt file excuted")
         else:
             print("file not exist")
 
@@ -1624,7 +1591,7 @@ class gridTable(Ui_MainWindow):
             f.close()
             logging.debug("postProcessing=",f.name)
             dexcsPlotPost.dexcsPlotPost(learnDir,lines)
-            print("[Table_GUI]: Load dplt file excuted")
+            print("[dexcsPlotTable]: Load dplt file excuted")
 
     def actionOnLoad2Button(self):
         logging.debug("test")
@@ -1720,7 +1687,7 @@ class gridTable(Ui_MainWindow):
         mapfiles.append(mapfile)
 
         #for h,name in enumerate(checked_postProcessisng_files):
-        #print(mapfile)
+        print(mapfile)
         for h,name in enumerate(mapfiles):        
             fileunit_data_columns = []
             #Dir__Name = postDir + "/" + name
@@ -1988,7 +1955,7 @@ class gridTable(Ui_MainWindow):
         else:
             filepath = filenamegroup_other[self.other_tree.tree_widget.indexOfTopLevelItem(select_item)]
 
-        #print(filepath)        
+        print(filepath)        
         #filepath = postDir + "/" + filenamegroup[0]
         logging.debug("matrix for loop success") 
         if other_flag == False:
@@ -2236,8 +2203,6 @@ if __name__ == "__main__":
         app = QApplication.instance()
         logging.debug("no argument")
     
-    #print("20211228_gitlab_test")
-    #print("20220101_gitlab_test")
     # rowLabels = ["score", "param1", "param2", "param3", ""]
     # colLabels = ["score", "sub1", "sub2", "sub3", ""]
     # rowColVals = [[1, 2, 3, 4, ""],
