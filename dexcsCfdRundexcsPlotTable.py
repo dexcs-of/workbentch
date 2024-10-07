@@ -39,9 +39,9 @@ class _CommandCfdRundexcsPlotTable:
     def GetResources(self):
         icon_path = os.path.join(dexcsCfdTools.get_module_path(), "Gui", "Resources", "icons", "Arch_Schedule.svg")
         return {'Pixmap': icon_path,
-                'MenuText': QtCore.QT_TRANSLATE_NOOP("Cfd_RundexcsPlotTable", "Run postProcessTable"),
+                'MenuText': QtCore.QT_TRANSLATE_NOOP("Cfd_RundexcsPlotTable", "Run dexcsPlotTable"),
                 'Accel': "S, P",
-                'ToolTip': QtCore.QT_TRANSLATE_NOOP("Cfd_RundexcsPlotTable", _("Run postProcessTable"))}
+                'ToolTip': QtCore.QT_TRANSLATE_NOOP("Cfd_RundexcsPlotTable", _("Run dexcsPlotTable"))}
 
     def IsActive(self):
         return dexcsCfdTools.getActiveAnalysis() is not None
