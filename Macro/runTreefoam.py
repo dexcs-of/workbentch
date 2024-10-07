@@ -42,15 +42,17 @@ trfCmd = "/opt/TreeFoam/treefoam"
 env = QtCore.QProcessEnvironment.systemEnvironment()
 
 if env.contains("APPIMAGE"):
-    message = (_("this FreeCAD is AppImage version.\n  some function of TreeFoam doesen't work.\n if you want utilize the function, use normal TreeFoam clicked by dock-launcher button.")) 
-    ans = QtGui.QMessageBox.critical(None, _("AppImage Warning"), message, QtGui.QMessageBox.Yes)
+    #message = (_("this FreeCAD is AppImage version.\n  some function of TreeFoam doesen't work.\n if you want utilize the function, use normal TreeFoam clicked by dock-launcher button.")) 
+    #ans = QtGui.QMessageBox.critical(None, _("AppImage Warning"), message, QtGui.QMessageBox.Yes)
     dexcsCfdTools.removeAppimageEnvironment(env)
     process = QtCore.QProcess()
     process.setProcessEnvironment(env)
     working_dir = modelDir
     if working_dir:
         process.setWorkingDirectory(working_dir)
-    process.start(trfCmd)
+    #process.start(trfCmd)
+    process.setProgram(trfCmd)
+    process.start()
 
 else:
     os.system(trfCmd)

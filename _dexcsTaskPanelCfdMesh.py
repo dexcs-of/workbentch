@@ -46,6 +46,7 @@ if FreeCAD.GuiUp:
     from PySide.QtGui import QApplication
 
 import pythonVerCheck
+import draftutils
 
 # import sys
 # import gettext
@@ -67,6 +68,7 @@ class _TaskPanelCfdMesh:
         self.form.pb_write_mesh.setText(_("Write mesh case"))
         self.form.l_meshTool.setText(_("Mesh Tool"))
         self.form.l_dimension.setText(_("dimension"))
+        self.form.l_stlMaxDev.setText(_("STL Max deviation"))
         self.form.l_featureAngle.setText(_("Feature Angle(deg)"))
         self.form.pb_stop_mesh.setText(_("Stop"))
         self.form.l_scaleToMeter.setText(_("Scale to Meter:"))
@@ -159,6 +161,9 @@ class _TaskPanelCfdMesh:
         setQuantity(self.form.if_max, self.mesh_obj.BaseCellSize)
 
         ### <--addDexcs 
+        maxDeviation = draftutils.params.get_param( "MaxDeviationExport", "Mod/Mesh")
+        #setQuantity(self.form.if_stlMaxDev, maxDeviation)
+        self.form.if_stlMaxDev.setValue(maxDeviation) 
         self.form.if_featureAngle.setValue(self.mesh_obj.FeatureAngle) 
         self.form.if_scaleToMeter.setValue(self.mesh_obj.ScaleToMeter) 
         self.form.check_keepCells.setChecked(self.mesh_obj.keepCellsIntersectingBoundary) 
@@ -211,6 +216,8 @@ class _TaskPanelCfdMesh:
                              "= '{}'".format(self.mesh_obj.Name, getQuantity(self.form.if_max)))
 
         ### <--addDexcs 
+        FreeCADGui.doCommand("\nFreeCAD.ActiveDocument.{}.FeatureAngle "
+                             "= {}".format(self.mesh_obj.Name, self.form.if_stlMaxDev.value()))
         FreeCADGui.doCommand("\nFreeCAD.ActiveDocument.{}.FeatureAngle "
                              "= {}".format(self.mesh_obj.Name, self.form.if_featureAngle.value()))
         FreeCADGui.doCommand("\nFreeCAD.ActiveDocument.{}.ScaleToMeter "
@@ -274,6 +281,10 @@ class _TaskPanelCfdMesh:
             self.form.snappySpecificProperties.setVisible(False)
 
     def writeMesh(self):
+        maxDeviation_before = draftutils.params.get_param( "MaxDeviationExport", "Mod/Mesh")
+        maxDeviation_after = self.form.if_stlMaxDev.value()
+        if maxDeviation_before != maxDeviation_after:
+            draftutils.params.set_param( "MaxDeviationExport",maxDeviation_after, "Mod/Mesh")
         import importlib
         importlib.reload(dexcsCfMeshTools)
         self.console_message_cart = ''

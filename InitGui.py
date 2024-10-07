@@ -68,12 +68,12 @@ class dexcsCfdOFWorkbench(Workbench):
         from dexcsCfdRunPlotTool import _CommandCfdRunPlotTool
         from dexcsCfdRunTreeFoam import _CommandCfdRunTreeFoam
         from dexcsCfdRunParallel import _CommandCfdRunParallel
-        from dexcsCfdRunTable_GUI import _CommandCfdRunTable_GUI
+        from dexcsCfdRundexcsPlotTable import _CommandCfdRundexcsPlotTable
         from dexcsCfdMakeCfMeshSetting import _CommandCfdMakeCfMeshSetting
         from dexcsCfdExportSTL import _CommandCfdExportSTL
         from dexcsCfdShowSolidInfo import _CommandCfdShowSolidInfo
         from dexcsCfdDowngrade import _CommandCfdDowngrade
-        from dexcsCfdFuse import _CommandCfdFuse
+        from dexcsCfdUpgrade import _CommandCfdUpgrade
 
         FreeCADGui.addCommand('Cfd_SolverSet', _CommandCfdSolverSet())
         FreeCADGui.addCommand('Cfd_Analysis', _CommandCfdAnalysis())
@@ -90,21 +90,21 @@ class dexcsCfdOFWorkbench(Workbench):
         FreeCADGui.addCommand('Cfd_RunPlotTool', _CommandCfdRunPlotTool())
         FreeCADGui.addCommand('Cfd_RunTreeFoam', _CommandCfdRunTreeFoam())
         FreeCADGui.addCommand('Cfd_RunParallel', _CommandCfdRunParallel())
-        FreeCADGui.addCommand('Cfd_RunTable_GUI', _CommandCfdRunTable_GUI())
+        FreeCADGui.addCommand('Cfd_RundexcsPlotTable', _CommandCfdRundexcsPlotTable())
         FreeCADGui.addCommand('Cfd_MakeCfMeshSetting', _CommandCfdMakeCfMeshSetting())
         FreeCADGui.addCommand('Cfd_ExportSTL', _CommandCfdExportSTL())
         FreeCADGui.addCommand('Cfd_ShowSolidInfo', _CommandCfdShowSolidInfo())
         FreeCADGui.addCommand('Cfd_Downgrade', _CommandCfdDowngrade())
-        FreeCADGui.addCommand('Cfd_Fuse', _CommandCfdFuse())
+        FreeCADGui.addCommand('Cfd_Upgrade', _CommandCfdUpgrade())
 
         cmdlst = ['Cfd_Analysis', 'Cfd_MeshFromShape', 
                   'Cfd_MeshRegion', 'Cfd_SolverControl', 'Cfd_SolverSet',
                   'Cfd_CheckCaseFileName', 'Cfd_RunGridEditor', 'Cfd_EditConstantFolder', 
                   'Cfd_EditSystemFolder', 'Cfd_RunPlotWatcher', 'Cfd_RunClearCase', 
                   'Cfd_OpenOFTerminal', 'Cfd_RunParaview', 'Cfd_RunPlotTool', 
-                  'Cfd_RunTreeFoam', 'Cfd_RunParallel', 'Cfd_RunTable_GUI', 
+                  'Cfd_RunTreeFoam', 'Cfd_RunParallel', 'Cfd_RundexcsPlotTable', 
                   'Cfd_MakeCfMeshSetting', 'Cfd_ExportSTL', 'Cfd_ShowSolidInfo', 
-                  'Cfd_Downgrade', 'Cfd_Fuse']
+                  'Cfd_Downgrade', 'Cfd_Upgrade']
 
         self.appendToolbar(str(QtCore.QT_TRANSLATE_NOOP("Cfd", "dexcsCfdOF")), cmdlst)
         self.appendMenu(str(QtCore.QT_TRANSLATE_NOOP("Cfd", "&dexcsCfdOF")), cmdlst)

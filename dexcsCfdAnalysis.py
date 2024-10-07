@@ -137,11 +137,11 @@ class _CfdAnalysis:
                 if dialog == QtGui.QMessageBox.Yes:
 
                     if env.contains("APPIMAGE"):
-                        message = _("This FreeCAD is AppImage version.\n ")
-                        message = message + _("AppImage cannot change the OutputPAth while loading process.\n\n") 
-                        message = message + _("so if you want change the OutputPAth of Analysis Container,\n") 
-                        message = message + _("change the property manually after lodaing process,\n") 
-                        ans = QtGui.QMessageBox.critical(None, _("AppImage Warning"), message, QtGui.QMessageBox.Yes)
+                        #message = _("This FreeCAD is AppImage version.\n ")
+                        #message = message + _("AppImage cannot change the OutputPAth while loading process.\n\n") 
+                        #message = message + _("so if you want change the OutputPAth of Analysis Container,\n") 
+                        #message = message + _("change the property manually after lodaing process,\n") 
+                        #ans = QtGui.QMessageBox.critical(None, _("AppImage Warning"), message, QtGui.QMessageBox.Yes)
                         dexcsCfdTools.removeAppimageEnvironment(env)
                     else:
                         d = QtGui.QFileDialog().getExistingDirectory(None, _('Choose output directory'), defaultModel_Dir)

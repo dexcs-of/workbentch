@@ -33,27 +33,21 @@ import os.path
 if FreeCAD.GuiUp:
     import FreeCADGui
     from PySide import QtCore
-    from PySide.QtCore import *
-    from PySide.QtGui import *
 import pythonVerCheck
 
-class _CommandCfdShowSolidInfo:
+class _CommandCfdUpgrade:
     def GetResources(self):
-        icon_path = os.path.join(dexcsCfdTools.get_module_path(), "Gui", "Resources", "icons", "bulb.svg")
+        icon_path = os.path.join(dexcsCfdTools.get_module_path(), "Gui", "Resources", "icons", "Draft_Upgrade.svg")
         return {'Pixmap': icon_path,
-                'MenuText': QtCore.QT_TRANSLATE_NOOP("Cfd_ShowSolidInfo", "show solid info"),
+                'MenuText': QtCore.QT_TRANSLATE_NOOP("Cfd_Upgrade", "upgrade"),
                 'Accel': "S, P",
-                'ToolTip': QtCore.QT_TRANSLATE_NOOP("Cfd_ShowSolidInfo", _("show solid info"))}
+                'ToolTip': QtCore.QT_TRANSLATE_NOOP("Cfd_Upgrade", _("upgrade"))}
 
     #def IsActive(self):
     #    return dexcsCfdTools.getActiveAnalysis() is not None
 
     def Activated(self):
-        #FreeCADGui.runCommand('Std_Macro_0',0)
-        #import showSolidInfo
-        _macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro'
-        prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
-        FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
-        FreeCADGui.runCommand('Std_Macro_0',0)
-        FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',prefs)
+        FreeCADGui.runCommand('Draft_Upgrade',0)
+        #import grade
+
 

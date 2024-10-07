@@ -84,11 +84,12 @@ class gui(QtWidgets.QDialog):
         import dexcsCfdTools
         if self.dpltFile :
             fileName = self.modelDir + '/system/' + self.dpltFile
-            dexcsCfdTools.openFileManager(self.modelDir+'/system/' + self.dpltFile)
-            #proc = QtCore.QProcess()
-            #proc.setProgram("gedit") 
-            #proc.setArguments([fileName])
+            #dexcsCfdTools.openFileManager(self.modelDir+'/system/' + self.dpltFile)
+            proc = QtCore.QProcess()
+            proc.setProgram("gnome-text-editor") 
+            proc.setArguments([fileName])
             #proc.start()
+            proc.startDetached()
             #proc.start("gedit " + fileName)
             #env = QtCore.QProcessEnvironment.systemEnvironment()
             #removeAppimageEnvironment(env)
@@ -116,10 +117,10 @@ class gui(QtWidgets.QDialog):
 if __name__ == '__main__':
     if not QtWidgets.QApplication.instance():
         app = QtWidgets.QApplication(sys.argv)
-        print("debug1")
+        #print("debug1")
     else:
-        print("debug2")
+        #print("debug2")
         app = QtWidgets.QApplication.instance()
-        print("debug3")
+        #print("debug3")
     window = gui()
     window.show()

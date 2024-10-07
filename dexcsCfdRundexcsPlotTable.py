@@ -35,20 +35,20 @@ if FreeCAD.GuiUp:
     from PySide import QtCore
 import pythonVerCheck
 
-class _CommandCfdRunTable_GUI:
+class _CommandCfdRundexcsPlotTable:
     def GetResources(self):
         icon_path = os.path.join(dexcsCfdTools.get_module_path(), "Gui", "Resources", "icons", "Arch_Schedule.svg")
         return {'Pixmap': icon_path,
-                'MenuText': QtCore.QT_TRANSLATE_NOOP("Cfd_RunTable_GUI", "Run postProcessTable"),
+                'MenuText': QtCore.QT_TRANSLATE_NOOP("Cfd_RundexcsPlotTable", "Run dexcsPlotTable"),
                 'Accel': "S, P",
-                'ToolTip': QtCore.QT_TRANSLATE_NOOP("Cfd_RunTable_GUI", _("Run postProcessTable"))}
+                'ToolTip': QtCore.QT_TRANSLATE_NOOP("Cfd_RundexcsPlotTable", _("Run dexcsPlotTable"))}
 
     def IsActive(self):
         return dexcsCfdTools.getActiveAnalysis() is not None
 
     def Activated(self):
         #FreeCADGui.runCommand('Std_Macro_16',0)
-        #import Table_GUI
+        #import dexcsPlotTable
         _macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro'
         _prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
         FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)

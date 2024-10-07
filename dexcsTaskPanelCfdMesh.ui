@@ -44,10 +44,7 @@
      <item row="0" column="1">
       <widget class="QComboBox" name="cb_meshTool"/>
      </item>
-     <item row="1" column="1">
-      <widget class="QComboBox" name="cb_dimension"/>
-     </item>
-     <item row="1" column="0">
+     <item row="2" column="0">
       <widget class="QLabel" name="l_dimension">
        <property name="text">
         <string>dimension</string>
@@ -63,6 +60,33 @@
         <string>Mesh Tool</string>
        </property>
       </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="l_stlMaxDev">
+       <property name="text">
+        <string>STL Max deviation</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QComboBox" name="cb_dimension"/>
+     </item>
+     <item row="1" column="1">
+           <widget class="QDoubleSpinBox" name="if_stlMaxDev">
+           <property name="decimals">
+            <number>6</number>
+           </property>
+           <property name="minimum">
+            <double>0.000000100000000</double>
+           </property>
+           <property name="maximum">
+            <double>1000.000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>0.001</double>
+           </property>
+          </widget>
+
      </item>
     </layout>
    </item>
