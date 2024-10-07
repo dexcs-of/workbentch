@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-02 09:51+0900\n"
+"POT-Creation-Date: 2024-10-08 06:08+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -425,43 +425,43 @@ msgstr "計算結果や不要なファイルを削除して、caseを初期化�
 msgid "case were initialized."
 msgstr "caseを初期化しました。"
 
-#: ../Macro/dexcsPlotTable.py:606
+#: ../Macro/dexcsPlotTable.py:606 ../Macro/dexcsPlotTable.py:605
 msgid "Existing file"
 msgstr "既存プロットファイル"
 
-#: ../Macro/dexcsPlotTable.py:618
+#: ../Macro/dexcsPlotTable.py:618 ../Macro/dexcsPlotTable.py:617
 msgid "load left-file"
 msgstr "プロット"
 
-#: ../Macro/dexcsPlotTable.py:529
+#: ../Macro/dexcsPlotTable.py:529 ../Macro/dexcsPlotTable.py:528
 msgid "plot"
 msgstr "プロット"
 
-#: ../Macro/dexcsPlotTable.py:561
+#: ../Macro/dexcsPlotTable.py:561 ../Macro/dexcsPlotTable.py:560
 msgid "save dplt"
 msgstr "保存"
 
-#: ../Macro/dexcsPlotTable.py:573
+#: ../Macro/dexcsPlotTable.py:573 ../Macro/dexcsPlotTable.py:572
 msgid "(not yet) load2"
 msgstr "開く"
 
-#: ../Macro/dexcsPlotTable.py:583
+#: ../Macro/dexcsPlotTable.py:583 ../Macro/dexcsPlotTable.py:582
 msgid "reserve"
 msgstr "予備"
 
-#: ../Macro/dexcsPlotTable.py:545
+#: ../Macro/dexcsPlotTable.py:545 ../Macro/dexcsPlotTable.py:544
 msgid "Save FileName"
 msgstr "保存ファイル名"
 
-#: ../Macro/dexcsPlotTable.py:489
+#: ../Macro/dexcsPlotTable.py:489 ../Macro/dexcsPlotTable.py:488
 msgid "Title"
 msgstr "タイトル名"
 
-#: ../Macro/dexcsPlotTable.py:514
+#: ../Macro/dexcsPlotTable.py:514 ../Macro/dexcsPlotTable.py:513
 msgid "Y-Label"
 msgstr "Yラベル名"
 
-#: ../Macro/dexcsPlotTable.py:764
+#: ../Macro/dexcsPlotTable.py:764 ../Macro/dexcsPlotTable.py:763
 msgid "caseDir is :"
 msgstr "ケースファイル :"
 
@@ -508,11 +508,11 @@ msgstr ""
 "してメッシュ作成タスク画面にてケース作成ボタンを押すか\n"
 "または，cfMesh用設定マクロにてCaseボタンを押して変更先を指定してください．"
 
-#: ../Macro/dexcsPlotTable.py:1512
+#: ../Macro/dexcsPlotTable.py:1512 ../Macro/dexcsPlotTable.py:1479
 msgid "上書き許可"
 msgstr ""
 
-#: ../Macro/dexcsPlotTable.py:1513
+#: ../Macro/dexcsPlotTable.py:1513 ../Macro/dexcsPlotTable.py:1480
 msgid "既に同名のファイルがありますが上書きしますか？"
 msgstr ""
 
@@ -908,15 +908,15 @@ msgstr "メッシュ細分化コンテナを作成"
 msgid "Edit properties and run solver"
 msgstr "ソルバーコンテナを起動"
 
-#: ../Macro/dexcsPlotTable.py:429
+#: ../Macro/dexcsPlotTable.py:429 ../Macro/dexcsPlotTable.py:428
 msgid "Add File"
 msgstr "ファイル追加"
 
-#: ../Macro/dexcsPlotTable.py:435
+#: ../Macro/dexcsPlotTable.py:435 ../Macro/dexcsPlotTable.py:434
 msgid "Delete File"
 msgstr "ファイル削除"
 
-#: ../Macro/dexcsPlotTable.py:456
+#: ../Macro/dexcsPlotTable.py:456 ../Macro/dexcsPlotTable.py:455
 msgid ""
 "Index, ColumnName, Scale_factor, Used_as_x , Used_as_y(multi), "
 "Vectorize_flag, Data_length"
@@ -1277,11 +1277,11 @@ msgstr "間引き"
 msgid "Last"
 msgstr "最新"
 
-#: ../Macro/dexcsPlotTable.py:624
+#: ../Macro/dexcsPlotTable.py:624 ../Macro/dexcsPlotTable.py:623
 msgid "LookAsText"
 msgstr "確認"
 
-#: ../Macro/dexcsPlotTable.py:407
+#: ../Macro/dexcsPlotTable.py:407 ../Macro/dexcsPlotTable.py:406
 msgid "Confirm on gedit"
 msgstr "テキストエディタで確認"
 
@@ -1328,3 +1328,8 @@ msgid ""
 msgstr ""
 "STLの最大メッシュ偏差を設定\n"
 " "
+
+#: ../dexcsCfdUpgrade.py:44
+msgid "upgrade"
+msgstr "アップグレード"
+

@@ -18,7 +18,7 @@
 ../Macro/runTreefoam.py
 ../Macro/solverSet.py
 ../dexcsPlotTool_ui.py
-../Macro/Table_GUI.py
+../Macro/dexcsPlotTable.py
 ../Macro/exportFSIinp.py
 ../_dexcsTaskPanelCfdSolverControl.py
 ../_dexcsTaskPanelCfdMesh.py
@@ -46,8 +46,9 @@
 ../dexcsCfdRunParaview.py
 ../dexcsCfdRunPlotTool.py
 ../dexcsCfdRunPlotWatcher.py
-../dexcsCfdRunTable_GUI.py
+../dexcsCfdRundexcsPlotTable.py
 ../dexcsCfdRunTreeFoam.py
 ../dexcsCfdShowSolidInfo.py
 ../dexcsCfdSolverSet.py
+../dexcsCfdUpgrade.py
 
