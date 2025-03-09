@@ -14,6 +14,22 @@ DEXCSランチャーのうち、DEXCSツールバー中のTreeFoamのサブセ�
 インストール先の環境によっては動かない場合もある点はお断りしておく。
 その場合は面倒ですが、TreeFoamを通常に起動して当該機能を使ってやって下さい。
 
+## 更新 2025/3/9（v0.26）
+TreeFoam のSHMツールを起動できるべく、改造・追加
+但し、.config/FreeCAD/user.cfg 中の Macro を定義したブロック（<FCParamGroup Name="Macros">）中に、以下の Macro の追加も必要
+
+          <FCParamGroup Name="Std_Macro_18">
+            <FCText Name="Script">runTrfSHM.py</FCText>
+            <FCText Name="Menu">TrfSHM</FCText>
+            <FCText Name="Tooltip">TrfSHMの起動</FCText>
+            <FCText Name="WhatsThis">TrfSHMの起動</FCText>
+            <FCText Name="Statustip">TrfSHMの起動</FCText>
+            <FCText Name="Pixmap">editMesh</FCText>
+            <FCText Name="Accel"></FCText>
+            <FCBool Name="System" Value="0"/>
+          </FCParamGroup>
+
+
 ## 更新 2024/10/11（v0.25）
 DEXCS2024用に諸々更新。特にFreeCAD-0.22rev対応。
 
