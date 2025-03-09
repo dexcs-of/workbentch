@@ -92,7 +92,7 @@ class _CfdMesh:
     # they will be used from the task panel too, thus they need to be outside of the __init__
     known_element_dimensions = ['2D', '3D']
     #known_mesh_utility = ['cfMesh', 'snappyHexMesh', 'gmsh']
-    known_mesh_utility = ['cfMesh']
+    known_mesh_utility = ['cfMesh', 'snappyHexMesh']
     known_workflowControls = ['none', 'templateGeneration', 'surfaceTopology', 'surfaceProjection', 'patchAssignment', 'edgeExtraction', 'boundaryLayerGeneration', 'meshOptimisation', 'boundaryLayerRefinement']
     known_patchType = ['patch', 'wall', 'symmetry', 'overset', 'cyclic', 'wedge', 'empty', 'symmetryPlane']
 
@@ -118,11 +118,11 @@ class _CfdMesh:
 
         addObjectProperty(obj, "Part", None, "App::PropertyLink", "Mesh Parameters", "Part object to mesh")
 
-        if addObjectProperty(obj, "MeshUtility", _CfdMesh.known_mesh_utility, "App::PropertyEnumeration",
-                             "Mesh Parameters", "Meshing utilities"):
-            obj.MeshUtility = 'cfMesh'
-        # addObjectProperty(obj, "MeshUtility", _CfdMesh.known_mesh_utility, "App::PropertyEnumeration",
-        #                       "Mesh Parameters", "Meshing utilities")
+        #if addObjectProperty(obj, "MeshUtility", _CfdMesh.known_mesh_utility, "App::PropertyEnumeration",
+        #                     "Mesh Parameters", "Meshing utilities"):
+        #    obj.MeshUtility = 'cfMesh'
+        addObjectProperty(obj, "MeshUtility", _CfdMesh.known_mesh_utility, "App::PropertyEnumeration",
+                               "Mesh Parameters", "Meshing utilities")
         ### <--addDexcs 
         addObjectProperty(obj, "FeatureAngle", 30, "App::PropertyFloat", "Mesh Parameters",
                           "Feature Angle of STL parts")

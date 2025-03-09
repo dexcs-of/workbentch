@@ -60,6 +60,7 @@ class dexcsCfdOFWorkbench(Workbench):
         from dexcsCfdCheckCaseFileName import _CommandCfdCheckCaseFileName
         from dexcsCfdEditConstantFolder import _CommandCfdEditConstantFolder
         from dexcsCfdEditSystemFolder import _CommandCfdEditSystemFolder
+        from dexcsCfdRunTrfSHM import _CommandCfdRunTrfSHM
         from dexcsCfdRunGridEditor import _CommandCfdRunGridEditor
         from dexcsCfdRunPlotWatcher import _CommandCfdRunPlotWatcher
         from dexcsCfdRunClearCase import _CommandCfdRunClearCase
@@ -80,6 +81,7 @@ class dexcsCfdOFWorkbench(Workbench):
         FreeCADGui.addCommand('Cfd_MeshFromShape', _CommandCfdMeshFromShape())
         FreeCADGui.addCommand('Cfd_MeshRegion', _CommandMeshRegion())
         FreeCADGui.addCommand('Cfd_CheckCaseFileName', _CommandCfdCheckCaseFileName())
+        FreeCADGui.addCommand('Cfd_RunTrfSHM', _CommandCfdRunTrfSHM())
         FreeCADGui.addCommand('Cfd_RunGridEditor', _CommandCfdRunGridEditor())
         FreeCADGui.addCommand('Cfd_EditConstantFolder', _CommandCfdEditConstantFolder())
         FreeCADGui.addCommand('Cfd_EditSystemFolder', _CommandCfdEditSystemFolder())
@@ -99,7 +101,7 @@ class dexcsCfdOFWorkbench(Workbench):
 
         cmdlst = ['Cfd_Analysis', 'Cfd_MeshFromShape', 
                   'Cfd_MeshRegion', 'Cfd_SolverControl', 'Cfd_SolverSet',
-                  'Cfd_CheckCaseFileName', 'Cfd_RunGridEditor', 'Cfd_EditConstantFolder', 
+                  'Cfd_CheckCaseFileName', 'Cfd_RunTrfSHM', 'Cfd_RunGridEditor','Cfd_EditConstantFolder', 
                   'Cfd_EditSystemFolder', 'Cfd_RunPlotWatcher', 'Cfd_RunClearCase', 
                   'Cfd_OpenOFTerminal', 'Cfd_RunParaview', 'Cfd_RunPlotTool', 
                   'Cfd_RunTreeFoam', 'Cfd_RunParallel', 'Cfd_RundexcsPlotTable', 

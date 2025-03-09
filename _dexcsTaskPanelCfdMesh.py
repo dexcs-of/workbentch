@@ -207,6 +207,20 @@ class _TaskPanelCfdMesh:
         else:
             self.form.optimizer_frame.setVisible(False)
 
+        self.choose_utility(1)
+
+        polyMesh = case_path + "constant/polyMesh"
+        if os.path.isdir(polyMesh):
+            self.template_path = os.path.join(dexcsCfdTools.get_module_path(), "data", "dexcsMesh")
+            settings={}
+            settings['MeshPath'] = self.cart_mesh.meshCaseDir
+            TemplateBuilder.TemplateBuilder(self.cart_mesh.meshCaseDir, self.template_path, settings)
+            self.form.pb_paraview.setEnabled(True)
+            self.form.pb_checkmesh.setEnabled(True)
+        else:
+            self.form.pb_paraview.setEnabled(False)
+            self.form.pb_checkmesh.setEnabled(False)
+
 
 
     def store(self):
@@ -274,11 +288,38 @@ class _TaskPanelCfdMesh:
     def choose_utility(self, index):
         if index < 0:
             return
-        utility = self.form.cb_utility.currentText()
+        utility = self.form.cb_meshTool.currentText()
         if utility == "snappyHexMesh":
-            self.form.snappySpecificProperties.setVisible(True)
+            #print('utilty = ' + utility)
+            self.form.label.setVisible(False)
+            self.form.l_featureAngle.setVisible(False)
+            self.form.l_max.setVisible(False)
+            self.form.l_workflowControls.setVisible(False)
+            self.form.check_keepCells.setVisible(False)
+            self.form.if_featureAngle.setVisible(False)
+            self.form.check_optimiseLayer.setVisible(False)
+            self.form.cb_workflowControls.setVisible(False)
+            self.form.if_max.setVisible(False)
+            self.form.l_dimension.setVisible(False)
+            self.form.cb_dimension.setVisible(False)
+            self.form.label_5.setVisible(False)
+            self.form.pb_run_mesh.setVisible(False)
+            self.form.pb_stop_mesh.setVisible(False)
         else:
-            self.form.snappySpecificProperties.setVisible(False)
+            self.form.label.setVisible(True)
+            self.form.l_featureAngle.setVisible(True)
+            self.form.l_max.setVisible(True)
+            self.form.l_workflowControls.setVisible(True)
+            self.form.check_keepCells.setVisible(True)
+            self.form.if_featureAngle.setVisible(True)
+            self.form.check_optimiseLayer.setVisible(True)
+            self.form.cb_workflowControls.setVisible(True)
+            self.form.if_max.setVisible(True)
+            self.form.l_dimension.setVisible(True)
+            self.form.cb_dimension.setVisible(True)
+            self.form.label_5.setVisible(True)
+            self.form.pb_run_mesh.setVisible(True)
+            self.form.pb_stop_mesh.setVisible(True)
 
     def writeMesh(self):
         maxDeviation_before = draftutils.params.get_param( "MaxDeviationExport", "Mod/Mesh")
@@ -314,11 +355,19 @@ class _TaskPanelCfdMesh:
         writeDict.close()
 
         template_case = dexcsCfdTools.getTemplateCase(self.analysis)
+        utility = self.form.cb_meshTool.currentText()            
         try:
             QApplication.setOverrideCursor(Qt.WaitCursor)
-            FreeCADGui.doCommand("dexcsCfMesh = dexcsCfMeshTools.MainControl()")
+            if (utility== 'cfMesh'):
+                FreeCADGui.addModule("dexcsCfMeshTools")                
+                FreeCADGui.doCommand("dexcsMesher = dexcsCfMeshTools.MainControl()")
+            elif (utility=='snappyHexMesh'):
+                FreeCADGui.addModule("dexcsSHMeshTools")                
+                FreeCADGui.doCommand("dexcsMesher = dexcsSHMeshTools.MainControl()")
+            else:
+                raise Exception()
             #FreeCADGui.doCommand("dexcsCfMesh.perform("+ "'" + cart_mesh.meshCaseDir + "'" + ")")
-            FreeCADGui.doCommand("dexcsCfMesh.perform("+ "'" + output_path + "', '" + template_case + "'" + ")")       
+            FreeCADGui.doCommand("dexcsMesher.perform("+ "'" + output_path + "', '" + template_case + "'" + ")")       
             self.consoleMessage("Exporting the part surfaces ...")
         except Exception as ex:
             self.consoleMessage("Error " + type(ex).__name__ + ": " + str(ex), '#FF0000')
