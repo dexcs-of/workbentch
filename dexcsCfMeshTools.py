@@ -648,7 +648,7 @@ class MainControl():
         '\n',
         '// remove cells where distinct parts of the mesh are joined together (optional)\n',
         '// active only when keepCellsIntersectingBoundary is active\n',
-        '// checkForGluedMesh    0; // 1 active or 0 inactive\n',
+        'checkForGluedMesh    1; // 1 active or 0 inactive\n',
         '\n',
         '// remove cells the cells intersected\n',
         '// by the selected patched/subsets\n',

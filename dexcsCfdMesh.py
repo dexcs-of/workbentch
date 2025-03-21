@@ -128,7 +128,7 @@ class _CfdMesh:
                           "Feature Angle of STL parts")
         addObjectProperty(obj, "ScaleToMeter", 1, "App::PropertyFloat", "Mesh Parameters",
                           "Scale Factor to meter")
-        addObjectProperty(obj, "keepCellsIntersectingBoundary", False, "App::PropertyBool", "Mesh Parameters",
+        addObjectProperty(obj, "keepCellsIntersectingBoundary", True, "App::PropertyBool", "Mesh Parameters",
                           "activates smoothing of boundary layers")
         addObjectProperty(obj, "optimiseLayer", False, "App::PropertyBool", "Mesh Parameters",
                           "keep template cells intersecting boundary")
