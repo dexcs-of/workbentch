@@ -11,6 +11,10 @@ export TEXTDOMAIN=treefoamBash
 export PATH=$TreeFoamPath:$TreeFoamPath/bin:$TreeFoamPath/python:$PATH
 export PYTHONPATH=$TreeFoamPath:$TreeFoamPath/python:$TreeFoamPath/bin:~/.FreeCAD:/usr/lib/freecad-daily/lib:/$PYTHONPATH
 
+#displayServerの設定
+#displayServerがX11
+export QT_QPA_PLATFORM=xcb
+
 #TreeFoamのlogFileを設定
 export LogFile=$TreeFoamUserPath"/temp/dexcsLauncher.log"
 
