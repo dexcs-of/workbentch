@@ -129,9 +129,11 @@ class _CfdMesh:
         addObjectProperty(obj, "ScaleToMeter", 1, "App::PropertyFloat", "Mesh Parameters",
                           "Scale Factor to meter")
         addObjectProperty(obj, "keepCellsIntersectingBoundary", True, "App::PropertyBool", "Mesh Parameters",
-                          "activates smoothing of boundary layers")
-        addObjectProperty(obj, "optimiseLayer", False, "App::PropertyBool", "Mesh Parameters",
                           "keep template cells intersecting boundary")
+        addObjectProperty(obj, "checkForGluedMesh", True, "App::PropertyBool", "Mesh Parameters",
+                          "check for glued mesh")
+        addObjectProperty(obj, "optimiseLayer", False, "App::PropertyBool", "Mesh Parameters",
+                          "activates smoothing of boundary layers")
         addObjectProperty(obj, "opt_nSmoothNormals", 3, "App::PropertyInteger", "Mesh Parameters",
                           "number of iterations in the procedure for reducing normal variation")
         addObjectProperty(obj, "opt_maxNumIterations", 5, "App::PropertyInteger", "Mesh Parameters",

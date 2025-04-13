@@ -14,6 +14,10 @@ DEXCSランチャーのうち、DEXCSツールバー中のTreeFoamのサブセ�
 インストール先の環境によっては動かない場合もある点はお断りしておく。
 その場合は面倒ですが、TreeFoamを通常に起動して当該機能を使ってやって下さい。
 
+## 更新 2025/4/13（v0.27）
+ubuntu 24.04 の displayServerがweylandに変更になったことで動かなくなったアプリ（gridEditor）に対する環境変数追加（export QT_QPA_PLATFORM=xcb）。
+cfMeshのパラメタオプション(checkForGluedMesh)を変更可能にした。
+
 ## 更新 2025/3/9（v0.26）
 TreeFoam のSHMツールを起動できるべく、改造・追加
 但し、.config/FreeCAD/user.cfg 中の Macro を定義したブロック（<FCParamGroup Name="Macros">）中に、以下の Macro の追加も必要

@@ -392,6 +392,7 @@ class MainControl():
             dexcsCfdDict_opt_reCalculateNormalsCHKOption = "0"
         dexcsCfdDict_opt_relThicknessTol= str(self.mesh_obj.opt_relThicknessTol)
         dexcsCfdDict_keepCellsIntersectingBoundaryCHKOption = self.mesh_obj.keepCellsIntersectingBoundary
+        dexcsCfdDict_checkForGluedMeshCHKOption = self.mesh_obj.checkForGluedMesh
 
         if self.mesh_obj.workflowControls == 'none':
             stopAfterString = '\t//\tstopAfter\tedgeExtraction;\n'
@@ -624,6 +625,10 @@ class MainControl():
             keepCellsIntersectingBoundaryString = 'keepCellsIntersectingBoundary    1; // 1 keep or 0 only internal cells are used\n'
         else :
             keepCellsIntersectingBoundaryString = '// keepCellsIntersectingBoundary    1; // 1 keep or 0 only internal cells are used\n'
+        if dexcsCfdDict_checkForGluedMeshCHKOption == 1 :
+            keepCellcheckForGluedMeshString = 'checkForGluedMesh    1; // 1 active or 0 inactive\n'
+        else :
+            keepCellcheckForGluedMeshString = 'checkForGluedMesh    0; // 1 active or 0 inactive\n'
 
         strings4 = [
         '\t}\n',
@@ -648,7 +653,7 @@ class MainControl():
         '\n',
         '// remove cells where distinct parts of the mesh are joined together (optional)\n',
         '// active only when keepCellsIntersectingBoundary is active\n',
-        'checkForGluedMesh    1; // 1 active or 0 inactive\n',
+        keepCellcheckForGluedMeshString,
         '\n',
         '// remove cells the cells intersected\n',
         '// by the selected patched/subsets\n',

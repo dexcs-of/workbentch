@@ -86,6 +86,7 @@ class _TaskPanelCfdMesh:
         self.form.label_reCalculateNormals.setText(_("reCalculateNormals"))
         self.form.label_nSmoothNormals.setText(_("Number of iterations:"))
         self.form.check_keepCells.setText(_("keepCellsIntersectingBoundary"))
+        self.form.check_checkForGluedMesh.setText(_("checkForGluedMesh"))
         self.form.l_max.setText(_("Base element size:"))
         self.form.l_workflowControls.setText(_("workflowControls(stopAfter):"))
         self.form.label_2.setText(_("Status"))
@@ -134,6 +135,7 @@ class _TaskPanelCfdMesh:
         #self.form.if_edgerefine.setToolTip("Number of refinement levels for all edges")
 
         self.form.check_optimiseLayer.stateChanged.connect(self.updateUI)
+        self.form.check_keepCells.stateChanged.connect(self.updateUI)
 
         self.load()
         self.updateUI()
@@ -167,6 +169,7 @@ class _TaskPanelCfdMesh:
         self.form.if_featureAngle.setValue(self.mesh_obj.FeatureAngle) 
         self.form.if_scaleToMeter.setValue(self.mesh_obj.ScaleToMeter) 
         self.form.check_keepCells.setChecked(self.mesh_obj.keepCellsIntersectingBoundary) 
+        self.form.check_checkForGluedMesh.setChecked(self.mesh_obj.checkForGluedMesh) 
         self.form.check_optimiseLayer.setChecked(self.mesh_obj.optimiseLayer) 
         self.form.if_nSmoothNormals.setValue(self.mesh_obj.opt_nSmoothNormals) 
         self.form.if_maxNumIterations.setValue(self.mesh_obj.opt_maxNumIterations) 
@@ -202,10 +205,6 @@ class _TaskPanelCfdMesh:
         #    self.form.snappySpecificProperties.setVisible(True)
 #        elif utility == "cfMesh":
 #            self.form.snappySpecificProperties.setVisible(False)
-        if self.form.check_optimiseLayer.isChecked():
-            self.form.optimizer_frame.setVisible(True)
-        else:
-            self.form.optimizer_frame.setVisible(False)
 
         self.choose_utility(1)
 
@@ -238,6 +237,8 @@ class _TaskPanelCfdMesh:
                              "= {}".format(self.mesh_obj.Name, self.form.if_scaleToMeter.value()))
         FreeCADGui.doCommand("\nFreeCAD.ActiveDocument.{}.keepCellsIntersectingBoundary "
                              "= {}".format(self.mesh_obj.Name, self.form.check_keepCells.isChecked()))
+        FreeCADGui.doCommand("\nFreeCAD.ActiveDocument.{}.checkForGluedMesh "
+                             "= {}".format(self.mesh_obj.Name, self.form.check_checkForGluedMesh.isChecked()))
         FreeCADGui.doCommand("\nFreeCAD.ActiveDocument.{}.optimiseLayer "
                              "= {}".format(self.mesh_obj.Name, self.form.check_optimiseLayer.isChecked()))
         FreeCADGui.doCommand("\nFreeCAD.ActiveDocument.{}.opt_nSmoothNormals "
@@ -296,8 +297,10 @@ class _TaskPanelCfdMesh:
             self.form.l_max.setVisible(False)
             self.form.l_workflowControls.setVisible(False)
             self.form.check_keepCells.setVisible(False)
+            self.form.check_checkForGluedMesh.setVisible(False)
             self.form.if_featureAngle.setVisible(False)
             self.form.check_optimiseLayer.setVisible(False)
+            self.form.optimizer_frame.setVisible(False)
             self.form.cb_workflowControls.setVisible(False)
             self.form.if_max.setVisible(False)
             self.form.l_dimension.setVisible(False)
@@ -310,9 +313,7 @@ class _TaskPanelCfdMesh:
             self.form.l_featureAngle.setVisible(True)
             self.form.l_max.setVisible(True)
             self.form.l_workflowControls.setVisible(True)
-            self.form.check_keepCells.setVisible(True)
             self.form.if_featureAngle.setVisible(True)
-            self.form.check_optimiseLayer.setVisible(True)
             self.form.cb_workflowControls.setVisible(True)
             self.form.if_max.setVisible(True)
             self.form.l_dimension.setVisible(True)
@@ -320,6 +321,18 @@ class _TaskPanelCfdMesh:
             self.form.label_5.setVisible(True)
             self.form.pb_run_mesh.setVisible(True)
             self.form.pb_stop_mesh.setVisible(True)
+
+            self.form.check_optimiseLayer.setVisible(True)
+            if self.form.check_optimiseLayer.isChecked():
+                self.form.optimizer_frame.setVisible(True)
+            else:
+                self.form.optimizer_frame.setVisible(False)
+
+            self.form.check_keepCells.setVisible(True)
+            if self.form.check_keepCells.isChecked():
+                self.form.check_checkForGluedMesh.setVisible(True)
+            else:
+                self.form.check_checkForGluedMesh.setVisible(False)
 
     def writeMesh(self):
         maxDeviation_before = draftutils.params.get_param( "MaxDeviationExport", "Mod/Mesh")
