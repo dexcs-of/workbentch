@@ -13,6 +13,10 @@ DEXCS for OpenFOAM で、DEXCS2021より実装されているもので、DEXCS20
 DEXCSランチャーのうち、DEXCSツールバー中のTreeFoamのサブセット（GridEditorなど）を起動するメニューは、
 インストール先の環境によっては動かない場合もある点はお断りしておく。
 その場合は面倒ですが、TreeFoamを通常に起動して当該機能を使ってやって下さい。
+## 更新 2025/10/24（v0.28）
+DEXCS2025用に諸々更新。
+ワークベンチアイコンの更新。
+デフォルトで、OutputPath オプションを使わない設定に変更。
 
 ## 更新 2025/4/13（v0.27）
 ubuntu 24.04 の displayServerがweylandに変更になったことで動かなくなったアプリ（gridEditor）に対する環境変数追加（export QT_QPA_PLATFORM=xcb）。
