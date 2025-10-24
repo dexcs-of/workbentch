@@ -12,12 +12,14 @@ import dexcsFunctions
 
 modelDir = dexcsFunctions.getCaseFileName()
 
-#モデルファイル置き場がケースファイルの場所（.CaseFileDictで指定）と異なる場合
-caseFileDict = modelDir + "/.CaseFileDict"
-if os.path.isfile(caseFileDict) == True:
-    f = open(caseFileDict)
-    modelDir = f.read()
-    f.close()
+optionOutputPath = dexcsCfdTools.getOptionOutputPath()
+if optionOutputPath :
+    #モデルファイル置き場がケースファイルの場所（.CaseFileDictで指定）と異なる場合
+    caseFileDict = modelDir + "/.CaseFileDict"
+    if os.path.isfile(caseFileDict) == True:
+        f = open(caseFileDict)
+        modelDir = f.read()
+        f.close()
 
 
 CaseFilePath=modelDir

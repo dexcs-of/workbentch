@@ -15,27 +15,36 @@ from PySide import QtGui
 
 import pythonVerCheck
 import dexcsCfdTools
-
+App = FreeCAD
 
 def getCaseFileName():
 	active_analysis = dexcsCfdTools.getActiveAnalysis()
-	if active_analysis:
-		modelDir =  active_analysis.OutputPath
-	else:    
-		doc = App.ActiveDocument
-		name = os.path.splitext(doc.FileName)[0]
-		modelDir = os.path.dirname(doc.FileName)
-		caseFileDict = modelDir + "/.CaseFileDict"
-		if os.path.isfile(caseFileDict) == True:
-			f = open(caseFileDict)
-			modelDir = f.read()
-			f.close()
+	optionOutputPath = dexcsCfdTools.getOptionOutputPath()
+	if optionOutputPath:
+		if active_analysis:
+			modelDir =  active_analysis.OutputPath
 		else:
-			output_dir = dexcsCfdTools.getDefaultOutputPath()
-			if os.path.exists(output_dir) == True:
-				modelDir = output_dir
-			else:
+			if optionOutputPath :    
+				doc = App.ActiveDocument
+				name = os.path.splitext(doc.FileName)[0]
 				modelDir = os.path.dirname(doc.FileName)
+				caseFileDict = modelDir + "/.CaseFileDict"
+				if os.path.isfile(caseFileDict) == True:
+					f = open(caseFileDict)
+					modelDir = f.read()
+					f.close()
+				else:
+					output_dir = dexcsCfdTools.getDefaultOutputPath()
+					if os.path.exists(output_dir) == True:
+						modelDir = output_dir
+					else:
+						modelDir = os.path.dirname(doc.FileName)
+			else:
+					modelDir = os.path.dirname(doc.FileName)
+	else:
+				doc = App.ActiveDocument
+				modelDir = os.path.dirname(doc.FileName)
+
 	return modelDir
 
 def convertPrPInpFile(caseDir,modelName,solverInp,scale_factor,solidName,young,poison,density,dT,prt_frq,finalTime):
@@ -443,15 +452,16 @@ def caseFileDir(doc):
 
     name = os.path.splitext(doc.FileName)[0]
     modelDir = os.path.dirname(doc.FileName)
-    
-       
-    #モデルファイル置き場がケースファイルの場所（.CaseFileDictで指定）と異なる場合
-    caseFileDict = modelDir + "/.CaseFileDict"
-    if os.path.isfile(caseFileDict) == True:
-        f = open(caseFileDict)
-        modelDir = f.read()
-        f.close()
-    
+
+    optionOutputPath = dexcsCfdTools.getOptionOutputPath()
+    if optionOutputPath :       
+        #モデルファイル置き場がケースファイルの場所（.CaseFileDictで指定）と異なる場合
+        caseFileDict = modelDir + "/.CaseFileDict"
+        if os.path.isfile(caseFileDict) :
+            f = open(caseFileDict)
+            modelDir = f.read()
+            f.close()
+
     return modelDir
 
 

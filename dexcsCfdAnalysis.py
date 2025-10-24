@@ -62,18 +62,33 @@ class _CfdAnalysis:
         print(obj.Label)
         model = FreeCAD.ActiveDocument.FileName
         prefs = dexcsCfdTools.getPreferencesLocation()
+
         model_Dir = FreeCAD.ParamGet(prefs).GetString("DefaultOutputPath", "")
-        if os.path.exists(model_Dir):
-            model_Dir = model_Dir
+        #if model_Dir == 'model_dir' :
+        #    model_Dir = os.path.dirname(FreeCAD.ActiveDocument.FileName)
+        addObjectProperty(obj, "OutputPath", model_Dir, "App::PropertyPath", "",
+                           "Path to which cases are written (blank to use system default)")
+
+        optionOutputPath = FreeCAD.ParamGet(prefs).GetBool("OptionOutputPath")
+        if optionOutputPath:
+        #  #print('optionOutputPath = True')
+        #  if os.path.exists(model_Dir):
+        #      model_Dir = model_Dir
+              obj.setEditorMode("OutputPath",0)  # Make read-only (2 = hidden)
+              #pass
         else:
-            model_Dir = os.path.dirname(model)
+        #      #print('optionOutputPath = False')
+        #      model_Dir = os.path.dirname(model)
+        #      model_Dir = model_Dir
+              obj.setEditorMode("OutputPath", 2)  # Make read-only (2 = hidden)
         templateCase = FreeCAD.ParamGet(prefs).GetString("DefaultTemplateCase", "")
  
         plot_maxnumber = FreeCAD.ParamGet(prefs).GetString("DefaultPlotMaxnumber", "")
         plot_method = FreeCAD.ParamGet(prefs).GetString("DefaultPlotMethod", "")
  
-        addObjectProperty(obj, "OutputPath", model_Dir, "App::PropertyPath", "",
-                           "Path to which cases are written (blank to use system default)")
+        #addObjectProperty(obj, "", option_model_Dir, "App::PropertyBool", "",
+        #                   "Option to which cases are written (NA to use system default)")
+
         addObjectProperty(obj, "TemplateCase", templateCase, "App::PropertyPath", "",
                            "Path to Template case Dir (blank to use system default)")
 
@@ -97,28 +112,44 @@ class _CfdAnalysis:
 
         model = FreeCAD.ActiveDocument.FileName
         prefs = dexcsCfdTools.getPreferencesLocation()
+
         model_Dir = FreeCAD.ParamGet(prefs).GetString("DefaultOutputPath", "")
-        if os.path.exists(model_Dir):
+
+        optionOutputPath = FreeCAD.ParamGet(prefs).GetBool("OptionOutputPath")
+
+        if optionOutputPath :
+          print('RestoreOption_model_Dir = ' + obj.OutputPath)
+          #addObjectProperty(obj, "OutputPath", model_Dir, "App::PropertyPath", "",
+          #                 "Path to which cases are written (blank to use system default)")
+          #print('RestoreOption_model_Dir = True')
+          #if os.path.exists(model_Dir):
+          if model_Dir == 'model_dir' :
+             model_Dir = os.path.dirname(FreeCAD.ActiveDocument.FileName)
+          model_Dir = model_Dir
+          obj.setEditorMode("OutputPath", 0)  # Make read-only (2 = hidden)
+
+
+          if os.path.exists(model_Dir):
             defaultModel_Dir = model_Dir
-        else:
+          else:
             defaultModel_Dir = os.path.dirname(model)
 
-        setDictOutput_dir = ""
-        dictName = os.path.dirname(FreeCAD.ActiveDocument.FileName)  + "/.CaseFileDict"
-        if os.path.isfile(dictName) == True:
+          setDictOutput_dir = ""
+          dictName = os.path.dirname(FreeCAD.ActiveDocument.FileName)  + "/.CaseFileDict"
+          if os.path.isfile(dictName) == True:
             f = open(dictName)
             tempDirName = f.read()
             f.close()
             if os.path.isdir(tempDirName) == True:
                  setDictOutput_dir = tempDirName
 
-        if obj.IsActiveAnalysis:
+          if obj.IsActiveAnalysis:
             outputPath = obj.OutputPath
-            # print("outputPath : " + outputPath)
-            # print("defaultModel_Dir : " + defaultModel_Dir)
-            # print("setDictOutput_dir : " + setDictOutput_dir)
+            #print("outputPath : " + outputPath)
+            #print("defaultModel_Dir : " + defaultModel_Dir)
+            #print("setDictOutput_dir : " + setDictOutput_dir)
 
-            if ( defaultModel_Dir == outputPath ) or ( setDictOutput_dir == outputPath) :
+            if (outputPath == 'model_dir') or ( defaultModel_Dir == outputPath ) or ( setDictOutput_dir == outputPath) :
                 pass
             else:
                 message = _("The OutputPath of Active Analysis Container is \n") + outputPath
@@ -137,20 +168,9 @@ class _CfdAnalysis:
                 if dialog == QtGui.QMessageBox.Yes:
 
                     if env.contains("APPIMAGE"):
-                        #message = _("This FreeCAD is AppImage version.\n ")
-                        #message = message + _("AppImage cannot change the OutputPAth while loading process.\n\n") 
-                        #message = message + _("so if you want change the OutputPAth of Analysis Container,\n") 
-                        #message = message + _("change the property manually after lodaing process,\n") 
-                        #ans = QtGui.QMessageBox.critical(None, _("AppImage Warning"), message, QtGui.QMessageBox.Yes)
                         dexcsCfdTools.removeAppimageEnvironment(env)
                     else:
                         d = QtGui.QFileDialog().getExistingDirectory(None, _('Choose output directory'), defaultModel_Dir)
-
-                        #msgBox = QtGui.QFileDialog()
-                        #msgBox.ShowDirsOnly
-                        #msgBox.setDirectory(defaultModel_Dir)
-                        #msgBox.setLabelText(_('Choose output directory'))
-                        #d = msgBox.exec_()
 
                         if d and os.access(d, os.R_OK):
                             outputPath = d
@@ -162,22 +182,12 @@ class _CfdAnalysis:
 
             obj.OutputPath = outputPath
 
+        else:
+              #print('RestoreOption_model_Dir = False')
+              #model_Dir = os.path.dirname(model)
+              model_Dir = model_Dir
+              obj.setEditorMode("OutputPath", 2)  # Make read-only (2 = hidden)
 
-        # active_analysis = dexcsCfdTools.getActiveAnalysis()
-        # if active_analysis:
-        #     print(active_analysis.OutputPath)
-        #print(model_Dir)
-        #templateCase = FreeCAD.ParamGet(prefs).GetString("DefaultTemplateCase", "")
-        # addObjectProperty(obj, "OutputPath", model_Dir, "App::PropertyPath", "",
-        #                    "Path to which cases are written (blank to use system default)")
-        # #obj.OutputPath = model_Dir
-        # addObjectProperty(obj, "TemplateCase", templateCase, "App::PropertyPath", "",
-        #                    "Path to Template case Dir (blank to use system default)")
-        # addObjectProperty(obj, "IsActiveAnalysis", False, "App::PropertyBool", "", "Active analysis object in document")
-        # obj.setEditorMode("IsActiveAnalysis", 1)  # Make read-only (2 = hidden)
-        # addObjectProperty(obj, 'NeedsMeshRewrite', True, "App::PropertyBool", "", "Mesh setup needs to be re-written")
-        # addObjectProperty(obj, 'NeedsCaseRewrite', True, "App::PropertyBool", "", "Case setup needs to be re-written")
-        # addObjectProperty(obj, 'NeedsMeshRerun', True, "App::PropertyBool", "", "Mesher needs to be re-run before running solver")
 
     def onDocumentRestored(self, obj):
         #print("deb:restored")

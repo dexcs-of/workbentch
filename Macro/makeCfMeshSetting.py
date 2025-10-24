@@ -22,6 +22,8 @@ from subprocess import Popen
 
 import pythonVerCheck
 import pyDexcsSwakSubset
+import dexcsCfdTools
+App = FreeCAD
 
 
 class FreeCadFileTable(QtGui.QTableWidget):
@@ -1007,6 +1009,7 @@ class ViewControl():
         @param event: マウスクリックイベント         
         """
         #print("actionOnCaseButton()")
+        import FreeCAD as App
 
         dirName = QFileDialog.getExistingDirectory(self.cfMeshFrame, 'Select Directory', os.path.expanduser('~') + '/Desktop')
 
@@ -1023,11 +1026,13 @@ class ViewControl():
                     #print("deb:"+dirName)
                     obj.OutputPath = dirName
 
-        dictName = os.path.dirname(App.ActiveDocument.FileName) + MainControl.SLASH_STR + ".CaseFileDict"
-        #print(dictName)
-        writeDict = open(dictName , 'w')
-        writeDict.writelines(text)
-        writeDict.close()
+        optionOutputPath = dexcsCfdTools.getOptionOutputPath()
+        if optionOutputPath :
+            dictName = os.path.dirname(App.ActiveDocument.FileName) + MainControl.SLASH_STR + ".CaseFileDict"
+            #print(dictName)
+            writeDict = open(dictName , 'w')
+            writeDict.writelines(text)
+            writeDict.close()
 
 
 
@@ -2234,26 +2239,28 @@ class MainControl():
         cellMax = Decimal(sumOf3Edges/60)#適切に数値を丸める
         #print ("cellMax = %6.2lf" % cellMax)
 
+        optionOutputPath = dexcsCfdTools.getOptionOutputPath()
+        if optionOutputPath :
+            outputPath1 = ""
+            for obj in FreeCAD.ActiveDocument.Objects:
+                if hasattr(obj, 'Proxy') and isinstance(obj.Proxy, _CfdAnalysis):
+                    if obj.IsActiveAnalysis:
+                        outputPath1 = obj.OutputPath
 
-        outputPath1 = ""
-        for obj in FreeCAD.ActiveDocument.Objects:
-            if hasattr(obj, 'Proxy') and isinstance(obj.Proxy, _CfdAnalysis):
-                if obj.IsActiveAnalysis:
-                    outputPath1 = obj.OutputPath
+            if outputPath1:
+                self.dirName = outputPath1
+            else:
+                self.dirName = os.path.dirname(self.caseFilePath)
+                #モデルファイルがケースファイルの置き場所にない場合（.CaseFileDict）
+                caseFileDict = self.dirName + "/"
+                if os.path.isfile(caseFileDict) == True:
+                    f = open(caseFileDict)
+                    tempDirName = f.read()
+                    f.close()
+                    if os.path.isdir(tempDirName) == True:
+                        self.dirName = tempDirName
+                    #print(self.dirName)
 
-        if outputPath1:
-            self.dirName = outputPath1
-        else:
-            self.dirName = os.path.dirname(self.caseFilePath)
-            #モデルファイルがケースファイルの置き場所にない場合（.CaseFileDict）
-            caseFileDict = self.dirName + "/.CaseFileDict"
-            if os.path.isfile(caseFileDict) == True:
-                f = open(caseFileDict)
-                tempDirName = f.read()
-                f.close()
-                if os.path.isdir(tempDirName) == True:
-                    self.dirName = tempDirName
-                #print(self.dirName)
         print(self.dirName)
         self.viewControl = ViewControl(self)
         self.viewControl.setLayout(self.fcListData, self.dirName, cellMax)

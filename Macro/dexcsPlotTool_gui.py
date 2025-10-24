@@ -11,6 +11,7 @@ import dexcsPlotPost
 import pythonVerCheck
 import sys
 from dexcsPlotTool_ui import Ui_DexcsPlotTool
+import dexcsCfdTools
 
 
 class gui(QtWidgets.QDialog):
@@ -22,22 +23,33 @@ class gui(QtWidgets.QDialog):
         #modelDir = os.path.dirname(doc.FileName)
         import dexcsFunctions
         modelDir = dexcsFunctions.getCaseFileName()
+        if modelDir == 'model_dir' :
+            modelDir = '.'
+        #modelDir = '.'
+        
+        optionOutputPath = dexcsCfdTools.getOptionOutputPath()
+        if optionOutputPath :
+            #モデルファイル置き場がケースファイルの場所（.CaseFileDictで指定）と異なる場合
+            caseFileDict = modelDir + "/.CaseFileDict"
+            if os.path.isfile(caseFileDict) == True:
+                f = open(caseFileDict)
+                modelDir = f.read()
+                f.close()
+        else :
+            modelDir = '.'
 
-        #モデルファイル置き場がケースファイルの場所（.CaseFileDictで指定）と異なる場合
-        caseFileDict = modelDir + "/.CaseFileDict"
-        if os.path.isfile(caseFileDict) == True:
-            f = open(caseFileDict)
-            modelDir = f.read()
-            f.close()
 
         systemFolder = modelDir + "/system"
         constantFolder = modelDir + "/constant"
+        #systemFolder = "./system"
+        #constantFolder =  "./constant"
 
         if os.path.isdir(systemFolder) and os.path.isdir(constantFolder):
 
             self.modelDir = modelDir
             dpltList=[]
-            for list in os.listdir(modelDir+"/system/"):
+            #for list in os.listdir(modelDir+"/system/"):
+            for list in os.listdir("./system/"):
                 ext = os.path.splitext(list)
                 if ext[1] == ".dplt":
                     dpltList.append(list)
@@ -48,7 +60,7 @@ class gui(QtWidgets.QDialog):
             self.ui.listView.clicked.connect(self.listClicked)
             self.ui.listView.doubleClicked.connect(self.listDoubleClicked)
         else:
-            message = (_("this folder is not case folder of OpenFOAM.\n  check current directory."))
+            message = (_("this folder is not case folder of OpenFOAM.\n  check current directory.")) + modelDir
             ans = QtGui.QMessageBox.critical(None, _("check OpenFOAM case"), message, QtGui.QMessageBox.Yes)
 
 

@@ -60,6 +60,7 @@ DEXCS_PATH = "/opt/DEXCS"
 TREEFOAM_PATH = "/opt/TreeFoam"
 PLOT_NUMBER_MAX ='100000'
 PLOT_METHOD = 'last'
+OPTION_OUTPUTDIR = False
 
 
 
@@ -83,6 +84,7 @@ class dexcsCfdPreferencePage:
         self.form.le_plot_maxnumber.textChanged.connect(self.plotMaxnumberChanged)
 
         self.form.tb_choose_output_dir.clicked.connect(self.chooseOutputDir)
+        self.form.cb_outputdir.clicked.connect(self.optionOutputDirChanged)
         self.form.le_output_dir.textChanged.connect(self.outputDirChanged)
         self.form.tb_choose_template_case.clicked.connect(self.chooseTemplateCase)
         self.form.le_template_case.setText(DEXCS_TEMPLATE)
@@ -94,6 +96,7 @@ class dexcsCfdPreferencePage:
         self.form.label_7.setText(_("OpenFOAM install directory"))
         self.form.label_7b.setText(_("ParaView executable path"))
         self.form.label_outputdir.setText(_("Default output directory"))
+        self.form.cb_outputdir.setText(_("use option"))
         self.form.label.setText(_("cfMesh install directory"))
         self.form.label_3.setText(_("TreeFoam install directory"))
         self.form.label_8.setText(_("DEXCS install directory"))
@@ -141,6 +144,7 @@ class dexcsCfdPreferencePage:
         self.initial_paraview_path = PARAVIEW_PATH
 
         self.output_dir = ""
+        self.initial_optionOutputPath = OPTION_OUTPUTDIR
         self.initial_template_case = DEXCS_TEMPLATE
 
         self.plot_Maxnumber = ""
@@ -167,6 +171,7 @@ class dexcsCfdPreferencePage:
         FreeCAD.ParamGet(prefs).SetString("CfmeshPath", self.cfmesh_dir)
         FreeCAD.ParamGet(prefs).SetString("TreefoamPath", self.treefoam_dir)
         FreeCAD.ParamGet(prefs).SetString("DexcsPath", self.dexcs_dir)
+        FreeCAD.ParamGet(prefs).SetBool("OptionOutputPath", self.optionOutputPath)
         FreeCAD.ParamGet(prefs).SetString("DefaultOutputPath", self.output_dir)
         FreeCAD.ParamGet(prefs).SetString("DefaultTemplateCase", self.template_case)
         FreeCAD.ParamGet(prefs).SetString("DefaultPlotMaxnumber", self.plot_Maxnumber)
@@ -207,10 +212,29 @@ class dexcsCfdPreferencePage:
                 self.paraview_path = self.initial_paraview_path
         self.form.le_paraview_path.setText(self.paraview_path)
 
+        self.optionOutputPath = FreeCAD.ParamGet(prefs).GetBool("OptionOutputPath")
+
         self.output_dir = FreeCAD.ParamGet(prefs).GetString("DefaultOutputPath", "")
         if self.output_dir == "" :
                 self.output_dir = "model_dir"
         self.form.le_output_dir.setText(self.output_dir)
+
+        if self.optionOutputPath:
+            self.form.cb_outputdir.setChecked(True)
+            self.form.le_output_dir.setVisible(True)
+            self.form.tb_choose_output_dir.setVisible(True)
+        else:
+            self.form.cb_outputdir.setChecked(False)
+            self.form.le_output_dir.setVisible(False)
+            self.form.tb_choose_output_dir.setVisible(False)
+
+
+        #if self.form.cb_outputdir.isChecked():
+        #    self.form.le_output_dir.setVisible(True)
+        #    self.form.tb_choose_output_dir.setVisible(True)
+        #else:
+        #    self.form.le_output_dir.setVisible(False)
+        #    self.form.tb_choose_output_dir.setVisible(False)
 
         self.template_case = FreeCAD.ParamGet(prefs).GetString("DefaultTemplateCase", "")
         if self.template_case == "" :
@@ -311,6 +335,18 @@ class dexcsCfdPreferencePage:
 
     def outputDirChanged(self, text):
         self.output_dir = text
+
+    def optionOutputDirChanged(self, text):
+        if self.form.cb_outputdir.isChecked():
+            self.form.le_output_dir.setVisible(True)
+            self.form.tb_choose_output_dir.setVisible(True)
+            self.optionOutputPath = True
+            #print('ToptionOutputPath = True' )
+        else:
+            self.form.le_output_dir.setVisible(False)
+            self.form.tb_choose_output_dir.setVisible(False)
+            self.optionOutputPath = False
+            #print('FoptionOutputPath = False')
 
     def templateCaseChanged(self, text):
         self.template_case = text

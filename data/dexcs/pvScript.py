@@ -33,7 +33,7 @@ Hide(pfoam, renderView1)
 ULUT = GetColorTransferFunction('U')
 
 # trace defaults for the display properties.
-cleantoGrid1Display.ColorArrayName = ['POINTS', 'U']
+cleantoGrid1Display.ColorArrayName = ['CELLS', 'U']
 cleantoGrid1Display.LookupTable = ULUT
 cleantoGrid1Display.EdgeColor = [0.0, 0.0, 0.5]
 cleantoGrid1Display.ScalarOpacityUnitDistance = 0.05

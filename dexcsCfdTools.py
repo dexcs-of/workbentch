@@ -74,16 +74,32 @@ PARAVIEW_PATH_DEFAULTS = {
                     }
 DEXCS_TEMPLATE = "/opt/DEXCS/template"
 
-def getDefaultOutputPath():
+def getOptionOutputPath():
     prefs = getPreferencesLocation()
-    output_path = FreeCAD.ParamGet(prefs).GetString("DefaultOutputPath", "")
-    #print('output_path = ' + output_path)
-    if not output_path:
+    optionOutputPath = FreeCAD.ParamGet(prefs).GetBool("OptionOutputPath")
+    #print('option_output_path = ' + option_output_path)
+    if not optionOutputPath:
         #output_path = tempfile.gettempdir()
         #output_path = os.path.dirname(FreeCAD.ActiveDocument.FileName) 
-        output_path = 'model_dir'
-    output_path = os.path.normpath(output_path)
-    print('output_path = ' + output_path)
+        optionOutputPath = False
+    #output_path = os.path.normpath(output_path)
+    #print('output_path = ' + output_path)
+    return optionOutputPath
+
+def getDefaultOutputPath():
+    prefs = getPreferencesLocation()
+    optionOutputPath = FreeCAD.ParamGet(prefs).GetBool("OptionOutputPath")
+    if optionOutputPath :
+        output_path = FreeCAD.ParamGet(prefs).GetString("DefaultOutputPath", "")
+        #print('output_path = ' + output_path)
+        if not output_path:
+            #output_path = tempfile.gettempdir()
+            #output_path = os.path.dirname(FreeCAD.ActiveDocument.FileName) 
+            output_path = 'model_dir'
+        output_path = os.path.normpath(output_path)
+        print('output_path = ' + output_path)
+    else:
+        output_path = os.path.dirname(FreeCAD.ActiveDocument.FileName) 
     return output_path
 
 def getDefaultTemplateCase():
@@ -97,13 +113,24 @@ def getDefaultTemplateCase():
     return template_case
 
 def getOutputPath(analysis):
-    if analysis and 'OutputPath' in analysis.PropertiesList:
-        output_path = analysis.OutputPath
+    prefs = getPreferencesLocation()
+    optionOutputPath = FreeCAD.ParamGet(prefs).GetBool("OptionOutputPath")
+    if optionOutputPath :
+      if analysis and 'OutputPath' in analysis.PropertiesList:
+          output_path = analysis.OutputPath
+          print('####output_path = ' + output_path)
+      else:
+          output_path = ""
+      if not output_path:
+          output_path = getDefaultOutputPath()
+          print('#####output_path = ' + output_path)
+      output_path = os.path.normpath(output_path)
+      if output_path == 'model_dir' :
+          output_path = os.path.dirname(FreeCAD.ActiveDocument.FileName) 
+      print('output_path = ' + output_path)
     else:
-        output_path = ""
-    if not output_path:
-        output_path = getDefaultOutputPath()
-    output_path = os.path.normpath(output_path)
+        output_path = os.path.dirname(FreeCAD.ActiveDocument.FileName) 
+        print('#####output_path = ' + output_path)
     return output_path
 
 def getTemplateCase(analysis):

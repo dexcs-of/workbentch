@@ -25,6 +25,7 @@ import pythonVerCheck
 import pyDexcsSwakSubset
 from dexcsCfdMesh import _CfdMesh
 import dexcsCfdTools
+App = FreeCAD
 
 class Test(QDialog):
     def __init__(self,parent=None):
@@ -1335,15 +1336,19 @@ class MainControl():
         #print ("cellMax = %6.2lf" % cellMax)
         self.viewControl = ViewControl(self)
         self.dirName = os.path.dirname(self.caseFilePath)
-        #モデルファイルがケースファイルの置き場所にない場合（.CaseFileDict）
-        caseFileDict = self.dirName + "/.CaseFileDict"
-        if os.path.isfile(caseFileDict) == True:
-            f = open(caseFileDict)
-            tempDirName = f.read()
-            f.close()
-            if os.path.isdir(tempDirName) == True:
-                self.dirName = tempDirName
-            #print(self.dirName)
+
+        optionOutputPath = dexcsCfdTools.getOptionOutputPath()
+        if optionOutputPath :
+            #モデルファイルがケースファイルの置き場所にない場合（.CaseFileDict）
+            caseFileDict = self.dirName + "/.CaseFileDict"
+            if os.path.isfile(caseFileDict) == True:
+                f = open(caseFileDict)
+                tempDirName = f.read()
+                f.close()
+                if os.path.isdir(tempDirName) == True:
+                    self.dirName = tempDirName
+                #print(self.dirName)
+
         self.viewControl.setLayout(self.fcListData, self.dirName, cellMax)
         #print ("dirName = ", self.dirName)
     #---------------------------------------------------------------------------

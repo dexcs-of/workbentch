@@ -2132,17 +2132,15 @@ if __name__ == "__main__":
                 dpltDir = main_listlized[0]
 
     else:
-        # learnDir = os.path.dirname(App.ActiveDocument.FileName)
-        # #モデルファイル置き場がケースファイルの場所（.CaseFileDictで指定）と異なる場合
-        # caseFileDict = learnDir + "/.CaseFileDict"
-        # if os.path.isfile(caseFileDict) == True:
-        #     main_f = open(caseFileDict)
-        #     learnDir = main_f.read()
-        #     main_f.close()
 
-        learnDir = dexcsFunctions.getCaseFileName()
+        optionOutputPath = dexcsCfdTools.getOptionOutputPath()
+
+        if optionOutputPath:
+            learnDir = dexcsFunctions.getCaseFileName()
+        else:
+            learnDir = '.'           
+
         dpltDir = learnDir + "/system/current.dplt"
-
         print('dpltDir = ',dpltDir)
 
         platformDir = learnDir    

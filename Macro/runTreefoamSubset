@@ -11,9 +11,12 @@ export TEXTDOMAIN=treefoamBash
 export PATH=$TreeFoamPath:$TreeFoamPath/bin:$TreeFoamPath/python:$PATH
 export PYTHONPATH=$TreeFoamPath:$TreeFoamPath/python:$TreeFoamPath/bin:~/.FreeCAD:/usr/lib/freecad-daily/lib:/$PYTHONPATH
 
-#displayServerの設定
-#displayServerがX11
-export QT_QPA_PLATFORM=xcb
+#Wayland(displayServer）対応
+#  displayServerがX11: ここの環境変数の設定は不要
+#  displayServerがwayland: 以下の設定を .bashrc に記述する
+export GDK_BACKEND=x11              #GTK3用の設定
+export QT_QPA_PLATFORM=xcb          #Qt5用の設定（X11）
+# ( export QT_QPA_PLATFORM=wayland      #Qt5用の設定（wayland）)
 
 #TreeFoamのlogFileを設定
 export LogFile=$TreeFoamUserPath"/temp/dexcsLauncher.log"

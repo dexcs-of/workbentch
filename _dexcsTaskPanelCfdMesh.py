@@ -352,20 +352,23 @@ class _TaskPanelCfdMesh:
         #cart_mesh = self.cart_mesh
         self.analysis = dexcsCfdTools.getParentAnalysisObject(self.mesh_obj)
         output_path = dexcsCfdTools.getOutputPath(self.analysis) + os.path.sep
-        if output_path[-1] == os.path.sep:
-            output_path1 = output_path[:-1] 
-        else:
-            output_path1 = output_path
+        optionOutputPath = dexcsCfdTools.getOptionOutputPath()
 
-        print("output dir = " + output_path1)
-        current_model_path = os.path.dirname(FreeCAD.ActiveDocument.FileName)
-        print("model dir = " + current_model_path)
-        #if output_path1 != current_model_path:
+        if optionOutputPath :
+            if output_path[-1] == os.path.sep:
+                output_path1 = output_path[:-1] 
+            else:
+                output_path1 = output_path
 
-        dictName = os.path.dirname(FreeCAD.ActiveDocument.FileName)  + "/.CaseFileDict"
-        writeDict = open(dictName , 'w')
-        writeDict.writelines(output_path1)
-        writeDict.close()
+            print("output dir = " + output_path1)
+            current_model_path = os.path.dirname(FreeCAD.ActiveDocument.FileName)
+            print("model dir = " + current_model_path)
+            #if output_path1 != current_model_path:
+
+            dictName = os.path.dirname(FreeCAD.ActiveDocument.FileName)  + "/.CaseFileDict"
+            writeDict = open(dictName , 'w')
+            writeDict.writelines(output_path1)
+            writeDict.close()
 
         template_case = dexcsCfdTools.getTemplateCase(self.analysis)
         utility = self.form.cb_meshTool.currentText()            
