@@ -115,7 +115,7 @@ def errDialog(title, message):
     QtGui.QMessageBox.Information,\
     title,\
     message)
-  diag.exec_()
+  diag.exec()
 
 systemFolder = modelDir + "/system"
 constantFolder = modelDir + "/constant"

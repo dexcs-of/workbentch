@@ -7,7 +7,7 @@ import os
 import glob
 import sys
 from PySide import QtGui
-from PySide2 import QtCore
+from PySide import QtCore
 import dexcsCfdTools
 import pythonVerCheck
 

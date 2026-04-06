@@ -141,7 +141,7 @@ def okDialog(self, title, message):
     QtGui.QMessageBox.Information,\
     title,\
     message,QtGui.QMessageBox.Yes)
-  diag.exec_()
+  diag.exec()
 
 #  okCancelDialog
 #
@@ -153,7 +153,7 @@ def okCancelDialog(parent, title, mess):
     msgBox.setWindowTitle(title)
     msgBox.setText(mess)
     msgBox.setStandardButtons(QtGui.QMessageBox.Ok  | QtGui.QMessageBox.Cancel)
-    res = msgBox.exec_()
+    res = msgBox.exec()
 
     if res == QtGui.QMessageBox.Ok:
         stat = "OK"

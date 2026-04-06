@@ -6,7 +6,7 @@ import re
 import tempfile
 import gettext
 from PySide import QtGui
-from PySide2 import QtCore, QtWidgets
+from PySide import QtCore, QtWidgets
 import dexcsPlotPost
 import pythonVerCheck
 import sys
@@ -82,7 +82,10 @@ class gui(QtWidgets.QDialog):
         #print("new1 at ", self.modelDir)
         import FreeCAD
         #FreeCAD.Gui.runCommand('Std_Macro_16',0)
-        _macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro'
+        #_macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/v1-1/Mod/dexcsCfdOF/Macro'
+        file_path = os.path.abspath(__file__)
+        dir_path = os.path.dirname(file_path)
+        _macroPath = dir_path+'/Macro'
         _prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
         FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
         FreeCADGui.runCommand('Std_Macro_16',0)

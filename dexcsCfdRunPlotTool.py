@@ -59,7 +59,10 @@ class _CommandCfdRunPlotTool:
         if not isPresent:
             #FreeCADGui.runCommand('Std_Macro_5',0)
             #import dexcsPlotTool_gui
-            _macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro'
+            #_macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/v1-1/Mod/dexcsCfdOF/Macro'
+            file_path = os.path.abspath(__file__)
+            dir_path = os.path.dirname(file_path)
+            _macroPath = dir_path+'/Macro'
             _prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
             FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
             FreeCADGui.runCommand('Std_Macro_5',0)

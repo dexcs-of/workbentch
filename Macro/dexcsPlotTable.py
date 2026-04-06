@@ -35,13 +35,13 @@ import pathlib
 
 #from PyQt4 import QtCore, QtGui
 #from PySide import QtCore, QtGui
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
+from PySide.QtCore import *
+from PySide.QtGui import *
+from PySide.QtWidgets import *
 
 import Util_Table
 import dexcsFunctions
-from PySide2 import QtCore
+from PySide import QtCore
 import dexcsCfdTools
 
 
@@ -132,7 +132,7 @@ class inputTextDialog:
 
     def show(self):
         self.setupDialog()
-        self.Dialog.exec_()
+        self.Dialog.exec()
         return (self.status, self.inputText)
 
     def close(self, *args):
@@ -1637,7 +1637,7 @@ class gridTable(Ui_MainWindow):
         
         #path = ""
         
-        #if dialog.exec_():
+        #if dialog.exec():
             #r = dialog.selectedFiles()
             #path = r[0]
             #logging.debug(path)

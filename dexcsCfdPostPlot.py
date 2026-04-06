@@ -23,7 +23,7 @@
 # *                                                                         *
 # ***************************************************************************
 
-from PySide2 import QtCore
+from PySide import QtCore
 import FreeCAD
 
 if int(FreeCAD.Version()[0]) == 0 and int(FreeCAD.Version()[1].split('.')[0]) < 20:

@@ -6,7 +6,7 @@ import Mesh
 import os
 import pyDexcsSwakSubset
 import dexcsCfdTools
-from PySide2 import QtCore
+from PySide import QtCore
 from PySide import QtGui
 import pythonVerCheck
 

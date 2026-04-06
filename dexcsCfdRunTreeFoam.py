@@ -49,7 +49,13 @@ class _CommandCfdRunTreeFoam:
     def Activated(self):
         #FreeCADGui.runCommand('Std_Macro_3',0)
         #import runTreefoam
-        _macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro'
+        #_macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/v1-1/Mod/dexcsCfdOF/Macro'
+        #from pathlib import Path
+        #file_path = Path(__file__).resolve()
+        #dir_path = file_path.parent
+        file_path = os.path.abspath(__file__)
+        dir_path = os.path.dirname(file_path)
+        _macroPath = dir_path+'/Macro'
         _prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
         FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
         FreeCADGui.runCommand('Std_Macro_3',0)

@@ -7,8 +7,8 @@ import os
 import re
 import tempfile
 import gettext
-import PySide2
-from PySide2 import QtGui
+import PySide
+from PySide import QtGui
 import math
 
 import pythonVerCheck

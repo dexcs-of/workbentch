@@ -165,11 +165,11 @@ if __name__ == '__main__':
         import sys
 
         if sys.version_info.major == 3:
-        	import PySide2
-        	if isinstance(PySide2.QtGui.qApp, type(None)):
-        	    app = PySide2.QtWidgets.QApplication([])
+        	import 
+        	if isinstance(PySide.QtGui.qApp, type(None)):
+        	    app = PySide.QtWidgets.QApplication([])
         	else:
-        	    app = PySide2.QtGui.qApp
+        	    app = PySide.QtGui.qApp
         else:
         	import PySide
         	if isinstance(PySide.QtGui.qApp, type(None)):
@@ -203,7 +203,7 @@ if __name__ == '__main__':
                             ui = MyFirstDialog()
                             ui.show()
            
-                            app.exec_()
+                            app.exec()
                 else:
                     mes = ".inp file dosen't exist"
                     QtGui.QMessageBox.information(None,"Message", mes)
@@ -223,4 +223,4 @@ if __name__ == '__main__':
 
         ui = MySecondDialog()
         ui.show()           
-        app.exec_()
+        app.exec()

@@ -23,7 +23,23 @@
 # *  usa                                                                   *
 # *                                                                        *
 # **************************************************************************/
-
+# for debugging by vs code
+#
+#import sys, os
+#os.environ["PYDEVD_DISABLE_FILE_VALIDATION"] = "1"
+#
+#_debugpy_path = "/home/dexcs/.freecad-debugpy"
+#if _debugpy_path not in sys.path:
+#    sys.path.insert(0, _debugpy_path)
+#
+#try:
+#    import debugpy
+#    debugpy.configure(python="/home/dexcs/squashfs-root/usr/bin/python")
+#    if not debugpy.is_client_connected():
+#        debugpy.listen(("localhost", 5678))
+#        print("✅ debugpy listening on localhost:5678")
+#except Exception as e:
+#    print(f"debugpy スキップ: {e}")
 
 class dexcsCfdOFWorkbench(Workbench):
     """ dexcsCfdOF workbench object """

@@ -972,7 +972,7 @@ class ViewControl():
         QtCore.QObject.connect(self.cfMeshFrame.loadButton, QtCore.SIGNAL("clicked()"), self.actionOnLoadButton)
         QtCore.QObject.connect(self.cfMeshFrame.radioButton_c, QtCore.SIGNAL("clicked()"), self.actionOnRadioButton)
         QtCore.QObject.connect(self.cfMeshFrame.radioButton_r, QtCore.SIGNAL("clicked()"), self.actionOnRadioButton)
-        self.cfMeshFrame.exec_()
+        self.cfMeshFrame.exec()
         #print ("cfMeshFrame.setLayout1")      
 
     def get_gridTableValue(self, iRow, jCol):
@@ -2260,7 +2260,8 @@ class MainControl():
                     if os.path.isdir(tempDirName) == True:
                         self.dirName = tempDirName
                     #print(self.dirName)
-
+        else:
+            self.dirName = os.path.dirname(self.caseFilePath)
         print(self.dirName)
         self.viewControl = ViewControl(self)
         self.viewControl.setLayout(self.fcListData, self.dirName, cellMax)

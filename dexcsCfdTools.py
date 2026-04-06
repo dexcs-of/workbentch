@@ -47,8 +47,8 @@ import BOPTools
 from BOPTools import SplitFeatures
 if FreeCAD.GuiUp:
     import FreeCADGui
-    from PySide2 import QtGui
-    from PySide2 import QtCore
+    from PySide import QtGui
+    from PySide import QtCore
 
 # Some standard install locations that are searched if an install directory is not specified
 FOAM_DIR_DEFAULTS = {"Windows": ["C:\\Program Files\\ESI-OpenCFD\\OpenFOAM\\v2012",

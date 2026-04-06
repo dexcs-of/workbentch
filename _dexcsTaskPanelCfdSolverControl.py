@@ -147,7 +147,7 @@ class _dexcsTaskPanelCfdSolverControl:
             self.form.l_time.setText('Time: ' + dexcsCfdTools.formatTimer(time.time() - self.Start))
 
     def getStandardButtons(self):
-        return int(QtGui.QDialogButtonBox.Close)
+        return QtGui.QDialogButtonBox.Close
 
     def accept(self):
         FreeCADGui.ActiveDocument.resetEdit()

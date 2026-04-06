@@ -36,6 +36,6 @@ def showSolidInfo():
     QtGui.QMessageBox.Information,\
     u"オブジェクト情報",\
     message)
-  diag.exec_()
+  diag.exec()
 
 showSolidInfo()

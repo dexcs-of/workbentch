@@ -159,7 +159,7 @@ class _CfdAnalysis:
                 msgBox.setText(message)
                 msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.RestoreDefaults | QMessageBox.No)
                 msgBox.setDefaultButton(QMessageBox.RestoreDefaults)
-                dialog = msgBox.exec_()
+                dialog = msgBox.exec()
  
                 if dialog == QtGui.QMessageBox.RestoreDefaults:
 

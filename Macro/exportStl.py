@@ -4,7 +4,7 @@ import os
 #import codecs
 #import ntpath
 import tempfile
-from PySide2.QtWidgets import *
+from PySide.QtWidgets import *
 import pythonVerCheck
 import Mesh
 #import MeshPart
