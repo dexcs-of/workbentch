@@ -1509,15 +1509,30 @@ def propsToDict(obj):
             d[k] = getattr(obj, k)
     return d
 
+def runTrfSHM(case_path):
+        file_path = os.path.abspath(__file__)
+        dir_path = os.path.dirname(file_path)
+        _macroPath = dir_path+'/Macro'
+        _prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
+        FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
+        FreeCADGui.runCommand('Std_Macro_18',0)
+        FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_prefs)
 
 def openFileManager(case_path):
-    case_path = os.path.abspath(case_path)
-    if platform.system() == 'MacOS':
-        subprocess.Popen(['open', '--', case_path])
-    elif platform.system() == 'Linux':
-        subprocess.Popen(['xdg-open', case_path])
-    elif platform.system() == 'Windows':
-        subprocess.Popen(['explorer', case_path])
+#    case_path = os.path.abspath(case_path)
+#    if platform.system() == 'MacOS':
+#        subprocess.Popen(['open', '--', case_path])
+#    elif platform.system() == 'Linux':
+#        subprocess.Popen(['xdg-open', case_path])
+#    elif platform.system() == 'Windows':
+#        subprocess.Popen(['explorer', case_path])
+        file_path = os.path.abspath(__file__)
+        dir_path = os.path.dirname(file_path)
+        _macroPath = dir_path+'/Macro'
+        _prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
+        FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
+        FreeCADGui.runCommand('Std_Macro_3',0)
+        FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_prefs)
 
 
 def writePatchToStl(solid_name, facemesh, fid, scale=1):

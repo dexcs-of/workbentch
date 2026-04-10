@@ -16,6 +16,7 @@
 ../Macro/runPlotWatcher.py
 ../Macro/runSolver.py
 ../Macro/runTreefoam.py
+../Macro/runTrfSHM.py
 ../Macro/solverSet.py
 ../dexcsPlotTool_ui.py
 ../Macro/dexcsPlotTable.py

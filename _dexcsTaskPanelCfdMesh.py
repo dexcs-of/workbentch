@@ -72,9 +72,11 @@ class _TaskPanelCfdMesh:
         self.form.l_featureAngle.setText(_("Feature Angle(deg)"))
         self.form.pb_stop_mesh.setText(_("Stop"))
         self.form.l_scaleToMeter.setText(_("Scale to Meter:"))
-        self.form.pb_edit_mesh.setText(_("Edit"))
+        self.form.pb_edit_mesh.setText(_("TreeFoam"))
         self.form.pb_run_mesh.setText(_("Run mesher"))
+        self.form.pb_trf_shm.setText(_("Run TrfSHM"))
         self.form.label_3.setText(_("Mesh verification"))
+        self.form.label_4.setText(_("Mesh Setting"))
         self.form.label_5.setText(_("Mesher"))
         self.form.label_6.setText(_("Mesh<"))
         self.form.pb_checkmesh.setText(_("CheckMesh"))
@@ -109,6 +111,7 @@ class _TaskPanelCfdMesh:
         self.open_paraview = QtCore.QProcess()
 
         self.form.pb_write_mesh.clicked.connect(self.writeMesh)
+        self.form.pb_trf_shm.clicked.connect(self.runTrfSHM)
         self.form.pb_edit_mesh.clicked.connect(self.editMesh)
         self.form.pb_run_mesh.clicked.connect(self.runMesh)
         self.form.pb_stop_mesh.clicked.connect(self.killMeshProcess)
@@ -305,6 +308,8 @@ class _TaskPanelCfdMesh:
             self.form.if_max.setVisible(False)
             self.form.l_dimension.setVisible(False)
             self.form.cb_dimension.setVisible(False)
+            self.form.label_4.setVisible(True)
+            self.form.pb_trf_shm.setVisible(True)
             self.form.label_5.setVisible(False)
             self.form.pb_run_mesh.setVisible(False)
             self.form.pb_stop_mesh.setVisible(False)
@@ -318,6 +323,8 @@ class _TaskPanelCfdMesh:
             self.form.if_max.setVisible(True)
             self.form.l_dimension.setVisible(True)
             self.form.cb_dimension.setVisible(True)
+            self.form.label_4.setVisible(False)
+            self.form.pb_trf_shm.setVisible(False)
             self.form.label_5.setVisible(True)
             self.form.pb_run_mesh.setVisible(True)
             self.form.pb_stop_mesh.setVisible(True)
@@ -396,6 +403,11 @@ class _TaskPanelCfdMesh:
         case_path = self.cart_mesh.meshCaseDir
         self.consoleMessage(_("Please edit the case input files externally at: {}\n").format(case_path))
         dexcsCfdTools.openFileManager(case_path)
+
+    def runTrfSHM(self):
+        case_path = self.cart_mesh.meshCaseDir
+        self.consoleMessage(_("Please run the TreeFoam SHM tool externally at: {}\n").format(case_path))
+        dexcsCfdTools.runTrfSHM(case_path)
 
     def runMesh(self):
         self.Start = time.time()

@@ -52,10 +52,10 @@ if env.contains("APPIMAGE"):
         process.setWorkingDirectory(working_dir)
     #process.start(trfCmd)
     process.setProgram(trfCmd)
-    process.start()
+    process.startDetached()
 
 else:
     os.system(trfCmd)
 
-def dummyFunction(): # 何故かこれがないとうまく動かない      
-    pass
+#def dummyFunction(): # 何故かこれがないとうまく動かない      
+#    pass
