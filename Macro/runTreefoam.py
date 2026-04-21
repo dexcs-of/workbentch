@@ -13,8 +13,14 @@ import pythonVerCheck
 import dexcsFunctions
 
 modelDir = dexcsFunctions.getCaseFileName()
-
-workDir=modelDir
+cfdOFDict = modelDir+"/.cfdOFDict"
+if os.path.exists(cfdOFDict):
+    f = open(cfdOFDict)
+    cfdOF_root = f.read()
+    f.close()
+    workDir = cfdOF_root
+else:
+    workDir=modelDir
 
 configDict = pyDexcsSwakSubset.readConfigDexcs()
 envTreeFoam = "~/.TreeFoamUser"

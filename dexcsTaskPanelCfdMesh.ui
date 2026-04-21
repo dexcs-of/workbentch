@@ -40,35 +40,12 @@
      <property name="bottomMargin">
       <number>8</number>
      </property>
-     <item row="0" column="1">
-      <widget class="QComboBox" name="cb_meshTool"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="l_dimension">
-       <property name="text">
-        <string>dimension</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
+     <item row="4" column="0">
       <widget class="QLabel" name="l_meshTool">
        <property name="text">
         <string>Mesh Tool</string>
        </property>
       </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="l_stlMaxDev">
-       <property name="text">
-        <string>STL Max deviation</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QComboBox" name="cb_dimension"/>
      </item>
      <item row="1" column="1">
       <widget class="QDoubleSpinBox" name="if_stlMaxDev">
@@ -83,6 +60,58 @@
        </property>
        <property name="singleStep">
         <double>0.001000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="l_stlMaxDev">
+       <property name="text">
+        <string>STL Max deviation</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QComboBox" name="cb_meshTool"/>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="l_dimension">
+       <property name="text">
+        <string>dimension</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QComboBox" name="cb_dimension"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="l_scaleToMeter">
+       <property name="text">
+        <string>Scale to Meter:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QDoubleSpinBox" name="if_scaleToMeter">
+       <property name="decimals">
+        <number>6</number>
+       </property>
+       <property name="minimum">
+        <double>0.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>1000.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.100000000000000</double>
        </property>
       </widget>
      </item>
@@ -115,53 +144,10 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="2">
-      <widget class="QDoubleSpinBox" name="if_scaleToMeter">
-       <property name="decimals">
-        <number>6</number>
-       </property>
-       <property name="minimum">
-        <double>0.000000000000000</double>
-       </property>
-       <property name="maximum">
-        <double>1000.000000000000000</double>
-       </property>
-       <property name="singleStep">
-        <double>0.100000000000000</double>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLabel" name="l_scaleToMeter">
-       <property name="text">
-        <string>Scale to Meter:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="2">
       <widget class="QPushButton" name="pb_edit_mesh">
        <property name="text">
         <string>TreeFoam</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="pb_trf_shm">
-       <property name="text">
-        <string>TrfSHM</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>meshSetting</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -180,7 +166,7 @@
     </widget>
    </item>
    <item>
-    <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0">
+    <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0">
      <property name="leftMargin">
       <number>8</number>
      </property>
@@ -196,7 +182,14 @@
      <property name="spacing">
       <number>8</number>
      </property>
-     <item row="1" column="1">
+     <item row="2" column="0">
+      <widget class="QPushButton" name="pb_run_mesh">
+       <property name="text">
+        <string>Run mesher</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
       <widget class="QPushButton" name="pb_stop_mesh">
        <property name="text">
         <string>Stop</string>
@@ -204,9 +197,19 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QPushButton" name="pb_run_mesh">
+      <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>Run mesher</string>
+        <string>meshSettingAndRun</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="pb_trf_shm">
+       <property name="text">
+        <string>TrfSHM</string>
        </property>
       </widget>
      </item>

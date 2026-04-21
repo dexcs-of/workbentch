@@ -85,7 +85,7 @@ class gui(QtWidgets.QDialog):
         #_macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/v1-1/Mod/dexcsCfdOF/Macro'
         file_path = os.path.abspath(__file__)
         dir_path = os.path.dirname(file_path)
-        _macroPath = dir_path+'/Macro'
+        _macroPath = dir_path
         _prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
         FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
         FreeCADGui.runCommand('Std_Macro_16',0)

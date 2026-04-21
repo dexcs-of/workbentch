@@ -76,7 +76,7 @@ class _TaskPanelCfdMesh:
         self.form.pb_run_mesh.setText(_("Run mesher"))
         self.form.pb_trf_shm.setText(_("Run TrfSHM"))
         self.form.label_3.setText(_("Mesh verification"))
-        self.form.label_4.setText(_("Mesh Setting"))
+        self.form.label_4.setText(_("Mesh Setting And Run"))
         self.form.label_5.setText(_("Mesher"))
         self.form.label_6.setText(_("Mesh<"))
         self.form.pb_checkmesh.setText(_("CheckMesh"))
@@ -198,7 +198,8 @@ class _TaskPanelCfdMesh:
     def updateUI(self):
         case_path = self.cart_mesh.meshCaseDir
         #print('case_path = ' + case_path)
-        self.form.pb_edit_mesh.setEnabled(os.path.exists(case_path))
+        self.form.pb_edit_mesh.setEnabled(os.path.exists(os.path.join(case_path, "system")))
+        self.form.pb_trf_shm.setEnabled(os.path.exists(os.path.join(case_path, "model")))
         self.form.pb_run_mesh.setEnabled(os.path.exists(os.path.join(case_path, "Allmesh")))
         self.form.pb_paraview.setEnabled(os.path.exists(os.path.join(case_path, "pv.foam")))
         self.form.pb_checkmesh.setEnabled(os.path.exists(os.path.join(case_path, "pv.foam")))

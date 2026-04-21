@@ -126,7 +126,7 @@ class _CfdMesh:
         ### <--addDexcs 
         addObjectProperty(obj, "FeatureAngle", 30, "App::PropertyFloat", "Mesh Parameters",
                           "Feature Angle of STL parts")
-        addObjectProperty(obj, "ScaleToMeter", 1, "App::PropertyFloat", "Mesh Parameters",
+        addObjectProperty(obj, "ScaleToMeter", 0.001, "App::PropertyFloat", "Mesh Parameters",
                           "Scale Factor to meter")
         addObjectProperty(obj, "keepCellsIntersectingBoundary", True, "App::PropertyBool", "Mesh Parameters",
                           "keep template cells intersecting boundary")
