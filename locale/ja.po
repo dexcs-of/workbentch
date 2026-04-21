@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-10 15:18+0900\n"
+"POT-Creation-Date: 2026-04-11 11:18+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -754,7 +754,7 @@ msgid "Checking dependencies..."
 msgstr "依存関係をチェック"
 
 #: ../_dexcsTaskPanelCfdSolverControl.py:208 ../_dexcsTaskPanelCfdMesh.py:332
-#: ../_dexcsTaskPanelCfdMesh.py:404
+#: ../_dexcsTaskPanelCfdMesh.py:404 ../_dexcsTaskPanelCfdMesh.py:405
 msgid "Please edit the case input files externally at: {}\n"
 msgstr "TreeFoamで以下のケースフォルダーを編集して下さい : {}\n"
 
@@ -800,63 +800,78 @@ msgstr "0 はデフォルト値を使用"
 
 #: ../_dexcsTaskPanelCfdMesh.py:344 ../_dexcsTaskPanelCfdMesh.py:444
 #: ../_dexcsTaskPanelCfdMesh.py:421 ../_dexcsTaskPanelCfdMesh.py:521
+#: ../_dexcsTaskPanelCfdMesh.py:422 ../_dexcsTaskPanelCfdMesh.py:522
 msgid "Executing: "
 msgstr "計算中: "
 
 #: ../_dexcsTaskPanelCfdMesh.py:353 ../_dexcsTaskPanelCfdMesh.py:430
+#: ../_dexcsTaskPanelCfdMesh.py:431
 msgid "Mesher started"
 msgstr "メッシュ作成を開始"
 
 #: ../_dexcsTaskPanelCfdMesh.py:355 ../_dexcsTaskPanelCfdMesh.py:432
+#: ../_dexcsTaskPanelCfdMesh.py:433
 msgid "Error starting meshing process"
 msgstr "メッシュ作成の開始に失敗"
 
 #: ../_dexcsTaskPanelCfdMesh.py:358 ../_dexcsTaskPanelCfdMesh.py:458
 #: ../_dexcsTaskPanelCfdMesh.py:435 ../_dexcsTaskPanelCfdMesh.py:535
+#: ../_dexcsTaskPanelCfdMesh.py:436 ../_dexcsTaskPanelCfdMesh.py:536
 msgid "Error "
 msgstr "エラー "
 
 #: ../_dexcsTaskPanelCfdMesh.py:364 ../_dexcsTaskPanelCfdMesh.py:441
+#: ../_dexcsTaskPanelCfdMesh.py:442
 msgid "Meshing manually stopped"
 msgstr "メッシュ作成を手動停止"
 
 #: ../_dexcsTaskPanelCfdMesh.py:365 ../_dexcsTaskPanelCfdMesh.py:442
+#: ../_dexcsTaskPanelCfdMesh.py:443
 msgid "Meshing interrupted"
 msgstr "メッシュ作成が中止された"
 
 #: ../_dexcsTaskPanelCfdMesh.py:379 ../_dexcsTaskPanelCfdMesh.py:456
+#: ../_dexcsTaskPanelCfdMesh.py:457
 msgid "Meshing completed"
 msgstr "メッシュ作成が完了"
 
 #: ../_dexcsTaskPanelCfdMesh.py:392 ../_dexcsTaskPanelCfdMesh.py:469
+#: ../_dexcsTaskPanelCfdMesh.py:470
 msgid "Meshing exited with error"
 msgstr "メッシュ作成がエラー終了"
 
 #: ../_dexcsTaskPanelCfdMesh.py:414 ../_dexcsTaskPanelCfdMesh.py:491
+#: ../_dexcsTaskPanelCfdMesh.py:492
 msgid "Reading mesh ..."
 msgstr "メッシュ読み込み中 ..."
 
 #: ../_dexcsTaskPanelCfdMesh.py:416 ../_dexcsTaskPanelCfdMesh.py:493
+#: ../_dexcsTaskPanelCfdMesh.py:494
 msgid "Triangulated representation of the surface mesh is shown - "
 msgstr "表面メッシュの状態が表示されるので,"
 
 #: ../_dexcsTaskPanelCfdMesh.py:417 ../_dexcsTaskPanelCfdMesh.py:494
+#: ../_dexcsTaskPanelCfdMesh.py:495
 msgid "Please view in Paraview for accurate display.\n"
 msgstr "Paraviewで詳細に観察してみて下さい.\n"
 
 #: ../_dexcsTaskPanelCfdMesh.py:426 ../_dexcsTaskPanelCfdMesh.py:503
+#: ../_dexcsTaskPanelCfdMesh.py:504
 msgid "Searching for an internal vector point ..."
 msgstr ""
 
 #: ../_dexcsTaskPanelCfdMesh.py:441 ../_dexcsTaskPanelCfdMesh.py:518
+#: ../_dexcsTaskPanelCfdMesh.py:519
 msgid "Running {} ..."
 msgstr "実行中 {} ..."
 
 #: ../_dexcsTaskPanelCfdMesh.py:453 ../_dexcsTaskPanelCfdMesh.py:530
+#: ../_dexcsTaskPanelCfdMesh.py:531
 msgid "checkMesh started"
 msgstr "チェックメッシュを開始"
 
 #: ../_dexcsTaskPanelCfdMesh.py:455 ../_dexcsTaskPanelCfdMesh.py:532
+#: ../_dexcsTaskPanelCfdMesh.py:533
 msgid "Error starting checkMeshing process"
 msgstr "チェックメッシュの開始に失敗"
 
@@ -1359,10 +1374,14 @@ msgstr "メッシュ設定"
 msgid "checkForGluedMesh"
 msgstr "checkForGluedMesh"
 
-#: ../_dexcsTaskPanelCfdMesh.py:409
+#: ../_dexcsTaskPanelCfdMesh.py:409 ../_dexcsTaskPanelCfdMesh.py:410
 msgid "Please run the TreeFoam SHM tool externally at: {}\n"
 msgstr "TreeFoamのSHMツールでメッシュパラメタを設定して下さい。\n"
 
 #: ../dexcsCfdPreferencePage.py:99
 msgid "use option"
 msgstr "可変オプションを使用"
+
+#: ../_dexcsTaskPanelCfdMesh.py:79
+msgid "Mesh Setting And Run"
+msgstr "メッシュ設定と作成"

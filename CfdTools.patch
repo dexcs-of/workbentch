@@ -1,0 +1,28 @@
+--- ./Mod/CfdOF/CfdOF/CfdTools.py	2026-04-02 16:29:50.308219798 +0900
++++ /home/dexcs/.local/share/FreeCAD/v1-1/Mod/CfdOF/CfdOF/CfdTools.py	2026-04-12 18:14:39.636971424 +0900
+@@ -1652,11 +1652,24 @@
+ 
+ 
+ def openFileManager(case_path):
++    from pathlib import Path
+     case_path = os.path.abspath(case_path)
+     if platform.system() == 'Darwin':
+         subprocess.Popen(['open', '--', case_path])
+     elif platform.system() == 'Linux':
+-        subprocess.Popen(['xdg-open', case_path])
++        #subprocess.Popen(['xdg-open', case_path])
++        path = Path(case_path).parent
++        cfdOF_Dict = path / ".cfdOFDict"
++        g = open(cfdOF_Dict,'w')
++        g.write(case_path)
++        g.close()
++        file_path = os.path.abspath(__file__)
++        dir_path = os.path.dirname(file_path)
++        _macroPath = dir_path+'/Macro'
++        _prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
++        FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
++        FreeCADGui.runCommand('Std_Macro_3',0)
++        FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_prefs)
+     elif platform.system() == 'Windows':
+         subprocess.Popen(['explorer', case_path])
+ 

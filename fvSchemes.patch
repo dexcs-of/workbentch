@@ -1,0 +1,12 @@
+--- ./Mod/CfdOF/Data/Templates/case/system/fvSchemes	2026-04-02 16:29:50.296220621 +0900
++++ /home/dexcs/.local/share/FreeCAD/v1-1/Mod/CfdOF/Data/Templates/case/system/fvSchemes	2026-04-21 06:10:38.369803872 +0900
+@@ -41,7 +41,8 @@
+     div(phi,Urel)      bounded Gauss linearUpwindV grad(U);
+     div((nuEff*dev2(T(grad(Urel))))) Gauss linear;
+ %:default
+-    div(phi,U)      bounded Gauss linearUpwindV grad(U);
++    //div(phi,U)      bounded Gauss linearUpwindV grad(U);
++    div(phi,U)      bounded Gauss upwind;
+     div((nuEff*dev2(T(grad(U))))) Gauss linear;
+ %}
+     div(div(phi,U)) Gauss linear;

@@ -1,0 +1,11 @@
+--- ./Mod/CfdOF/Data/Templates/mesh/system/snappyHexMeshDict	2026-04-02 16:29:50.295220689 +0900
++++ /home/dexcs/.local/share/FreeCAD/v1-1/Mod/CfdOF/Data/Templates/mesh/system/snappyHexMeshDict	2026-04-21 06:00:33.487204915 +0900
+@@ -200,7 +200,7 @@
+     finalLayerThickness 0.3;
+     minThickness 0.1;
+     nGrow 0;
+-    featureAngle 120;
++    featureAngle 85;
+     nRelaxIter 3;
+     nSmoothSurfaceNormals 1;
+     nSmoothNormals 3;
