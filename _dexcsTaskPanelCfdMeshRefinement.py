@@ -159,10 +159,10 @@ class _TaskPanelCfdMeshRefinement:
 
     def changeCellSize(self):
 
-        #print('refLevel = ')
-        #print('refLevel = ' + str(self.form.if_reflevel.value()))
-        
-        setQuantity(self.form.if_cellsize, self.baseMeshSize/2**(self.form.if_reflevel.value()))
+        refValue =  self.form.if_reflevel.value()         
+        self.obj.CellSize =  self.baseMeshSize/2**refValue  
+        setQuantity(self.form.if_cellsize, self.obj.CellSize)
+
         return True
 
     def accept(self):
