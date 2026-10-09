@@ -130,7 +130,7 @@ def getOutputPath(analysis):
       print('output_path = ' + output_path)
     else:
         output_path = os.path.dirname(FreeCAD.ActiveDocument.FileName) 
-        print('#####output_path = ' + output_path)
+        print('## ###output_path = ' + output_path)
     return output_path
 
 def getTemplateCase(analysis):

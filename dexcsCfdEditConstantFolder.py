@@ -49,7 +49,7 @@ class _CommandCfdEditConstantFolder:
     def Activated(self):
         #FreeCADGui.runCommand('Std_Macro_10',0)
         #import editConstantFolder
-        _macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro'
+        _macroPath = os.path.expanduser("~")+'/.local/share/FreeCAD/v1-1/Mod/dexcsCfdOF/Macro'
         _prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
         FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").SetString('MacroPath',_macroPath)
         FreeCADGui.runCommand('Std_Macro_10',0)

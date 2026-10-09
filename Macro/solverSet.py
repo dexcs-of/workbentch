@@ -28,9 +28,9 @@ os.chdir(CaseFilePath)
 #geditの実行ファイル作成
 caseName = CaseFilePath
 title =  "#!/bin/bash\n"
-envSet = ". ~/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro/runTreefoamSubset\n"
+envSet = ". ~/.local/share/FreeCAD/v1-1/Mod/dexcsCfdOF/Macro/runTreefoamSubset\n"
 if TreeFoamVersion.startswith('3') :
-    solverSet = os.path.expanduser("~") + "/.local/share/FreeCAD/Mod/dexcsCfdOF/Macro/createAndChangeCaseDialogDexcs.py "  + CaseFilePath
+    solverSet = os.path.expanduser("~") + "/.local/share/FreeCAD/v1-1/Mod/dexcsCfdOF/Macro/createAndChangeCaseDialogDexcs.py "  + CaseFilePath
 else :
     solverSet = "createAndChangeCaseDialog.py "  + CaseFilePath
 sleep = ""

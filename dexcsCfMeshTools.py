@@ -422,7 +422,7 @@ class MainControl():
                '\n',
                '// maximum cell size in the mesh (mandatory)\n',
                #'maxCellSize\t' + str(self.viewControl.get_maxCellSizeValue()) + ';\n'
-               'maxCellSize\t' + str(dexcsCfdDict_maxCellSize) + ';\n'
+               'maxCellSize\t' + str(dexcsCfdDict_maxCellSize.Value) + ';\n'
                '\n',
                '// minimum cell size allowed in the automatic refinement procedure (optional)\n',
                ]

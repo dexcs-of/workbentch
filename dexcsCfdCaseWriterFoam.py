@@ -69,7 +69,7 @@ class dexcsCfdCaseWriterFoam:
         fname = os.path.join(self.case_folder, "Allrun")
         p_new = pathlib.Path(fname)
         
-        title =  "#!/bin/bash\n"
+        title =  "#!/bin/bash\nexport OMPI_MCA_btl=self,vader\n"
         prefs = dexcsCfdTools.getPreferencesLocation()
         installation_path = FreeCAD.ParamGet(prefs).GetString("InstallationPath", "")
         envOpenFOAMFix = os.path.expanduser(installation_path)
